@@ -1,6 +1,6 @@
 PROG = run
 CC = g++
-CPFLAGS = -c
+CPFLAGS = -Wall -fsanitize=address -g -c
 BIN_DIR = ./bin
 BUILD_DIR = ./build
 INCLUDES_DIR = ./includes
