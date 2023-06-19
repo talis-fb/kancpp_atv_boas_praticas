@@ -26,7 +26,7 @@ public:
      *
      * @param user The user to be promoted.
      */
-    Admin promoteToAdmin(User &user);
+    void promoteToAdmin(User &user);
 };
 
 #endif

@@ -53,11 +53,15 @@ public:
     tm getCreatedAt() const;
 
     /**
-     * @brief Update a user task.
-     * @param task Task to be updated.
+     * @brief Updates a task for the user.
+     *
+     * This is a pure virtual function that needs to be implemented in derived classes.
+     * It allows updating a task based on the provided Task object.
+     *
+     * @param task The task to be updated.
      * @return true if the task was updated successfully, false otherwise.
      */
-    bool updateTask(const Task &task);
+    virtual bool updateTask(const Task &task) = 0;
 };
 
 #endif
