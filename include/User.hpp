@@ -29,6 +29,11 @@ public:
     User(const string &id, const string &name, const string &password);
 
     /**
+     * @brief Destructor for the User class that frees the memory.
+     */
+    ~User();
+
+    /**
      * @brief Get the user ID.
      * @return User ID.
      */

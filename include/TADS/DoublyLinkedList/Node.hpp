@@ -41,6 +41,11 @@ public:
     Node(T val, Node *n, Node *p);
 
     /**
+     * @brief Destructor for the Node class that frees the memory.
+     */
+    ~Node();
+
+    /**
      * @brief Get the value stored in the node.
      *
      * @return The value stored in the node.

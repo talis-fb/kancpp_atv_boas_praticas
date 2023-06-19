@@ -24,6 +24,24 @@ private:
 
 public:
     /**
+     * @brief Constructs a new Board object.
+     * @param name The name of the board.
+     * @param description The description of the board.
+     */
+    Board(const string &name, const string &description);
+
+    /**
+     * @brief Constructs a new Board object.
+     * @param name The name of the board.
+     */
+    Board(const string &name);
+
+    /**
+     * @brief Destroys the Board object and all its columns and tasks.
+     */
+    ~Board();
+
+    /**
      * @brief Get the name of the board.
      * @return The name of the board.
      */

@@ -6,6 +6,8 @@
 #include <string>
 
 #include "./Column.hpp"
+#include "./User.hpp"
+#include "./TADS/Set/Set.hpp"
 
 using namespace std;
 
@@ -15,17 +17,60 @@ using namespace std;
 class Task
 {
 private:
-    string id;                     /**< ID of the task */
-    string title;                  /**< Title of the task */
-    string description;            /**< Description of the task */
-    int order;                     /**< Order of the task */
-    tm deadline;                   /**< Deadline of the task */
-    unordered_set<User> assignees; /**< Set of assignees for the task */
-    unordered_set<string> labels;  /**< Set of labels for the task */
-    Column *column;                /**< Column containing the task */
-    tm createdAt;                  /**< Creation date and time of the task */
+    string id;           /**< ID of the task */
+    string title;        /**< Title of the task */
+    string description;  /**< Description of the task */
+    int order;           /**< Order of the task */
+    tm deadline;         /**< Deadline of the task */
+    Set<User> assignees; /**< Set of assignees for the task */
+    Set<string> labels;  /**< Set of labels for the task */
+    Column *column;      /**< Column containing the task */
+    tm createdAt;        /**< Creation date and time of the task */
 
 public:
+    /**
+     * @brief Constructs a new Task object.
+     * @param id The ID of the task.
+     * @param title The title of the task.
+     * @param description The description of the task.
+     * @param order The order of the task.
+     * @param deadline The deadline of the task.
+     * @param column The column containing the task.
+     */
+    Task(const string &id, const string &title, const string &description, int order, tm deadline, Column *column);
+
+    /**
+     * @brief Constructs a new Task object.
+     * @param id The ID of the task.
+     * @param title The title of the task.
+     * @param description The description of the task.
+     * @param order The order of the task.
+     * @param column The column containing the task.
+     */
+    Task(const string &id, const string &title, const string &description, int order, Column *column);
+
+    /**
+     * @brief Constructs a new Task object.
+     * @param id The ID of the task.
+     * @param title The title of the task.
+     * @param description The description of the task.
+     * @param column The column containing the task.
+     */
+    Task(const string &id, const string &title, const string &description, Column *column);
+
+    /**
+     * @brief Constructs a new Task object.
+     * @param id The ID of the task.
+     * @param title The title of the task.
+     * @param column The column containing the task.
+     */
+    Task(const string &id, const string &title, Column *column);
+
+    /**
+     * @brief Destroys the Task object and frees the memory.
+     */
+    ~Task();
+
     /**
      * @brief Get the ID of the task.
      * @return The ID of the task.
@@ -90,7 +135,7 @@ public:
      * @brief Get the assignees for the task.
      * @return The assignees for the task.
      */
-    unordered_set<User> getAssignees();
+    Set<User> getAssignees();
 
     /**
      * @brief Add an assignee to the task.
@@ -110,7 +155,7 @@ public:
      * @brief Get the labels for the task.
      * @return The labels for the task.
      */
-    unordered_set<string> getLabels();
+    Set<string> getLabels();
 
     /**
      * @brief Add a label to the task.

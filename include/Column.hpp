@@ -24,6 +24,35 @@ private:
 
 public:
     /**
+     * @brief Constructs a new Column object.
+     * @param id The ID of the column.
+     * @param name The name of the column.
+     * @param description The description of the column.
+     * @param order The order of the column.
+     */
+    Column(const string &id, const string &name, const string &description, const int &order);
+
+    /**
+     * @brief Constructs a new Column object.
+     * @param id The ID of the column.
+     * @param name The name of the column.
+     * @param description The description of the column.
+     */
+    Column(const string &id, const string &name, const string &description);
+
+    /**
+     * @brief Constructs a new Column object.
+     * @param id The ID of the column.
+     * @param name The name of the column.
+     */
+    Column(const string &id, const string &name);
+
+    /**
+     * @brief Destroys the Column object and all its tasks.
+     */
+    ~Column();
+
+    /**
      * @brief Get the ID of the column.
      * @return The ID of the column.
      */

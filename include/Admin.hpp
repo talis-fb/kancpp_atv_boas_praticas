@@ -22,6 +22,11 @@ public:
     Admin(const string &id, const string &name, const string &password, const string &role);
 
     /**
+     * @brief Destroys the Admin object and frees the memory.
+     */
+    ~Admin();
+
+    /**
      * @brief Promotes a user to admin status.
      *
      * @param user The user to be promoted.

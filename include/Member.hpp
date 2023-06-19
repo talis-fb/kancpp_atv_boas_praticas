@@ -28,6 +28,11 @@ public:
     Member(const string &id, const string &name, const string &password, const string &role);
 
     /**
+     * @brief Destroys the Member object and frees the memory.
+     */
+    ~Member();
+
+    /**
      * @brief Get the role of the member.
      *
      * @return The role of the member.
