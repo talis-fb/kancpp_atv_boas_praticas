@@ -17,7 +17,7 @@ private:
     string id;       /**< User ID. */
     string name;     /**< User name. */
     string password; /**< User password. */
-    tm createdAt;    /**< User creation timestamp. */
+    tm* createdAt;    /**< User creation timestamp. */
 
 public:
     /**
@@ -32,6 +32,18 @@ public:
      * @brief Destructor for the User class that frees the memory.
      */
     ~User();
+
+    /**
+     * @brief Set the Created At object
+     * 
+     */
+    void setCreatedAt();
+
+    /**
+     * @brief 
+     * 
+     */
+    void displayCreatedAt();
 
     /**
      * @brief Get the user ID.
@@ -55,7 +67,7 @@ public:
      * @brief Get the user creation timestamp.
      * @return User creation timestamp.
      */
-    tm getCreatedAt() const;
+    tm* getCreatedAt() const;
 
     /**
      * @brief Updates a task for the user.
