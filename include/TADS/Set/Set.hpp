@@ -13,8 +13,9 @@ using namespace std;
  * @tparam T The type of elements stored in the set.
  */
 template <typename T>
-class Set
-{
+class Set{
+private:
+    vector<T> elements; /**< The vector storing the elements of the set. */
 public:
     /**
      * @brief Constructs an empty Set object.
@@ -68,9 +69,6 @@ public:
      * @brief Print the elements of the set.
      */
     void print() const;
-
-private:
-    vector<T> elements; /**< The vector storing the elements of the set. */
 };
 
 #endif

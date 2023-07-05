@@ -5,9 +5,9 @@
 #include <string>
 #include <vector>
 
-#include "./Task.hpp"
-
 using namespace std;
+
+class Task;
 
 /**
  * @brief Class that represents a column.

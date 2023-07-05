@@ -1,0 +1,6 @@
+#include "../include/User.hpp"
+#include "../include/Task.hpp"
+#include "../include/Admin.hpp"
+#include "../include/Member.hpp"
+#include "../include/Board.hpp"
+#include "../include/Column.hpp"

@@ -4,9 +4,9 @@
 #include <ctime>
 #include <string>
 
-#include "./Task.hpp"
-
 using namespace std;
+
+class Task;
 
 /**
  * @brief Class representing a user.
@@ -26,7 +26,7 @@ public:
      * @param name User name.
      * @param password User password.
      */
-    User(const string &id, const string &name, const string &password);
+    User(const string id, const string name, const string password);
 
     /**
      * @brief Destructor for the User class that frees the memory.
@@ -66,7 +66,7 @@ public:
      * @param task The task to be updated.
      * @return true if the task was updated successfully, false otherwise.
      */
-    virtual bool updateTask(const Task &task) = 0;
+    virtual bool updateTask(Task task) = 0;
 };
 
 #endif

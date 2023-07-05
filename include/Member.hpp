@@ -38,6 +38,8 @@ public:
      * @return The role of the member.
      */
     string getRole() const;
+
+    bool updateTask(Task task);
 };
 
 #endif

@@ -2,6 +2,7 @@
 #define NODE_CLASS
 
 #include <iostream>
+#include "../../Task.hpp"
 
 /**
  * @brief The Node class represents a node in a doubly linked list.
@@ -10,7 +11,7 @@
  *
  * @tparam T The type of the value stored in the node.
  */
-template <typename T>
+template <class T>
 class Node
 {
 private:

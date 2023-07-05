@@ -1,14 +1,25 @@
-PROG = run
 CC = g++
-CPFLAGS = -Wall -fsanitize=address -g -c
-BIN_DIR = ./bin
-BUILD_DIR = ./build
-INCLUDES_DIR = ./includes
-SRC_DIR = ./src
-OBJS = 
+CPPFLAGS = -O0 -g -W -Wall -pedantic -std=c++14
+SOURCES = $(wildcard src/*.cpp) $(wildcard src/*/*.cpp) $(wildcard src/*/*/*.cpp)
+OBJECTS = $(SOURCES:.cpp=.o)
+EXECUTABLE = bin/main
 
 $(PROG): $(OBJS)
 	$(CC) -o $(PROG) $(OBJS)
 
+$(EXECUTABLE): $(OBJECTS)
+	$(CC) $^ -o $@
+
+%.o: %.cpp
+	$(CC) $(CPPFLAGS) -c $< -o $@
+
 clean:
-	del $(BIN_DIR)/*.o	
+	del src\*.o
+	del src\utils\*.o
+	del src\TADS\DoublyLinkedList\*.o
+	del src\TADS\Set\*.o
+	del bin\main.exe
+
+.PHONY: run
+run: $(EXECUTABLE)
+	./$(EXECUTABLE)

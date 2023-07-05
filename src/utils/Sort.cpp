@@ -1,4 +1,5 @@
-#include "Sort.h"
+#include <iostream>
+#include "../../include/utils/Sort.h"
 
 template <typename T>
 void bubbleSort(T array[], int length) {
@@ -17,7 +18,7 @@ void bubbleSort(T array[], int length) {
     }
     end--;
   }
-};
+}
 
 template <typename T>
 void selectionSort(T array[], int length) {
@@ -36,7 +37,7 @@ void selectionSort(T array[], int length) {
       array[minIndex] = temp;
     }
   }
-};
+}
 
 template <typename T>
 int findMedian(T array[], int start, int end) {

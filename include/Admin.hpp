@@ -32,6 +32,8 @@ public:
      * @param user The user to be promoted.
      */
     void promoteToAdmin(User &user);
+
+    bool updateTask(Task task);
 };
 
 #endif

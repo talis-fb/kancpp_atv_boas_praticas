@@ -1,4 +1,5 @@
-#include "Search.h"
+#include <iostream>
+#include "../../include/utils/Search.h"
 
 /* Binary search has a time complexity of O(log n) */
 template <typename T>
@@ -20,8 +21,7 @@ int binarySearch(T array[], T key, int start, int end){
     // Search in the right half of the array
     return binarySearch(array, key, mid + 1, end);
   }
-};
-
+}
 
 /* The sequential search has a time complexity of O(n) */
 template <typename T>

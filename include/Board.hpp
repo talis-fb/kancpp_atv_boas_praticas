@@ -7,6 +7,7 @@
 
 #include "./Column.hpp"
 #include "./Task.hpp"
+#include "TADS/DoublyLinkedList/DoublyLinkedList.hpp"
 
 using namespace std;
 
@@ -18,9 +19,9 @@ class Board
 private:
     string name;              /**< Name of the board */
     string description;       /**< Description of the board */
-    vector<Column *> columns; /**< List of columns in the board */
-    vector<Task *> backlog;   /**< List of tasks in the backlog */
-    tm createdAt;             /**< Creation date and time of the board */
+    DoublyLinkedList* columns; /**< List of columns in the board */
+    vector<Task>* backlog;   /**< List of tasks in the backlog */
+    tm* createdAt;             /**< Creation date and time of the board */
 
 public:
     /**
@@ -28,13 +29,13 @@ public:
      * @param name The name of the board.
      * @param description The description of the board.
      */
-    Board(const string &name, const string &description);
+    Board(string name, string description);
 
     /**
      * @brief Constructs a new Board object.
      * @param name The name of the board.
      */
-    Board(const string &name);
+    Board(string name);
 
     /**
      * @brief Destroys the Board object and all its columns and tasks.
@@ -65,6 +66,17 @@ public:
      */
     int getColumnCount();
 
+    /**
+     * @brief Set the Created At
+     */
+    void setCreatedAt();
+
+    /**
+     * @brief 
+     * 
+     */
+    void displayCreatedAt();
+    
     /**
      * @brief Add a column to the board.
      * @param column The column to be added.

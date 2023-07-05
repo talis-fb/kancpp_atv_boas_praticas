@@ -4,12 +4,14 @@
 #include <iostream>
 #include <ctime>
 #include <string>
+#include <vector>
 
 #include "./Column.hpp"
-#include "./User.hpp"
-#include "./TADS/Set/Set.hpp"
+#include "TADS/Set/Set.hpp"
 
 using namespace std;
+
+class User;
 
 /**
  * @brief Class that represents a task.
@@ -20,12 +22,13 @@ private:
     string id;           /**< ID of the task */
     string title;        /**< Title of the task */
     string description;  /**< Description of the task */
-    int order;           /**< Order of the task */
+    // int order;           /**< Order of the task */
     tm deadline;         /**< Deadline of the task */
     Set<User> assignees; /**< Set of assignees for the task */
-    Set<string> labels;  /**< Set of labels for the task */
+    vector<string> labels;  /**< Set of labels for the task */
     Column *column;      /**< Column containing the task */
     tm createdAt;        /**< Creation date and time of the task */
+    int count;
 
 public:
     /**
@@ -37,7 +40,7 @@ public:
      * @param deadline The deadline of the task.
      * @param column The column containing the task.
      */
-    Task(const string &id, const string &title, const string &description, int order, tm deadline, Column *column);
+    Task(const string title, const string description, tm deadline);
 
     /**
      * @brief Constructs a new Task object.
@@ -47,16 +50,8 @@ public:
      * @param order The order of the task.
      * @param column The column containing the task.
      */
-    Task(const string &id, const string &title, const string &description, int order, Column *column);
+    Task(const string title, const string description);
 
-    /**
-     * @brief Constructs a new Task object.
-     * @param id The ID of the task.
-     * @param title The title of the task.
-     * @param description The description of the task.
-     * @param column The column containing the task.
-     */
-    Task(const string &id, const string &title, const string &description, Column *column);
 
     /**
      * @brief Constructs a new Task object.
@@ -64,7 +59,7 @@ public:
      * @param title The title of the task.
      * @param column The column containing the task.
      */
-    Task(const string &id, const string &title, Column *column);
+    Task(const string title);
 
     /**
      * @brief Destroys the Task object and frees the memory.
@@ -142,14 +137,14 @@ public:
      * @param user The user to be added as an assignee.
      * @return True if the assignee was added successfully, false otherwise.
      */
-    bool addAssignee(User user);
+    bool addAssignee(const User &user);
 
     /**
      * @brief Remove an assignee from the task.
      * @param user The user to be removed as an assignee.
      * @return True if the assignee was removed successfully, false otherwise.
      */
-    bool removeAssignee(User user);
+    bool removeAssignee(const User &user);
 
     /**
      * @brief Get the labels for the task.
