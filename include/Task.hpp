@@ -19,16 +19,16 @@ class User;
 class Task
 {
 private:
-    string id;           /**< ID of the task */
+    long int id;           /**< ID of the task */
     string title;        /**< Title of the task */
     string description;  /**< Description of the task */
     // int order;           /**< Order of the task */
-    tm deadline;         /**< Deadline of the task */
+    tm* deadline;         /**< Deadline of the task */
     Set<User> assignees; /**< Set of assignees for the task */
     vector<string> labels;  /**< Set of labels for the task */
     Column *column;      /**< Column containing the task */
-    tm createdAt;        /**< Creation date and time of the task */
-    int count;
+    tm* createdAt;        /**< Creation date and time of the task */
+    static long int count; /** Add description*/
 
 public:
     /**
@@ -40,7 +40,7 @@ public:
      * @param deadline The deadline of the task.
      * @param column The column containing the task.
      */
-    Task(const string title, const string description, tm deadline);
+    Task(const string title, const string description, tm* deadline);
 
     /**
      * @brief Constructs a new Task object.
@@ -67,10 +67,22 @@ public:
     ~Task();
 
     /**
+     * @brief 
+     * 
+     */
+    void setCreatedAt();
+    
+    /**
+     * @brief 
+     * 
+     */
+    void displayCreatedAt();
+
+    /**
      * @brief Get the ID of the task.
      * @return The ID of the task.
      */
-    string getId();
+    int getId();
 
     /**
      * @brief Get the column containing the task.
@@ -94,19 +106,19 @@ public:
      * @brief Set the order of the task.
      * @param order The new order of the task.
      */
-    void setOrder(int order);
+    // void setOrder(int order);
 
     /**
      * @brief Get the order of the task.
      * @return The order of the task.
      */
-    int getOrder();
+    // int getOrder();
 
     /**
      * @brief Get the deadline of the task.
      * @return The deadline of the task.
      */
-    tm getDeadline();
+    tm* getDeadline();
 
     /**
      * @brief Set the deadline of the task.
