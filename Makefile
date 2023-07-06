@@ -1,25 +1,29 @@
 CC = g++
 CPPFLAGS = -O0 -g -W -Wall -pedantic -std=c++14
-SOURCES = $(wildcard src/*.cpp) $(wildcard src/*/*.cpp) $(wildcard src/*/*/*.cpp)
-OBJECTS = $(SOURCES:.cpp=.o)
-EXECUTABLE = bin/main
+SRCDIR = src
+OBJDIR = bin
+BINDIR = build
+SOURCES = $(wildcard $(SRCDIR)/*.cpp)
+OBJECTS = $(patsubst $(SRCDIR)/%.cpp,$(OBJDIR)/%.o,$(SOURCES))
+EXECUTABLE = $(BINDIR)\run
 
-$(PROG): $(OBJS)
-	$(CC) -o $(PROG) $(OBJS)
+# Commands
+RM = del 
+
+all: $(EXECUTABLE)
 
 $(EXECUTABLE): $(OBJECTS)
-	$(CC) $^ -o $@
+	$(CC) $(CFLAGS) $^ -o $@
 
-%.o: %.cpp
-	$(CC) $(CPPFLAGS) -c $< -o $@
+$(OBJDIR)/%.o: $(SRCDIR)/%.cpp
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	del src\*.o
-	del src\utils\*.o
-	del src\TADS\DoublyLinkedList\*.o
-	del src\TADS\Set\*.o
-	del bin\main.exe
-
-.PHONY: run
-run: $(EXECUTABLE)
-	./$(EXECUTABLE)
+	$(RM) $(OBJDIR)\main.o
+	$(RM) $(OBJDIR)\Column.o
+	$(RM) $(OBJDIR)\Board.o
+	$(RM) $(OBJDIR)\Admin.o
+	$(RM) $(OBJDIR)\User.o
+	$(RM) $(OBJDIR)\Member.o
+	$(RM) $(OBJDIR)\Task.o
+	$(RM) $(EXECUTABLE)
