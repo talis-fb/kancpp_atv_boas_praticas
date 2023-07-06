@@ -1,8 +1,4 @@
 #include "../include/Task.hpp"
-#include "../include/Column.hpp"
-#include "../include/Admin.hpp"
-#include "../include/Member.hpp"
-#include "../include/Board.hpp"
 
 long int Task::count = 0;
 
