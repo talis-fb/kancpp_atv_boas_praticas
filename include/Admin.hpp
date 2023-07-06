@@ -2,6 +2,7 @@
 #define ADMIN_CLASS_HPP
 
 #include "./User.hpp"
+#include "./Task.hpp"
 
 /**
  * @brief The Admin class represents an administrator in the system.
