@@ -10,9 +10,11 @@ template <typename T>
 Set<T>::~Set() {}
 
 template <typename T>
-bool Set<T>::insert(T element) {
+bool Set<T>::insert(T element)
+{
     // Verificar se o elemento já existe no conjunto
-    if (contains(element)) {
+    if (contains(element))
+    {
         return false;
     }
 
@@ -22,12 +24,14 @@ bool Set<T>::insert(T element) {
 }
 
 template <typename T>
-bool Set<T>::remove(T element) {
+bool Set<T>::remove(T element)
+{
     // Procurar o elemento no vetor
     auto it = find(elements.begin(), elements.end(), element);
 
     // Verificar se o elemento foi encontrado
-    if (it != elements.end()) {
+    if (it != elements.end())
+    {
         // Remover o elemento do vetor
         elements.erase(it);
         return true;
@@ -37,7 +41,8 @@ bool Set<T>::remove(T element) {
 }
 
 template <typename T>
-bool Set<T>::contains(T element) const {
+bool Set<T>::contains(T element) const
+{
     // Procurar o elemento no vetor
     auto it = find(elements.begin(), elements.end(), element);
 
@@ -46,18 +51,22 @@ bool Set<T>::contains(T element) const {
 }
 
 template <typename T>
-int Set<T>::size() const {
+int Set<T>::size() const
+{
     return elements.size();
 }
 
 template <typename T>
-bool Set<T>::isEmpty() const {
+bool Set<T>::isEmpty() const
+{
     return elements.empty();
 }
 
 template <typename T>
-void Set<T>::print() const {
-    for (const T& element : elements) {
+void Set<T>::print() const
+{
+    for (const T &element : elements)
+    {
         std::cout << element << " ";
     }
     std::cout << std::endl;

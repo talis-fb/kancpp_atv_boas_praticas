@@ -20,14 +20,14 @@ class Task
 {
 private:
     long int id;           /**< ID of the task */
-    string title;        /**< Title of the task */
-    string description;  /**< Description of the task */
-    // int order;           /**< Order of the task */
-    tm* deadline;         /**< Deadline of the task */
-    Set<User> assignees; /**< Set of assignees for the task */
-    vector<string> labels;  /**< Set of labels for the task */
-    Column *column;      /**< Column containing the task */
-    tm* createdAt;        /**< Creation date and time of the task */
+    string title;          /**< Title of the task */
+    string description;    /**< Description of the task */
+    int order;             /**< Order of the task */
+    tm *deadline;          /**< Deadline of the task */
+    Set<User> assignees;   /**< Set of assignees for the task */
+    Set<string> labels;    /**< Set of labels for the task */
+    Column *column;        /**< Column containing the task */
+    tm *createdAt;         /**< Creation date and time of the task */
     static long int count; /** Add description*/
 
 public:
@@ -40,7 +40,7 @@ public:
      * @param deadline The deadline of the task.
      * @param column The column containing the task.
      */
-    Task(const string title, const string description, tm* deadline);
+    Task(const string title, const string description, tm *deadline);
 
     /**
      * @brief Constructs a new Task object.
@@ -51,7 +51,6 @@ public:
      * @param column The column containing the task.
      */
     Task(const string title, const string description);
-
 
     /**
      * @brief Constructs a new Task object.
@@ -67,14 +66,14 @@ public:
     ~Task();
 
     /**
-     * @brief 
-     * 
+     * @brief
+     *
      */
     void setCreatedAt();
-    
+
     /**
-     * @brief 
-     * 
+     * @brief
+     *
      */
     void displayCreatedAt();
 
@@ -106,19 +105,19 @@ public:
      * @brief Set the order of the task.
      * @param order The new order of the task.
      */
-    // void setOrder(int order);
+    void setOrder(int order);
 
     /**
      * @brief Get the order of the task.
      * @return The order of the task.
      */
-    // int getOrder();
+    int getOrder();
 
     /**
      * @brief Get the deadline of the task.
      * @return The deadline of the task.
      */
-    tm* getDeadline();
+    tm *getDeadline();
 
     /**
      * @brief Set the deadline of the task.
