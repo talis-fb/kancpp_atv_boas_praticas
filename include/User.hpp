@@ -1,8 +1,8 @@
 #ifndef USER_CLASS
 #define USER_CLASS
 
+#include <iostream>
 #include <ctime>
-#include <string>
 
 using namespace std;
 
@@ -17,7 +17,7 @@ private:
     string id;       /**< User ID. */
     string name;     /**< User name. */
     string password; /**< User password. */
-    tm* createdAt;    /**< User creation timestamp. */
+    tm *createdAt;   /**< User creation timestamp. */
 
 public:
     /**
@@ -35,13 +35,13 @@ public:
 
     /**
      * @brief Set the Created At object
-     * 
+     *
      */
     void setCreatedAt();
 
     /**
-     * @brief 
-     * 
+     * @brief
+     *
      */
     void displayCreatedAt();
 
@@ -67,7 +67,7 @@ public:
      * @brief Get the user creation timestamp.
      * @return User creation timestamp.
      */
-    tm* getCreatedAt() const;
+    tm *getCreatedAt() const;
 
     /**
      * @brief Updates a task for the user.
