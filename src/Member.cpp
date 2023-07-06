@@ -1,6 +1,21 @@
-#include "../include/User.hpp"
-#include "../include/Task.hpp"
-#include "../include/Admin.hpp"
 #include "../include/Member.hpp"
-#include "../include/Board.hpp"
-#include "../include/Column.hpp"
+
+Member::Member(const string &id, const string &name, const string &password, const string &role) : User(id, name, password)
+{
+    this->role = role;
+}
+
+Member::~Member()
+{
+    //
+}
+
+string Member::getRole() const
+{
+    return this->role;
+}
+
+bool Member::updateTask(Task task)
+{
+    //
+}
