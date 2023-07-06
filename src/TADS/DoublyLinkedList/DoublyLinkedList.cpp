@@ -36,7 +36,7 @@ Node<T> *DoublyLinkedList<T>::getTail()
 }
 
 template <class T>
-T DoublyLinkedList<T>::retrieve(int index)
+T DoublyLinkedList<T>::get(int index)
 {
   if (index < 0 || index >= this->size)
   {
@@ -298,6 +298,31 @@ T DoublyLinkedList<T>::removeAt(int index)
   }
 
   throw std::out_of_range("Index out of range at removeAt.");
+}
+
+template <class T>
+bool DoublyLinkedList<T>::remove(T element)
+{
+  Node<T> *current = this->head->getNext();
+
+  while (current != nullptr)
+  {
+    if (current->getValue() == element)
+    {
+      current->getPrevious()->setNext(current->getNext());
+      current->getNext()->setPrevious(current->getPrevious());
+
+      delete current;
+
+      this->size--;
+
+      return true;
+    }
+
+    current = current->getNext();
+  }
+
+  return false;
 }
 
 template <class T>

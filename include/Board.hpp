@@ -17,11 +17,11 @@ using namespace std;
 class Board
 {
 private:
-    string name;              /**< Name of the board */
-    string description;       /**< Description of the board */
-    DoublyLinkedList* columns; /**< List of columns in the board */
-    vector<Task>* backlog;   /**< List of tasks in the backlog */
-    tm* createdAt;             /**< Creation date and time of the board */
+    string name;                       /**< Name of the board */
+    string description;                /**< Description of the board */
+    DoublyLinkedList<Column> *columns; /**< List of columns in the board */
+    vector<Task> backlog;              /**< List of tasks in the backlog */
+    tm *createdAt;                     /**< Creation date and time of the board */
 
 public:
     /**
@@ -72,41 +72,41 @@ public:
     void setCreatedAt();
 
     /**
-     * @brief 
-     * 
+     * @brief
+     *
      */
     void displayCreatedAt();
-    
+
     /**
      * @brief Add a column to the board.
      * @param column The column to be added.
      */
-    void addColumn(Column *column);
+    void addColumn(Column column);
 
     /**
      * @brief Remove a column from the board.
      * @param column The column to be removed.
      */
-    void removeColumn(Column *column);
+    void removeColumn(Column column);
 
     /**
      * @brief Move a task to a different column.
      * @param task The task to be moved.
      * @param column The target column.
      */
-    void moveTask(Task *task, Column *column);
+    void moveTask(Task task, Column column);
 
     /**
      * @brief Add a task to the backlog.
      * @param task The task to be added.
      */
-    void addTaskToBacklog(Task *task);
+    void addTaskToBacklog(Task task);
 
     /**
      * @brief Remove a task from the backlog.
      * @param task The task to be removed.
      */
-    void removeTaskFromBacklog(Task *task);
+    void removeTaskFromBacklog(Task task);
 };
 
 #endif

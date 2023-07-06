@@ -47,7 +47,7 @@ public:
      * @param index The index of the element to retrieve.
      * @return The element at the specified index.
      */
-    T retrieve(int index);
+    T get(int index);
 
     /**
      * @brief Search for the specified element in the list.
@@ -113,6 +113,14 @@ public:
      * @return The removed element.
      */
     T removeAt(int index);
+
+    /**
+     * @brief Remove the specified element from the list.
+     *
+     * @param element The element to remove.
+     * @return True if the element was successfully removed, false otherwise.
+     */
+    bool remove(T element);
 
     /**
      * @brief Check if the list is empty.
