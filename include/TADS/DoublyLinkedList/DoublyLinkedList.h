@@ -1,7 +1,7 @@
 #ifndef DOUBLY_LINKED_LIST_CLASS
 #define DOUBLY_LINKED_LIST_CLASS
 
-#include "./Node.h"
+#include "Node.h"
 
 /**
  * @brief The DoublyLinkedList class represents a doubly linked list.

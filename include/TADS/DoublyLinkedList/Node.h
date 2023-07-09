@@ -2,7 +2,6 @@
 #define NODE_CLASS
 
 #include <iostream>
-#include "../../Task.h"
 
 /**
  * @brief The Node class represents a node in a doubly linked list.

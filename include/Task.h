@@ -6,10 +6,12 @@
 #include <string>
 #include <vector>
 
-#include "./Column.h"
-#include "./TADS/Set/Set.h"
+#include "Column.h"
+#include "TADS/Set/Set.h"
 
 using namespace std;
+
+class Column;
 
 /**
  * @brief Class that represents a task.

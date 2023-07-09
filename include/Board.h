@@ -5,9 +5,9 @@
 #include <string>
 #include <vector>
 
-#include "./Column.h"
-#include "./Task.h"
-#include "./TADS/DoublyLinkedList/DoublyLinkedList.h"
+#include "Column.h"
+#include "Task.h"
+#include "TADS/DoublyLinkedList/DoublyLinkedList.h"
 
 using namespace std;
 
