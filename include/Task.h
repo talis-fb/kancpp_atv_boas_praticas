@@ -1,90 +1,72 @@
 #ifndef TASK_CLASS
 #define TASK_CLASS
 
-#include <iostream>
-#include <ctime>
 #include <string>
-#include <vector>
-
+#include <ctime>
 #include "Column.h"
-#include "TADS/Set/Set.h"
-
-using namespace std;
-
-class Column;
 
 /**
- * @brief Class that represents a task.
+ * @brief Class representing a Task.
  */
 class Task
 {
+
 private:
-    long int id;           /**< ID of the task */
-    string title;          /**< Title of the task */
-    string description;    /**< Description of the task */
-    int order;             /**< Order of the task */
-    tm *deadline;          /**< Deadline of the task */
-    Set<string> labels;    /**< Set of labels for the task */
-    Column *column;        /**< Column containing the task */
-    tm *createdAt;         /**< Creation date and time of the task */
-    static long int count; /** Add description*/
+    std::string id; /**< The ID of the task. */
+
+protected:
+    Column *column;          /**< The column associated with the task. */
+    std::string title;       /**< The title of the task. */
+    std::string description; /**< The description of the task. */
+    int order;               /**< The order of the task. */
+    tm *deadline;            /**< The deadline of the task. */
+    tm *createdAt;           /**< The creation date of the task. */
 
 public:
     /**
-     * @brief Constructs a new Task object.
-     * @param id The ID of the task.
+     * @brief Constructs a Task object with a specified column.
+     * @param column The column associated with the task.
+     */
+    Task(Column column);
+
+    /**
+     * @brief Constructs a Task object with a specified column and title.
+     * @param column The column associated with the task.
+     * @param title The title of the task.
+     */
+    Task(Column column, std::string title);
+
+    /**
+     * @brief Constructs a Task object with a specified column, title, and description.
+     * @param column The column associated with the task.
      * @param title The title of the task.
      * @param description The description of the task.
-     * @param order The order of the task.
+     */
+    Task(Column column, std::string title, std::string description);
+
+    /**
+     * @brief Constructs a Task object with a specified column, title, description, and deadline.
+     * @param column The column associated with the task.
+     * @param title The title of the task.
+     * @param description The description of the task.
      * @param deadline The deadline of the task.
-     * @param column The column containing the task.
      */
-    Task(const string title, const string description, tm *deadline);
+    Task(Column column, std::string title, std::string description, tm deadline);
 
     /**
-     * @brief Constructs a new Task object.
-     * @param id The ID of the task.
-     * @param title The title of the task.
-     * @param description The description of the task.
-     * @param order The order of the task.
-     * @param column The column containing the task.
+     * @brief Default constructor for Task.
      */
-    Task(const string title, const string description);
-
-    /**
-     * @brief Constructs a new Task object.
-     * @param id The ID of the task.
-     * @param title The title of the task.
-     * @param column The column containing the task.
-     */
-    Task(const string title);
-
-    /**
-     * @brief Destroys the Task object and frees the memory.
-     */
-    ~Task();
-
-    /**
-     * @brief
-     *
-     */
-    void setCreatedAt();
-
-    /**
-     * @brief
-     *
-     */
-    void displayCreatedAt();
+    Task();
 
     /**
      * @brief Get the ID of the task.
      * @return The ID of the task.
      */
-    int getId();
+    std::string getId();
 
     /**
-     * @brief Get the column containing the task.
-     * @return The column containing the task.
+     * @brief Get the column associated with the task.
+     * @return The column associated with the task.
      */
     Column *getColumn();
 
@@ -92,13 +74,13 @@ public:
      * @brief Get the title of the task.
      * @return The title of the task.
      */
-    string getTitle();
+    std::string getTitle();
 
     /**
      * @brief Set the title of the task.
      * @param title The new title of the task.
      */
-    void setTitle(string title);
+    void setTitle(std::string title);
 
     /**
      * @brief Set the order of the task.
@@ -116,7 +98,7 @@ public:
      * @brief Get the deadline of the task.
      * @return The deadline of the task.
      */
-    tm *getDeadline();
+    tm getDeadline();
 
     /**
      * @brief Set the deadline of the task.
@@ -128,39 +110,24 @@ public:
      * @brief Get the description of the task.
      * @return The description of the task.
      */
-    string getDescription();
+    std::string getDescription();
 
     /**
      * @brief Set the description of the task.
      * @param description The new description of the task.
      */
-    void setDescription(string description);
+    void setDescription(std::string description);
 
     /**
-     * @brief Get the labels for the task.
-     * @return The labels for the task.
-     */
-    Set<string> getLabels();
-
-    /**
-     * @brief Add a label to the task.
-     * @param label The label to be added.
-     * @return True if the label was added successfully, false otherwise.
-     */
-    bool addLabel(string label);
-
-    /**
-     * @brief Remove a label from the task.
-     * @param label The label to be removed.
-     * @return True if the label was removed successfully, false otherwise.
-     */
-    bool removeLabel(string label);
-
-    /**
-     * @brief Get the creation date and time of the task.
-     * @return The creation date and time of the task.
+     * @brief Get the creation date of the task.
+     * @return The creation date of the task.
      */
     tm getCreatedAt();
+
+    /**
+     * @brief Set the creation date of the task.
+     */
+    virtual void print() const = 0;
 };
 
-#endif
+#endif // TASK_CLASS

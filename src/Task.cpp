@@ -1,38 +1,48 @@
 #include "../include/Task.h"
 
-long int Task::count = 0;
-
-Task::Task(const string title, const string description, tm *deadline)
+Task::Task(Column column)
 {
-  this->id = this->count++;
-  this->title = title;
-  this->description = description;
-  this->deadline = deadline;
-  setCreatedAt();
+  this->column = &column;
+  this->title = "";
+  this->description = "";
+  this->order = 0;
+  this->deadline = nullptr;
+  this->createdAt = nullptr;
 }
 
-Task::Task(const string title, const string description)
+Task::Task(Column column, std::string title)
 {
-  this->id = this->count++;
-  this->title = title;
-  this->description = description;
-  setCreatedAt();
-}
-
-Task::Task(const string title)
-{
-  this->id = this->count++;
+  this->column = &column;
   this->title = title;
   this->description = "";
-  setCreatedAt();
+  this->order = 0;
+  this->deadline = nullptr;
+  this->createdAt = nullptr;
 }
 
-Task::~Task()
+Task::Task(Column column, std::string title, std::string description)
 {
-  //
+  this->column = &column;
+  this->title = title;
+  this->description = description;
+  this->order = 0;
+  this->deadline = nullptr;
+  this->createdAt = nullptr;
 }
 
-int Task::getId()
+Task::Task(Column column, std::string title, std::string description, tm deadline)
+{
+  this->column = &column;
+  this->title = title;
+  this->description = description;
+  this->order = 0;
+  this->deadline = &deadline;
+  this->createdAt = nullptr;
+}
+
+Task::Task() {}
+
+std::string Task::getId()
 {
   return this->id;
 }
@@ -42,12 +52,12 @@ Column *Task::getColumn()
   return this->column;
 }
 
-string Task::getTitle()
+std::string Task::getTitle()
 {
   return this->title;
 }
 
-void Task::setTitle(string title)
+void Task::setTitle(std::string title)
 {
   this->title = title;
 }
@@ -62,9 +72,9 @@ int Task::getOrder()
   return this->order;
 }
 
-tm *Task::getDeadline()
+tm Task::getDeadline()
 {
-  return this->deadline;
+  return *this->deadline;
 }
 
 void Task::setDeadline(tm date)
@@ -72,36 +82,14 @@ void Task::setDeadline(tm date)
   this->deadline = &date;
 }
 
-string Task::getDescription()
+std::string Task::getDescription()
 {
   return this->description;
 }
 
-void Task::setDescription(string description)
+void Task::setDescription(std::string description)
 {
   this->description = description;
-}
-
-Set<string> Task::getLabels()
-{
-  return this->labels;
-}
-
-bool Task::addLabel(string label)
-{
-  return this->labels.insert(label);
-}
-
-bool Task::removeLabel(string label)
-{
-  return this->labels.remove(label);
-}
-
-void Task::setCreatedAt()
-{
-  time_t currentTime = time(nullptr);
-  tm *localTime = localtime(&currentTime);
-  this->createdAt = localTime;
 }
 
 tm Task::getCreatedAt()
