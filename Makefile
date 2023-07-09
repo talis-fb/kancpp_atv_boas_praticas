@@ -1,30 +1,17 @@
-# Compilador a ser usado
 CC = g++
-
-# Opções de compilação
 CFLAGS = -c -Wall -std=c++11 
-
-# Diretórios de origem dos arquivos .cpp e .h
 SRCDIR = src
 INCDIR = includes
-
-# Diretórios de destino dos arquivos .o e do executável
 OBJDIR = bin
 BINDIR = build
-
-# Lista de todos os arquivos .cpp (incluindo subpastas)
-SRCS := $(wildcard $(SRCDIR)/*.cpp)
-
-# Gera a lista de nomes dos arquivos .o correspondentes
+SRCS := $(wildcard $(SRCDIR)/*.cpp) 
 OBJS := $(patsubst $(SRCDIR)/%.cpp,$(OBJDIR)/%.o,$(SRCS))
-
-
-# Nome do executável
 EXECUTABLE = $(BINDIR)/run
 
 all: $(EXECUTABLE)
 
 $(EXECUTABLE): $(OBJS)
+	@if not exist "$(BINDIR)" (mkdir "$(BINDIR)")
 	$(CC) $^ -o $@
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.cpp
@@ -32,5 +19,5 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.cpp
 	$(CC) $(CFLAGS) -I$(INCDIR) $< -o $@
 
 clean:
-	rmdir /S /Q "$(OBJDIR)" 2>NUL
+	del /Q /F "$(OBJDIR)\*" 2>NUL
 	del /Q /F "$(EXECUTABLE)" 2>NUL
