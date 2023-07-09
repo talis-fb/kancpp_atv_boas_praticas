@@ -93,11 +93,6 @@ vector<Task *> Column::getTasks()
 
 bool Column::addTask(Task *task)
 {
-    if (&task == nullptr)
-    {
-        return false;
-    }
-
     this->tasks.push_back(task);
 
     return true;
@@ -105,10 +100,6 @@ bool Column::addTask(Task *task)
 
 bool Column::removeTask(Task *task)
 {
-    if (&task == nullptr)
-    {
-        return false;
-    }
 
     for (auto i = this->tasks.begin(); i != this->tasks.end(); i++)
     {
@@ -120,4 +111,9 @@ bool Column::removeTask(Task *task)
     }
 
     return false;
+}
+
+bool Column::operator==(const Column &column) const
+{
+    return this->id == column.id;
 }

@@ -130,6 +130,13 @@ public:
      * @brief Set the creation date of the task.
      */
     virtual void print() const = 0;
+
+    /**
+     * @brief Overload of the == operator.
+     * @param task The task to compare.
+     * @return True if the tasks are equal, false otherwise.
+     */
+    bool operator==(const Task &task) const;
 };
 
 #endif // TASK_CLASS

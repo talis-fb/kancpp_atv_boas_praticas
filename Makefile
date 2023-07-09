@@ -2,7 +2,7 @@
 CC = g++
 
 # Opções de compilação
-CFLAGS = -c -Wall
+CFLAGS = -c -Wall -std=c++11 
 
 # Diretórios de origem dos arquivos .cpp e .h
 SRCDIR = src
@@ -13,7 +13,7 @@ OBJDIR = bin
 BINDIR = build
 
 # Lista de todos os arquivos .cpp (incluindo subpastas)
-SRCS := $(wildcard $(SRCDIR)/*.cpp) $(wildcard $(SRCDIR)/*/*.cpp) $(wildcard $(SRCDIR)/*/*/*.cpp)
+SRCS := $(wildcard $(SRCDIR)/*.cpp)
 
 # Gera a lista de nomes dos arquivos .o correspondentes
 OBJS := $(patsubst $(SRCDIR)/%.cpp,$(OBJDIR)/%.o,$(SRCS))

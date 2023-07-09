@@ -1,5 +1,4 @@
 #include "../include/Board.h"
-#include "../include/TADS/DoublyLinkedList/DoublyLinkedList.h"
 
 Board::Board(string name, string description)
 {
@@ -90,7 +89,7 @@ void Board::addTaskToBacklog(Task *task)
 
 void Board::removeTaskFromBacklog(Task *task)
 {
-  for (int i = 0; i < this->backlog.size(); i++)
+  for (std::size_t i = 0; i < this->backlog.size(); i++)
   {
     if (this->backlog[i]->getId() == task->getId())
     {

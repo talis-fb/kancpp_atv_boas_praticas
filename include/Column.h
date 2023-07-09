@@ -127,6 +127,13 @@ public:
      * @return True if the task was removed successfully, false otherwise.
      */
     bool removeTask(Task *task);
+
+    /**
+     * @brief Overload of the == operator for the Column class.
+     * @param other The column to be compared.
+     * @return True if the columns are equal, false otherwise.
+     */
+    bool operator==(const Column &column) const;
 };
 
 #endif

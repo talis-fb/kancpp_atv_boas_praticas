@@ -96,3 +96,8 @@ tm Task::getCreatedAt()
 {
   return *this->createdAt;
 }
+
+bool Task::operator==(const Task &task) const
+{
+  return this->id == task.id;
+}

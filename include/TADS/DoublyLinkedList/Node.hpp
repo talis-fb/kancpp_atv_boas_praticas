@@ -22,14 +22,17 @@ public:
     /**
      * @brief Default constructor.
      */
-    Node();
+    Node()
+    {
+        this->next(nullptr);
+    }
 
     /**
      * @brief Constructor with a value parameter.
      *
      * @param val The value to be stored in the node.
      */
-    Node(T val);
+    Node(T val) : value(val), next(nullptr), previous(nullptr) {}
 
     /**
      * @brief Constructor with value, next, and previous parameters.
@@ -38,54 +41,74 @@ public:
      * @param n Pointer to the next node.
      * @param p Pointer to the previous node.
      */
-    Node(T val, Node *n, Node *p);
+    Node(T val, Node *n, Node *p) : value(val), next(n), previous(p) {}
 
     /**
      * @brief Destructor for the Node class that frees the memory.
      */
-    ~Node();
+    ~Node()
+    {
+        //
+    }
 
     /**
      * @brief Get the value stored in the node.
      *
      * @return The value stored in the node.
      */
-    T getValue();
+    T getValue()
+    {
+        return this->value;
+    }
 
     /**
      * @brief Set the value stored in the node.
      *
      * @param val The value to be set.
      */
-    void setValue(T val);
+    void setValue(T val)
+    {
+        this->value = val;
+    }
 
     /**
      * @brief Get the next node.
      *
      * @return Pointer to the next node.
      */
-    Node *getNext();
+    Node<T> *getNext()
+    {
+        return this->next;
+    }
 
     /**
      * @brief Set the next node.
      *
      * @param n Pointer to the next node.
      */
-    void setNext(Node *n);
-
+    void setNext(Node<T> *n)
+    {
+        this->next = n;
+    }
     /**
      * @brief Get the previous node.
      *
      * @return Pointer to the previous node.
      */
-    Node *getPrevious();
+    Node<T> *getPrevious()
+    {
+        return this->previous;
+    }
 
     /**
      * @brief Set the previous node.
      *
      * @param p Pointer to the previous node.
      */
-    void setPrevious(Node *p);
+    void setPrevious(Node<T> *p)
+    {
+        this->previous = p;
+    }
 };
 
 #endif
