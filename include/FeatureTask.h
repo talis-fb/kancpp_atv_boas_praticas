@@ -12,6 +12,8 @@ private:
     std::string project; /**< The project associated with the feature task. */
 
 public:
+    FeatureTask();
+
     /**
      * @brief Constructs a FeatureTask object with a specified column and project.
      * @param column The column associated with the feature task.
@@ -55,7 +57,7 @@ public:
     /**
      * @brief Prints the feature task.
      */
-    void print();
+    void print() const override;
 };
 
 #endif // FEATURE_TASK_CLASS
