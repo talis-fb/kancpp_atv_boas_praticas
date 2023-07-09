@@ -1,29 +1,36 @@
+# Compilador a ser usado
 CC = g++
-CPPFLAGS = -O0 -g -W -Wall -pedantic -std=c++14
+
+# Opções de compilação
+CFLAGS = -c -Wall
+
+# Diretórios de origem dos arquivos .cpp e .h
 SRCDIR = src
+INCDIR = includes
+
+# Diretórios de destino dos arquivos .o e do executável
 OBJDIR = bin
 BINDIR = build
-SOURCES = $(wildcard $(SRCDIR)/*.cpp)
-OBJECTS = $(patsubst $(SRCDIR)/%.cpp,$(OBJDIR)/%.o,$(SOURCES))
-EXECUTABLE = $(BINDIR)\run
 
-# Commands
-RM = del 
+# Lista de todos os arquivos .cpp (incluindo subpastas)
+SRCS := $(wildcard $(SRCDIR)/*.cpp) $(wildcard $(SRCDIR)/*/*.cpp) $(wildcard $(SRCDIR)/*/*/*.cpp)
+
+# Gera a lista de nomes dos arquivos .o correspondentes
+OBJS := $(patsubst $(SRCDIR)/%.cpp,$(OBJDIR)/%.o,$(SRCS))
+
+
+# Nome do executável
+EXECUTABLE = $(BINDIR)/run
 
 all: $(EXECUTABLE)
 
-$(EXECUTABLE): $(OBJECTS)
-	$(CC) $(CFLAGS) $^ -o $@
+$(EXECUTABLE): $(OBJS)
+	$(CC) $^ -o $@
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.cpp
-	$(CC) $(CFLAGS) -c $< -o $@
+	@if not exist "$(dir $@)" (mkdir "$(dir $@)")
+	$(CC) $(CFLAGS) -I$(INCDIR) $< -o $@
 
 clean:
-	$(RM) $(OBJDIR)\main.o
-	$(RM) $(OBJDIR)\Column.o
-	$(RM) $(OBJDIR)\Board.o
-	$(RM) $(OBJDIR)\Admin.o
-	$(RM) $(OBJDIR)\User.o
-	$(RM) $(OBJDIR)\Member.o
-	$(RM) $(OBJDIR)\Task.o
-	$(RM) $(EXECUTABLE)
+	rmdir /S /Q "$(OBJDIR)" 2>NUL
+	del /Q /F "$(EXECUTABLE)" 2>NUL

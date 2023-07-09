@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "../include/TestTask.h"
 
 TestTask::TestTask(Column column, FeatureTask *feature) : Task(column)
@@ -23,4 +25,9 @@ TestTask::TestTask(Column column, std::string title, FeatureTask *feature) : Tas
 FeatureTask *TestTask::getFeature()
 {
     return feature;
+}
+
+void TestTask::print()
+{
+    std::cout << "TestTask" << std::endl;
 }

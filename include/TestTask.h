@@ -53,6 +53,11 @@ public:
      * @return The feature associated with the test task.
      */
     FeatureTask *getFeature();
+
+    /**
+     * @brief Prints the test task.
+     */
+    void print();
 };
 
 #endif // TEST_TASK_CLASS

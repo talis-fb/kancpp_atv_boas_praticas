@@ -5,6 +5,8 @@
 #include <ctime>
 #include "Column.h"
 
+class Column;
+
 /**
  * @brief Class representing a Task.
  */

@@ -57,6 +57,11 @@ public:
      * @param priority The new priority of the bug task.
      */
     void setPriority(int priority);
+
+    /**
+     * @brief Prints the bug task.
+     */
+    void print();
 };
 
 #endif // BUGTASK_CLASS

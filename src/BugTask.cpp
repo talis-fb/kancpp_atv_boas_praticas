@@ -1,3 +1,4 @@
+#include <iostream>
 #include "../include/BugTask.h"
 
 BugTask::BugTask(Column column, int priority) : Task(column)
@@ -23,4 +24,9 @@ BugTask::BugTask(Column column, std::string title, std::string description, tm d
 int BugTask::getPriority()
 {
     return priority;
+}
+
+void BugTask::print()
+{
+    std::cout << "BugTask" << std::endl;
 }

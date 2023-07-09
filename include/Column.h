@@ -7,9 +7,9 @@
 
 #include "Task.h"
 
-using namespace std;
-
 class Task;
+
+using namespace std;
 
 /**
  * @brief Class that represents a column.
@@ -17,12 +17,12 @@ class Task;
 class Column
 {
 private:
-    string id;          /**< ID of the column */
-    string name;        /**< Name of the column */
-    tm *createdAt;      /**< Creation date and time of the column */
-    string description; /**< Description of the column */
-    int order;          /**< Order of the column */
-    vector<Task> tasks; /**< List of tasks in the column */
+    string id;            /**< ID of the column */
+    string name;          /**< Name of the column */
+    tm *createdAt;        /**< Creation date and time of the column */
+    string description;   /**< Description of the column */
+    int order;            /**< Order of the column */
+    vector<Task *> tasks; /**< List of tasks in the column */
 
 public:
     /**
@@ -112,21 +112,21 @@ public:
      * @brief Get the tasks in the column.
      * @return The tasks in the column.
      */
-    vector<Task> getTasks();
+    vector<Task *> getTasks();
 
     /**
      * @brief Add a task to the column.
      * @param task The task to be added.
      * @return True if the task was added successfully, false otherwise.
      */
-    bool addTask(Task task);
+    bool addTask(Task *task);
 
     /**
      * @brief Remove a task from the column.
      * @param task The task to be removed.
      * @return True if the task was removed successfully, false otherwise.
      */
-    bool removeTask(Task task);
+    bool removeTask(Task *task);
 };
 
 #endif

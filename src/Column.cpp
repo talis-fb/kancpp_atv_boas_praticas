@@ -86,12 +86,12 @@ void Column::setOrder(int order)
     this->order = order;
 }
 
-vector<Task> Column::getTasks()
+vector<Task *> Column::getTasks()
 {
     return this->tasks;
 }
 
-bool Column::addTask(Task task)
+bool Column::addTask(Task *task)
 {
     if (&task == nullptr)
     {
@@ -103,7 +103,7 @@ bool Column::addTask(Task task)
     return true;
 }
 
-bool Column::removeTask(Task task)
+bool Column::removeTask(Task *task)
 {
     if (&task == nullptr)
     {
@@ -112,7 +112,7 @@ bool Column::removeTask(Task task)
 
     for (auto i = this->tasks.begin(); i != this->tasks.end(); i++)
     {
-        if ((*i).getId() == task.getId())
+        if (*i == task)
         {
             this->tasks.erase(i);
             return true;

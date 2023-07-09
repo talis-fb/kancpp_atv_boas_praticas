@@ -1,3 +1,4 @@
+#include <iostream>
 #include "../include/FeatureTask.h"
 
 FeatureTask::FeatureTask(Column column, std::string project) : Task(column)
@@ -23,4 +24,9 @@ FeatureTask::FeatureTask(Column column, std::string title, std::string descripti
 std::string FeatureTask::getProject()
 {
     return project;
+}
+
+void FeatureTask::print()
+{
+    std::cout << "FeatureTask" << std::endl;
 }

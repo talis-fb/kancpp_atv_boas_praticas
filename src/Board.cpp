@@ -1,12 +1,12 @@
-
 #include "../include/Board.h"
+#include "../include/TADS/DoublyLinkedList/DoublyLinkedList.h"
 
 Board::Board(string name, string description)
 {
   this->name = name;
   this->description = description;
   this->columns = new DoublyLinkedList<Column>();
-  this->backlog = std::vector<Task>();
+  this->backlog = std::vector<Task *>();
   setCreatedAt();
 }
 
@@ -18,7 +18,8 @@ Board::Board(string name)
 
 Board::~Board()
 {
-  //
+  delete this->columns;
+  delete this->createdAt;
 }
 
 string Board::getName()
@@ -55,25 +56,25 @@ void Board::displayCreatedAt()
   std::cout << "Created at: " << dateTime << std::endl;
 }
 
-void Board::addColumn(Column column)
+void Board::addColumn(Column *column)
 {
-  this->columns->insertAtHead(column);
+  this->columns->insertAtHead(*column);
 }
 
-void Board::removeColumn(Column column)
+void Board::removeColumn(Column *column)
 {
-  this->columns->remove(column);
+  this->columns->remove(*column);
 }
 
-void Board::moveTask(Task task, Column column)
+void Board::moveTask(Task *task, Column *column)
 {
 
   for (int i = 0; i < this->columns->getSize(); i++)
   {
-    if (this->columns->get(i).getId() == column.getId())
+    if (this->columns->get(i).getId() == (*column).getId())
     {
-      Column *targetColumn = &this->columns->get(i);
-      targetColumn->addTask(task);
+      Column targetColumn = this->columns->get(i);
+      targetColumn.addTask(task);
     }
     else
     {
@@ -82,16 +83,16 @@ void Board::moveTask(Task task, Column column)
   }
 }
 
-void Board::addTaskToBacklog(Task task)
+void Board::addTaskToBacklog(Task *task)
 {
   this->backlog.push_back(task);
 }
 
-void Board::removeTaskFromBacklog(Task task)
+void Board::removeTaskFromBacklog(Task *task)
 {
   for (int i = 0; i < this->backlog.size(); i++)
   {
-    if (this->backlog[i].getId() == task.getId())
+    if (this->backlog[i]->getId() == task->getId())
     {
       this->backlog.erase(this->backlog.begin() + i);
     }

@@ -51,6 +51,11 @@ public:
      * @return The project associated with the feature task.
      */
     std::string getProject();
+
+    /**
+     * @brief Prints the feature task.
+     */
+    void print();
 };
 
 #endif // FEATURE_TASK_CLASS
