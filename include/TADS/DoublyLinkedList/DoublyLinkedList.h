@@ -1,7 +1,7 @@
 #ifndef DOUBLY_LINKED_LIST_CLASS
 #define DOUBLY_LINKED_LIST_CLASS
 
-#include "./Node.hpp"
+#include "./Node.h"
 
 /**
  * @brief The DoublyLinkedList class represents a doubly linked list.
@@ -42,9 +42,9 @@ public:
     Node<T> *getTail();
 
     /**
-     * @brief Retrieve the element at the specified index.
+     * @brief Get the element at the specified index.
      *
-     * @param index The index of the element to retrieve.
+     * @param index The index of the element to get.
      * @return The element at the specified index.
      */
     T get(int index);
@@ -65,7 +65,7 @@ public:
      * @param element The element to insert.
      * @return True if the element was successfully inserted, false otherwise.
      */
-    bool insert(T element);
+    bool insertSorted(T element);
 
     /**
      * @brief Insert an element at the head (start) of the list.

@@ -1,4 +1,4 @@
-#include "../include/Column.hpp"
+#include "../include/Column.h"
 
 Column::Column(const string &id, const string &name, const string &description, const int &order)
 {

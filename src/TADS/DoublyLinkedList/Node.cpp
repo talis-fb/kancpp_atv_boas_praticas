@@ -1,4 +1,4 @@
-#include "..\..\..\include\TADS\DoublyLinkedList\Node.hpp"
+#include "..\..\..\include\TADS\DoublyLinkedList\Node.h"
 
 class Task;
 

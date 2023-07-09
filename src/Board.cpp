@@ -1,5 +1,5 @@
 
-#include "../include/Board.hpp"
+#include "../include/Board.h"
 
 Board::Board(string name, string description)
 {

@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 
-#include "..\..\..\include\TADS\Set\Set.hpp"
+#include "..\..\..\include\TADS\Set\Set.h"
 
 template <typename T>
 Set<T>::Set() {}

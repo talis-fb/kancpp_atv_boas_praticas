@@ -1,5 +1,5 @@
 #include "Node.cpp"
-#include "..\..\..\include\TADS\DoublyLinkedList\DoublyLinkedList.hpp"
+#include "..\..\..\include\TADS\DoublyLinkedList\DoublyLinkedList.h"
 
 template <class T>
 DoublyLinkedList<T>::DoublyLinkedList(void)

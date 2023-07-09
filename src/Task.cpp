@@ -1,4 +1,4 @@
-#include "../include/Task.hpp"
+#include "../include/Task.h"
 
 long int Task::count = 0;
 
@@ -81,21 +81,6 @@ void Task::setDescription(string description)
 {
   this->description = description;
 }
-
-Set<User> Task::getAssignees()
-{
-  return this->assignees;
-}
-
-// bool Task::addAssignee(User &user)
-// {
-
-// }
-
-// bool Task::removeAssignee(User *user)
-// {
-
-// }
 
 Set<string> Task::getLabels()
 {

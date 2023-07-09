@@ -6,12 +6,10 @@
 #include <string>
 #include <vector>
 
-#include "./Column.hpp"
-#include "./TADS/Set/Set.hpp"
+#include "./Column.h"
+#include "./TADS/Set/Set.h"
 
 using namespace std;
-
-class User;
 
 /**
  * @brief Class that represents a task.
@@ -24,7 +22,6 @@ private:
     string description;    /**< Description of the task */
     int order;             /**< Order of the task */
     tm *deadline;          /**< Deadline of the task */
-    Set<User> assignees;   /**< Set of assignees for the task */
     Set<string> labels;    /**< Set of labels for the task */
     Column *column;        /**< Column containing the task */
     tm *createdAt;         /**< Creation date and time of the task */
@@ -136,26 +133,6 @@ public:
      * @param description The new description of the task.
      */
     void setDescription(string description);
-
-    /**
-     * @brief Get the assignees for the task.
-     * @return The assignees for the task.
-     */
-    Set<User> getAssignees();
-
-    /**
-     * @brief Add an assignee to the task.
-     * @param user The user to be added as an assignee.
-     * @return True if the assignee was added successfully, false otherwise.
-     */
-    bool addAssignee(const User &user);
-
-    /**
-     * @brief Remove an assignee from the task.
-     * @param user The user to be removed as an assignee.
-     * @return True if the assignee was removed successfully, false otherwise.
-     */
-    bool removeAssignee(const User &user);
 
     /**
      * @brief Get the labels for the task.
