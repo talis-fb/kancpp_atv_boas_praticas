@@ -45,5 +45,13 @@
     "typeinfo": "cpp",
     "chrono": "cpp",
     "ratio": "cpp"
-  }
+  },
+  "makefile.launchConfigurations": [
+    {
+      "stopAtEntry": true,
+      "cwd": "c:\\Users\\pedro\\Documents\\Faculdade\\LP1\\kanccp\\build",
+      "binaryPath": "c:\\Users\\pedro\\Documents\\Faculdade\\LP1\\kanccp\\build\\run",
+      "binaryArgs": []
+    }
+  ]
 }
