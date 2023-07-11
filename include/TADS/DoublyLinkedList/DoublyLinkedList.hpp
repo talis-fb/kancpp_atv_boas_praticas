@@ -184,10 +184,10 @@ T DoublyLinkedList<T>::get(int index)
         throw std::out_of_range("Index out of range at retrieve.");
     }
 
-    Node<T> *current = this->head;
+    Node<T> *current = this->head->getNext();
     int i = 0;
 
-    while (current != nullptr)
+    while (current != nullptr && current != this->tail)
     {
         if (i == index)
         {

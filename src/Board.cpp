@@ -99,5 +99,12 @@ void Board::removeTaskFromBacklog(Task *task)
 }
 
 void Board::printBoard(){
+  int sizeColumns = this->columns->getSize();
+
+  cout <<  "Quadro Kanban (" << this->getName() << ")" << endl; 
   
+  for(int i = 0; i < sizeColumns; i++){
+    cout << this->columns->get(i).getName() << endl;
+  }
+
 }

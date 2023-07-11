@@ -94,23 +94,23 @@ int main()
     cout << "Digite as informacoes da coluna" << endl;
 
     cout << "Id: ";
-    id = "1";
-    // getline(cin, id);
+    // id = "1";
+    getline(cin, id);
     cout << "-------------------------------" << endl;;
 
     cout << "Nome: ";
-    name = "A fazer";
-    // getline(cin, name);
+    // name = "A fazer";
+    getline(cin, name);
     cout << "-------------------------------" << endl;;
     
     cout << "Descricao: ";
-    description = "Tarefas a fazer";
-    // getline(cin, description);
+    // description = "Tarefas a fazer";
+    getline(cin, description);
     cout << "-------------------------------" << endl;;
 
     cout << "Ordem: ";
-    order = 1;
-    // cin >> order;
+    // order = 1;
+    cin >> order;
     cout << "-------------------------------" << endl;;
 
     Column* newColumn = new Column(id, name, description, order);
@@ -123,7 +123,7 @@ int main()
     boardKanban.addColumn(newColumn);
 
     cout << "Deseja adicionar outra coluna?(S/N) ";
-    // cin.ignore();
+    cin.ignore();
     cin >> addNewColumn;
     cin.ignore();
 
