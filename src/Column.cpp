@@ -1,5 +1,15 @@
 #include "../include/Column.h"
 
+Column::Column(void){
+    this->id = " ";
+    this->name = " ";
+    this->description = " ";
+    this->order = -1;
+
+    time_t currentTime = time(nullptr);
+    this->createdAt = localtime(&currentTime);
+}
+
 Column::Column(const string id, const string name, const string description, const int order)
 {
     this->id = id;
