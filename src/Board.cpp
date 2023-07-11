@@ -51,8 +51,8 @@ void Board::setCreatedAt()
 void Board::displayCreatedAt()
 {
   char dateTime[100];
-  std::strftime(dateTime, sizeof(dateTime), "%Y-%m-%d %H:%M:%S", createdAt);
-  std::cout << "Created at: " << dateTime << std::endl;
+  std::strftime(dateTime, sizeof(dateTime), "%d/%m/%Y as %Hh%Mmin", createdAt);
+  std::cout << "Criado em: " << dateTime << std::endl;
 }
 
 void Board::addColumn(Column *column)
@@ -96,4 +96,8 @@ void Board::removeTaskFromBacklog(Task *task)
       this->backlog.erase(this->backlog.begin() + i);
     }
   }
+}
+
+void Board::printBoard(){
+  
 }

@@ -32,7 +32,7 @@ public:
      * @param description The description of the column.
      * @param order The order of the column.
      */
-    Column(const string &id, const string &name, const string &description, const int &order);
+    Column(const string id, const string name, const string description, const int order);
 
     /**
      * @brief Constructs a new Column object.

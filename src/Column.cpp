@@ -1,6 +1,6 @@
 #include "../include/Column.h"
 
-Column::Column(const string &id, const string &name, const string &description, const int &order)
+Column::Column(const string id, const string name, const string description, const int order)
 {
     this->id = id;
     this->name = name;

@@ -10,30 +10,26 @@
  *
  * @tparam T The type of the value stored in the node.
  */
-template <class T>
+template <typename T>
 class Node
 {
 private:
     T value;        /**< The value stored in the node. */
-    Node *next;     /**< Pointer to the next node. */
-    Node *previous; /**< Pointer to the previous node. */
+    Node* next;     /**< Pointer to the next node. */
+    Node* previous; /**< Pointer to the previous node. */
 
 public:
     /**
      * @brief Default constructor.
      */
-    Node()
-    {
-        this->next(nullptr);
-    }
+    Node();
 
     /**
      * @brief Constructor with a value parameter.
      *
      * @param val The value to be stored in the node.
      */
-    Node(T val) : value(val), next(nullptr), previous(nullptr) {}
-
+    Node(T val);
     /**
      * @brief Constructor with value, next, and previous parameters.
      *
@@ -41,74 +37,108 @@ public:
      * @param n Pointer to the next node.
      * @param p Pointer to the previous node.
      */
-    Node(T val, Node *n, Node *p) : value(val), next(n), previous(p) {}
+    Node(T val, Node *n, Node *p);
 
     /**
      * @brief Destructor for the Node class that frees the memory.
      */
-    ~Node()
-    {
-        //
-    }
+    ~Node();
 
     /**
      * @brief Get the value stored in the node.
      *
      * @return The value stored in the node.
      */
-    T getValue()
-    {
-        return this->value;
-    }
+    T getValue();
 
     /**
      * @brief Set the value stored in the node.
      *
      * @param val The value to be set.
      */
-    void setValue(T val)
-    {
-        this->value = val;
-    }
+    void setValue(T val);
 
     /**
      * @brief Get the next node.
      *
      * @return Pointer to the next node.
      */
-    Node<T> *getNext()
-    {
-        return this->next;
-    }
+    Node* getNext();
 
     /**
      * @brief Set the next node.
      *
      * @param n Pointer to the next node.
      */
-    void setNext(Node<T> *n)
-    {
-        this->next = n;
-    }
+    void setNext(Node *n);
+
     /**
      * @brief Get the previous node.
      *
      * @return Pointer to the previous node.
      */
-    Node<T> *getPrevious()
-    {
-        return this->previous;
-    }
+    Node* getPrevious();
 
     /**
      * @brief Set the previous node.
      *
      * @param p Pointer to the previous node.
      */
-    void setPrevious(Node<T> *p)
-    {
-        this->previous = p;
-    }
+    void setPrevious(Node *p);
 };
+
+template <typename T>
+Node<T>::Node(void):
+next(NULL) {}
+
+template <typename T>
+Node<T>::Node(T val) : 
+value(val), next(NULL), previous(NULL) {}
+
+template <typename T>
+Node<T>::Node(T val, Node *n, Node *p) : 
+value(val), next(n), previous(p) {}
+
+template <typename T>
+Node<T>::~Node()
+{
+    //
+}
+
+template <typename T>
+T Node<T>::getValue()
+{
+    return this->value;
+}
+
+template <typename T>
+void Node<T>::setValue(T val)
+{
+    this->value = val;
+}
+
+template <typename T>
+Node<T>* Node<T>::getNext()
+{
+    return this->next;
+}
+
+template <typename T>
+void Node<T>::setNext(Node<T> *n)
+{
+    this->next = n;
+}
+
+template <typename T>
+Node<T>* Node<T>::getPrevious()
+{
+    return this->previous;
+}
+
+template <typename T>
+void Node<T>::setPrevious(Node<T> *p)
+{
+    this->previous = p;
+}
 
 #endif

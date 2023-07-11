@@ -107,6 +107,12 @@ public:
      * @param task The task to be removed.
      */
     void removeTaskFromBacklog(Task *task);
+
+    /**
+     * @brief 
+     * 
+     */
+    void printBoard();
 };
 
 #endif
