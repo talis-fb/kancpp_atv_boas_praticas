@@ -4,7 +4,7 @@ Board::Board(string name, string description)
 {
   this->name = name;
   this->description = description;
-  this->columns = new DoublyLinkedList();
+  this->columns = new DoublyLinkedList<Column>();
   this->backlog = std::vector<Task *>();
   setCreatedAt();
 }

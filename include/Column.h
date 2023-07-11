@@ -33,12 +33,6 @@ public:
     Column();
     
     /**
-     * @brief Construct a new Column object
-     * 
-     */
-    Column();
-    
-    /**
      * @brief Constructs a new Column object.
      * @param id The ID of the column.
      * @param name The name of the column.

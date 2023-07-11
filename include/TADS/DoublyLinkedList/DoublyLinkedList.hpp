@@ -8,10 +8,11 @@
  *
  * It allows for efficient insertion and removal of elements at both the head and tail of the list.
  */
+template <typename T>
 class DoublyLinkedList{
 private:
-    Node<Column>* head; /**< The head (first node) of the list. */
-    Node<Column>* tail; /**< The tail (last node) of the list. */
+    Node<T>* head; /**< The head (first node) of the list. */
+    Node<T>* tail; /**< The tail (last node) of the list. */
     int size;      /**< The number of elements in the list. */
 
 public:
@@ -29,14 +30,14 @@ public:
      *
      * @return A pointer to the head node.
      */
-    Node<Column> *getHead();
+    Node<T> *getHead();
 
     /**
      * @brief Get the tail (last node) of the list.
      *
      * @return A pointer to the tail node.
      */
-    Node<Column> *getTail();
+    Node<T> *getTail();
 
     /**
      * @brief Get the element at the specified index.
@@ -44,7 +45,7 @@ public:
      * @param index The index of the element to get.
      * @return The element at the specified index.
      */
-    Column get(int index);
+    T get(int index);
 
     /**
      * @brief Search for the specified element in the list.
@@ -52,7 +53,7 @@ public:
      * @param element The element to search for.
      * @return The index of the first occurrence of the element, or -1 if not found.
      */
-    int search(Column element);
+    int search(T element);
 
     /**
      * @brief Insert an element into the list in an ordered manner.
@@ -62,7 +63,7 @@ public:
      * @param element The element to insert.
      * @return True if the element was successfully inserted, false otherwise.
      */
-    bool insertSorted(Column element);
+    bool insertSorted(T element);
 
     /**
      * @brief Insert an element at the head (start) of the list.
@@ -70,7 +71,7 @@ public:
      * @param element The element to insert.
      * @return True if the element was successfully inserted, false otherwise.
      */
-    bool insertAtHead(Column element);
+    bool insertAtHead(T element);
 
     /**
      * @brief Insert an element at the tail (end) of the list.
@@ -78,7 +79,7 @@ public:
      * @param element The element to insert.
      * @return True if the element was successfully inserted, false otherwise.
      */
-    bool insertAtTail(Column element);
+    bool insertAtTail(T element);
 
     /**
      * @brief Insert an element at the specified index in the list.
@@ -87,21 +88,21 @@ public:
      * @param element The element to insert.
      * @return True if the element was successfully inserted, false otherwise.
      */
-    bool insertAt(int index, Column element);
+    bool insertAt(int index, T element);
 
     /**
      * @brief Remove the element at the head (first node) of the list.
      *
      * @return The removed element.
      */
-    Column removeFromHead();
+    T removeFromHead();
 
     /**
      * @brief Remove the element at the tail (last node) of the list.
      *
      * @return The removed element.
      */
-    Column removeFromTail();
+    T removeFromTail();
 
     /**
      * @brief Remove the element at the specified index in the list.
@@ -109,7 +110,7 @@ public:
      * @param index The index of the element to remove.
      * @return The removed element.
      */
-    Column removeAt(int index);
+    T removeAt(int index);
 
     /**
      * @brief Remove the specified element from the list.
@@ -117,7 +118,7 @@ public:
      * @param element The element to remove.
      * @return True if the element was successfully removed, false otherwise.
      */
-    bool remove(Column element);
+    bool remove(T element);
 
     /**
      * @brief Check if the list is empty.
@@ -134,10 +135,11 @@ public:
     int getSize();
 };
 
-DoublyLinkedList::DoublyLinkedList()
+template <typename T>
+DoublyLinkedList<T>::DoublyLinkedList()
 {
-    this->head = new Node<Column>();
-    this->tail = new Node<Column>();
+    this->head = new Node<T>();
+    this->tail = new Node<T>();
 
     this->head->setPrevious(nullptr);
     this->tail->setNext(nullptr);
@@ -148,10 +150,11 @@ DoublyLinkedList::DoublyLinkedList()
     this->size = 0;
 }
 
-DoublyLinkedList::~DoublyLinkedList()
+template <typename T>
+DoublyLinkedList<T>::~DoublyLinkedList()
 {
-    Node<Column> *current = this->head;
-    Node<Column> *next = nullptr;
+    Node<T> *current = this->head;
+    Node<T> *next = nullptr;
 
     while (current != nullptr)
     {
@@ -161,24 +164,27 @@ DoublyLinkedList::~DoublyLinkedList()
     }
 }
 
-Node<Column>* DoublyLinkedList::getHead()
+template <typename T>
+Node<T>* DoublyLinkedList<T>::getHead()
 {
     return this->head;
 }
 
-Node<Column>* DoublyLinkedList::getTail()
+template <typename T>
+Node<T>* DoublyLinkedList<T>::getTail()
 {
     return this->tail;
 }
 
-Column DoublyLinkedList::get(int index)
+template <typename T>
+T DoublyLinkedList<T>::get(int index)
 {
     if (index < 0 || index >= this->size)
     {
         throw std::out_of_range("Index out of range at retrieve.");
     }
 
-    Node<Column> *current = this->head;
+    Node<T> *current = this->head;
     int i = 0;
 
     while (current != nullptr)
@@ -195,9 +201,10 @@ Column DoublyLinkedList::get(int index)
     throw std::out_of_range("Index out of range at retrieve.");
 }
 
-int DoublyLinkedList::search(Column element)
+template <typename T>
+int DoublyLinkedList<T>::search(T element)
 {
-    Node<Column> *current = this->head;
+    Node<T> *current = this->head;
     int i = 0;
 
     while (current != nullptr)
@@ -215,18 +222,19 @@ int DoublyLinkedList::search(Column element)
     return -1;
 }
 
-bool DoublyLinkedList::insertSorted(Column element)
+template <typename T>
+bool DoublyLinkedList<T>::insertSorted(T element)
 {
     //  Insert an element into the list in an ordered manner.
 
-    Node<Column> *newNode = new Node<Column>(element);
+    Node<T> *newNode = new Node<T>(element);
 
     if (newNode == nullptr)
     {
         return false;
     }
 
-    Node<Column>* current = this->head->getNext();
+    Node<T>* current = this->head->getNext();
 
     if (current == nullptr)
     {
@@ -253,9 +261,10 @@ bool DoublyLinkedList::insertSorted(Column element)
     return false;
 }
 
-bool DoublyLinkedList::insertAtHead(Column element)
+template <typename T>
+bool DoublyLinkedList<T>::insertAtHead(T element)
 {
-    Node<Column> *newNode = new Node<Column>(element);
+    Node<T> *newNode = new Node<T>(element);
 
     if (newNode == nullptr)
     {
@@ -272,9 +281,10 @@ bool DoublyLinkedList::insertAtHead(Column element)
     return true;
 }
 
-bool DoublyLinkedList::insertAtTail(Column element)
+template <typename T>
+bool DoublyLinkedList<T>::insertAtTail(T element)
 {
-    Node<Column> *newNode = new Node<Column>(element);
+    Node<T> *newNode = new Node<T>(element);
 
     if (newNode == nullptr)
     {
@@ -291,7 +301,8 @@ bool DoublyLinkedList::insertAtTail(Column element)
     return true;
 }
 
-bool DoublyLinkedList::insertAt(int index, Column element)
+template <typename T>
+bool DoublyLinkedList<T>::insertAt(int index, T element)
 {
     if (index < 0 || index > this->size)
     {
@@ -308,14 +319,14 @@ bool DoublyLinkedList::insertAt(int index, Column element)
         return this->insertAtTail(element);
     }
 
-    Node<Column> *newNode = new Node<Column>(element);
+    Node<T> *newNode = new Node<T>(element);
 
     if (newNode == nullptr)
     {
         return false;
     }
 
-    Node<Column> *current = this->head->getNext();
+    Node<T> *current = this->head->getNext();
 
     int i = 0;
 
@@ -341,16 +352,17 @@ bool DoublyLinkedList::insertAt(int index, Column element)
     return false;
 }
 
-Column DoublyLinkedList::removeFromHead()
+template <typename T>
+T DoublyLinkedList<T>::removeFromHead()
 {
-    Node<Column> *current = this->head->getNext();
+    Node<T> *current = this->head->getNext();
 
     if (current == nullptr)
     {
         throw std::out_of_range("List is empty.");
     }
 
-    Column value = current->getValue();
+    T value = current->getValue();
 
     this->head->setNext(current->getNext());
     current->getNext()->setPrevious(this->head);
@@ -362,16 +374,17 @@ Column DoublyLinkedList::removeFromHead()
     return value;
 }
 
-Column DoublyLinkedList::removeFromTail()
+template <typename T>
+T DoublyLinkedList<T>::removeFromTail()
 {
-    Node<Column> *current = this->tail->getPrevious();
+    Node<T> *current = this->tail->getPrevious();
 
     if (current == nullptr)
     {
         throw std::out_of_range("List is empty.");
     }
 
-    Column value = current->getValue();
+    T value = current->getValue();
 
     this->tail->setPrevious(current->getPrevious());
     current->getPrevious()->setNext(this->tail);
@@ -383,7 +396,8 @@ Column DoublyLinkedList::removeFromTail()
     return value;
 }
 
-Column DoublyLinkedList::removeAt(int index)
+template <typename T>
+T DoublyLinkedList<T>::removeAt(int index)
 {
     if (index < 0 || index >= this->size)
     {
@@ -400,7 +414,7 @@ Column DoublyLinkedList::removeAt(int index)
         return this->removeFromTail();
     }
 
-    Node<Column> *current = this->head->getNext();
+    Node<T> *current = this->head->getNext();
 
     int i = 0;
 
@@ -408,7 +422,7 @@ Column DoublyLinkedList::removeAt(int index)
     {
         if (i == index)
         {
-            Column value = current->getValue();
+            T value = current->getValue();
 
             current->getPrevious()->setNext(current->getNext());
             current->getNext()->setPrevious(current->getPrevious());
@@ -427,9 +441,10 @@ Column DoublyLinkedList::removeAt(int index)
     throw std::out_of_range("Index out of range at removeAt.");
 }
 
-bool DoublyLinkedList::remove(Column element)
+template <typename T>
+bool DoublyLinkedList<T>::remove(T element)
 {
-    Node<Column> *current = this->head->getNext();
+    Node<T> *current = this->head->getNext();
 
     while (current != nullptr)
     {
@@ -451,12 +466,14 @@ bool DoublyLinkedList::remove(Column element)
     return false;
 }
 
-bool DoublyLinkedList::isEmpty()
+template <typename T>
+bool DoublyLinkedList<T>::isEmpty()
 {
     return this->size == 0;
 }
 
-int DoublyLinkedList::getSize()
+template <typename T>
+int DoublyLinkedList<T>::getSize()
 {
     return this->size;
 }
