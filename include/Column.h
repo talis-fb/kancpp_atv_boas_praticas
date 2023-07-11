@@ -25,6 +25,13 @@ private:
     vector<Task *> tasks; /**< List of tasks in the column */
 
 public:
+
+    /**
+     * @brief Construct a new Column object
+     * 
+     */
+    Column();
+    
     /**
      * @brief Constructs a new Column object.
      * @param id The ID of the column.

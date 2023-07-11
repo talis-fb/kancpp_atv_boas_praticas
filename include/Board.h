@@ -19,7 +19,7 @@ class Board
 private:
     string name;                       /**< Name of the board */
     string description;                /**< Description of the board */
-    DoublyLinkedList<Column> *columns; /**< List of columns in the board */
+    DoublyLinkedList *columns; /**< List of columns in the board */
     vector<Task *> backlog;            /**< List of tasks in the backlog */
     tm *createdAt;                     /**< Creation date and time of the board */
 
