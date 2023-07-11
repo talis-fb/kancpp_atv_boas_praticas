@@ -19,7 +19,7 @@ public:
      * @param column The column associated with the test task.
      * @param project The project associated with the test task.
      */
-    TestTask(Column column, FeatureTask *feature);
+    TestTask(Column* column, FeatureTask *feature);
 
     /**
      * @brief Constructs a TestTask object with a specified column, title, description, deadline, and project.
@@ -29,7 +29,7 @@ public:
      * @param deadline The deadline of the test task.
      * @param project The project associated with the test task.
      */
-    TestTask(Column column, std::string title, std::string description, tm deadline, FeatureTask *feature);
+    TestTask(Column* column, std::string title, std::string description, tm deadline, FeatureTask *feature);
 
     /**
      * @brief Constructs a TestTask object with a specified column, title, description, and project.
@@ -38,7 +38,7 @@ public:
      * @param description The description of the test task.
      * @param project The project associated with the test task.
      */
-    TestTask(Column column, std::string title, std::string description, FeatureTask *feature);
+    TestTask(Column* column, std::string title, std::string description, FeatureTask *feature);
 
     /**
      * @brief Constructs a TestTask object with a specified column, title, and project.
@@ -46,7 +46,7 @@ public:
      * @param title The title of the test task.
      * @param project The project associated with the test task.
      */
-    TestTask(Column column, std::string title, FeatureTask *feature);
+    TestTask(Column* column, std::string title, FeatureTask *feature);
 
     /**
      * @brief Get the feature associated with the test task.

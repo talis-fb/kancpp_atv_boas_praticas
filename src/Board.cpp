@@ -100,11 +100,30 @@ void Board::removeTaskFromBacklog(Task *task)
 
 void Board::printBoard(){
   int sizeColumns = this->columns->getSize();
-
+  
+  system("clear||cls");
   cout <<  "Quadro Kanban (" << this->getName() << ")" << endl; 
   
   for(int i = 0; i < sizeColumns; i++){
-    cout << this->columns->get(i).getName() << endl;
+    cout << this->columns->get(i).getName() << " (Id: " << this->columns->get(i).getId() << ")" << endl;
+    vector<Task*> tasks = this->columns->get(i).getTasks();
+    vector<Task*>::iterator it;
+    for(int k = 0; k < tasks.size(); k++){
+      cout << tasks.at(k)->getTitle() << endl;
+    }
+    
+    cout << endl;
   }
 
+  cout << endl;
+}
+
+Column Board::getColumnById(string id){
+  int sizeColumns = this->columns->getSize();
+
+  for(int i = 0; i < sizeColumns; i++){
+    if(this->columns->get(i).getId() == id){
+      return this->columns->get(i);
+    }
+  }
 }

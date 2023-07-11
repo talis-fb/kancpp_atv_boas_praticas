@@ -3,7 +3,99 @@
 #include "../include/Board.h"
 #include "../include/Column.h"
 #include "../include/FeatureTask.h"
+#include "../include/BugTask.h"
+#include "../include/TestTask.h"
 #include "../include/storage/FileManager.hpp"
+
+void addNewTask(Board* board){
+  int optionTask;
+  board->printBoard();
+
+  cout << "Escolha o tipo da tarefa" << endl;
+
+  cout << "1. Bug Task" << endl; 
+  cout << "2. Feature Task" << endl; 
+  cout << "3. Test Task" << endl;
+
+  cout << "Digite a opcao escolhida: ";
+  cin >> optionTask;
+  cin.ignore();
+
+  string title, description, id;
+
+  cout << "Digite as informacoes da coluna" << endl;
+  cout << "Id da coluna: ";
+  getline(cin, id);
+  cout << "-------------------------------" << endl;
+
+  cout << "Nome: ";
+  getline(cin, title);
+  cout << "-------------------------------" << endl;
+  
+  cout << "Descricao: ";
+  getline(cin, description);
+  cout << "-------------------------------" << endl;
+
+  tm deadline;
+  // cout << "Ordem: ";
+  // cin >> order;
+  // cout << "-------------------------------" << endl;
+
+  Column chosenColumn = board->getColumnById(id);
+  switch (optionTask)
+  {
+  case 1:
+  {
+    int priority;
+    cout << "Prioridade: ";
+    cin >> priority;
+    cin.ignore();
+    cout << "-------------------------------" << endl;
+    Task* bugTask = new BugTask(&chosenColumn, title, description, deadline, priority);
+    chosenColumn.addTask(bugTask);
+  }
+    break;
+  
+  default:
+    cout << "Opcao nao encontrada" << endl;
+  }
+}
+
+void addNewColumns(Board* board){
+  char addNewColumn = 'S';
+  
+  do{
+    string id, name, description;
+    int order;
+
+    cout << "Digite as informacoes da coluna" << endl;
+    cout << "Id: ";
+    getline(cin, id);
+    cout << "-------------------------------" << endl;
+
+    cout << "Nome: ";
+    getline(cin, name);
+    cout << "-------------------------------" << endl;
+    
+    cout << "Descricao: ";
+    getline(cin, description);
+    cout << "-------------------------------" << endl;
+
+    cout << "Ordem: ";
+    cin >> order;
+    cout << "-------------------------------" << endl;
+
+    Column* newColumn = new Column(id, name, description, order);
+
+    board->addColumn(newColumn);
+
+    cout << "Deseja adicionar outra coluna?(S/N) ";
+    cin.ignore();
+    cin >> addNewColumn;
+    cin.ignore();
+
+  }while(toupper(addNewColumn) == 'S');
+}
 
 int showMenu(){
   int option;
@@ -25,6 +117,7 @@ int showMenu(){
   cout << "+---------------------------------+\n";
   cout << "Digite o numero da operacao desejada: ";
   cin >> option;
+  cin.ignore();
 
   if(option < minOption || option > maxOption){
     system("clear||cls");
@@ -67,8 +160,6 @@ int main()
 
   readFile.~FileManager();*/
 
-  // DoublyLinkedList* teste = new DoublyLinkedList<int>();
-
 
   cout << "Insira as informacoes do seu Kanban\n";
   
@@ -84,55 +175,11 @@ int main()
   
   cout << "Vamos adicionar as primeiras colunas do seu quadro kanban\n";
 
-  char addNewColumn = 'S';
-  
-
-  do{
-    string id, name, description;
-    int order;
-
-    cout << "Digite as informacoes da coluna" << endl;
-
-    cout << "Id: ";
-    // id = "1";
-    getline(cin, id);
-    cout << "-------------------------------" << endl;;
-
-    cout << "Nome: ";
-    // name = "A fazer";
-    getline(cin, name);
-    cout << "-------------------------------" << endl;;
-    
-    cout << "Descricao: ";
-    // description = "Tarefas a fazer";
-    getline(cin, description);
-    cout << "-------------------------------" << endl;;
-
-    cout << "Ordem: ";
-    // order = 1;
-    cin >> order;
-    cout << "-------------------------------" << endl;;
-
-    Column* newColumn = new Column(id, name, description, order);
-
-    cout << newColumn->getId() << endl;
-    cout << newColumn->getName() << endl;
-    cout << newColumn->getDescription() << endl;
-    cout << newColumn->getOrder() << endl;
-
-    boardKanban.addColumn(newColumn);
-
-    cout << "Deseja adicionar outra coluna?(S/N) ";
-    cin.ignore();
-    cin >> addNewColumn;
-    cin.ignore();
-
-  }while(toupper(addNewColumn) == 'S');
-
-
+  addNewColumns(&boardKanban);
 
   int exitOption = 7;
   int chosenOption;
+
   do{
     chosenOption = showMenu();
 
@@ -142,10 +189,10 @@ int main()
       boardKanban.printBoard();
       break;
     case 2:
-      /* code */
+      addNewColumns(&boardKanban);
       break;
     case 3:
-      /* code */
+      addNewTask(&boardKanban);
       break;
     case 4:
       /* code */

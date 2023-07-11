@@ -17,7 +17,7 @@ private:
     std::string id; /**< The ID of the task. */
 
 protected:
-    Column *column;          /**< The column associated with the task. */
+    Column* column;          /**< The column associated with the task. */
     std::string title;       /**< The title of the task. */
     std::string description; /**< The description of the task. */
     int order;               /**< The order of the task. */
@@ -29,14 +29,14 @@ public:
      * @brief Constructs a Task object with a specified column.
      * @param column The column associated with the task.
      */
-    Task(Column column);
+    Task(Column* column);
 
     /**
      * @brief Constructs a Task object with a specified column and title.
      * @param column The column associated with the task.
      * @param title The title of the task.
      */
-    Task(Column column, std::string title);
+    Task(Column* column, std::string title);
 
     /**
      * @brief Constructs a Task object with a specified column, title, and description.
@@ -44,7 +44,7 @@ public:
      * @param title The title of the task.
      * @param description The description of the task.
      */
-    Task(Column column, std::string title, std::string description);
+    Task(Column* column, std::string title, std::string description);
 
     /**
      * @brief Constructs a Task object with a specified column, title, description, and deadline.
@@ -53,7 +53,7 @@ public:
      * @param description The description of the task.
      * @param deadline The deadline of the task.
      */
-    Task(Column column, std::string title, std::string description, tm deadline);
+    Task(Column* column, std::string title, std::string description, tm deadline);
 
     /**
      * @brief Default constructor for Task.
@@ -129,7 +129,7 @@ public:
     /**
      * @brief Set the creation date of the task.
      */
-    virtual void print() const = 0;
+    virtual void print() = 0;
 
     /**
      * @brief Overload of the == operator.

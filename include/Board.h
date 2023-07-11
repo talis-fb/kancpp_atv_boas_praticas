@@ -113,6 +113,12 @@ public:
      * 
      */
     void printBoard();
+
+    /**
+     * @brief 
+     * @param id 
+     */
+    Column getColumnById(string id);
 };
 
 #endif

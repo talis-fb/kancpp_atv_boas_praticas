@@ -19,7 +19,7 @@ public:
      * @param column The column associated with the feature task.
      * @param project The project associated with the feature task.
      */
-    FeatureTask(Column column, std::string project);
+    FeatureTask(Column* column, std::string project);
 
     /**
      * @brief Constructs a FeatureTask object with a specified column, title, and project.
@@ -27,7 +27,7 @@ public:
      * @param title The title of the feature task.
      * @param project The project associated with the feature task.
      */
-    FeatureTask(Column column, std::string title, std::string project);
+    FeatureTask(Column* column, std::string title, std::string project);
 
     /**
      * @brief Constructs a FeatureTask object with a specified column, title, description, and project.
@@ -36,7 +36,7 @@ public:
      * @param description The description of the feature task.
      * @param project The project associated with the feature task.
      */
-    FeatureTask(Column column, std::string title, std::string description, std::string project);
+    FeatureTask(Column* column, std::string title, std::string description, std::string project);
 
     /**
      * @brief Constructs a FeatureTask object with a specified column, title, description, deadline, and project.
@@ -46,7 +46,7 @@ public:
      * @param deadline The deadline of the feature task.
      * @param project The project associated with the feature task.
      */
-    FeatureTask(Column column, std::string title, std::string description, tm deadline, std::string project);
+    FeatureTask(Column* column, std::string title, std::string description, tm deadline, std::string project);
 
     /**
      * @brief Get the project associated with the feature task.
@@ -57,7 +57,7 @@ public:
     /**
      * @brief Prints the feature task.
      */
-    void print() const override;
+    void print() override;
 };
 
 #endif // FEATURE_TASK_CLASS

@@ -1,8 +1,8 @@
 #include "../include/Task.h"
 
-Task::Task(Column column)
+Task::Task(Column* column)
 {
-  this->column = &column;
+  this->column = column;
   this->title = "";
   this->description = "";
   this->order = 0;
@@ -10,9 +10,9 @@ Task::Task(Column column)
   this->createdAt = nullptr;
 }
 
-Task::Task(Column column, std::string title)
+Task::Task(Column* column, std::string title)
 {
-  this->column = &column;
+  this->column = column;
   this->title = title;
   this->description = "";
   this->order = 0;
@@ -20,9 +20,9 @@ Task::Task(Column column, std::string title)
   this->createdAt = nullptr;
 }
 
-Task::Task(Column column, std::string title, std::string description)
+Task::Task(Column* column, std::string title, std::string description)
 {
-  this->column = &column;
+  this->column = column;
   this->title = title;
   this->description = description;
   this->order = 0;
@@ -30,9 +30,9 @@ Task::Task(Column column, std::string title, std::string description)
   this->createdAt = nullptr;
 }
 
-Task::Task(Column column, std::string title, std::string description, tm deadline)
+Task::Task(Column* column, std::string title, std::string description, tm deadline)
 {
-  this->column = &column;
+  this->column = column;
   this->title = title;
   this->description = description;
   this->order = 0;
