@@ -1,18 +1,12 @@
 #include "../include/Column.h"
 
-Column::Column(void){
-    this->id = " ";
-    this->name = " ";
-    this->description = " ";
-    this->order = -1;
+int Column::nextId = 1;
 
-    time_t currentTime = time(nullptr);
-    this->createdAt = localtime(&currentTime);
-}
+Column::Column() {}
 
-Column::Column(const string id, const string name, const string description, const int order)
+Column::Column(const string name, const string description, const int order)
 {
-    this->id = id;
+    this->id = Column::getNextId();
     this->name = name;
     this->description = description;
     this->order = order;
@@ -21,9 +15,9 @@ Column::Column(const string id, const string name, const string description, con
     this->createdAt = localtime(&currentTime);
 }
 
-Column::Column(const string &id, const string &name, const string &description)
+Column::Column(const string &name, const string &description)
 {
-    this->id = id;
+    this->id = Column::getNextId();
     this->name = name;
     this->description = description;
     this->order = 0;
@@ -32,9 +26,9 @@ Column::Column(const string &id, const string &name, const string &description)
     this->createdAt = localtime(&currentTime);
 }
 
-Column::Column(const string &id, const string &name)
+Column::Column(const string &name)
 {
-    this->id = id;
+    this->id = Column::getNextId();
     this->name = name;
     this->description = "";
     this->order = 0;
@@ -103,6 +97,11 @@ vector<Task *> Column::getTasks()
 
 bool Column::addTask(Task *task)
 {
+    if (task == nullptr)
+    {
+        return false;
+    }
+
     this->tasks.push_back(task);
 
     return true;
@@ -126,4 +125,24 @@ bool Column::removeTask(Task *task)
 bool Column::operator==(const Column &column) const
 {
     return this->id == column.id;
+}
+
+void Column::print()
+{
+    cout << "Id: " << this->id << endl;
+    cout << "Nome: " << this->name << endl;
+    // cout << "Descricao: " << this->description << endl;
+    // cout << "Ordem: " << this->order << endl;
+    // cout << "Data de criacao: " << this->createdAt->tm_mday << "/" << this->createdAt->tm_mon << "/" << this->createdAt->tm_year << endl;
+    // cout << "Tarefas: " << endl;
+
+    for (auto task : this->tasks)
+    {
+        task->print();
+    }
+}
+
+string Column::getNextId()
+{
+    return "C" + to_string(nextId++);
 }

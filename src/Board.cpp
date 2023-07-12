@@ -70,14 +70,14 @@ void Board::moveTask(Task *task, Column *column)
 
   for (int i = 0; i < this->columns->getSize(); i++)
   {
-    if (this->columns->get(i).getId() == (*column).getId())
+    if (this->columns->get(i) == column)
     {
-      Column targetColumn = this->columns->get(i);
-      targetColumn.addTask(task);
+      Column *targetColumn = this->columns->get(i);
+      targetColumn->addTask(task);
     }
     else
     {
-      this->columns->get(i).removeTask(task);
+      this->columns->get(i)->removeTask(task);
     }
   }
 }
@@ -98,32 +98,65 @@ void Board::removeTaskFromBacklog(Task *task)
   }
 }
 
-void Board::printBoard(){
+void Board::print()
+{
   int sizeColumns = this->columns->getSize();
-  
+
   system("clear||cls");
-  cout <<  "Quadro Kanban (" << this->getName() << ")" << endl; 
-  
-  for(int i = 0; i < sizeColumns; i++){
-    cout << this->columns->get(i).getName() << " (Id: " << this->columns->get(i).getId() << ")" << endl;
-    vector<Task*> tasks = this->columns->get(i).getTasks();
-    vector<Task*>::iterator it;
-    for(int k = 0; k < tasks.size(); k++){
+  cout << "Quadro Kanban (" << this->getName() << ")" << endl;
+
+  for (int i = 0; i < sizeColumns; i++)
+  {
+    cout << this->columns->get(i)->getName() << " (Id: " << this->columns->get(i)->getId() << ")" << endl;
+    vector<Task *> tasks = this->columns->get(i)->getTasks();
+    vector<Task *>::iterator it;
+    for (std::size_t k = 0; k < tasks.size(); k++)
+    {
       cout << tasks.at(k)->getTitle() << endl;
     }
-    
+
     cout << endl;
   }
 
   cout << endl;
 }
 
-Column Board::getColumnById(string id){
+Column *Board::getColumnById(string id)
+{
   int sizeColumns = this->columns->getSize();
 
-  for(int i = 0; i < sizeColumns; i++){
-    if(this->columns->get(i).getId() == id){
+  for (int i = 0; i < sizeColumns; i++)
+  {
+    if (this->columns->get(i)->getId() == id)
+    {
       return this->columns->get(i);
     }
   }
+
+  return nullptr;
+}
+
+Task *Board::searchTaskById(string id)
+{
+  for (int i = 0; i < this->columns->getSize(); i++)
+  {
+    vector<Task *> tasks = this->columns->get(i)->getTasks();
+    for (std::size_t k = 0; k < tasks.size(); k++)
+    {
+      if (tasks.at(k)->getId() == id)
+      {
+        return tasks.at(k);
+      }
+    }
+  }
+
+  for (std::size_t i = 0; i < this->backlog.size(); i++)
+  {
+    if (this->backlog.at(i)->getId() == id)
+    {
+      return this->backlog.at(i);
+    }
+  }
+
+  return nullptr;
 }

@@ -84,6 +84,12 @@ public:
     void addColumn(Column *column);
 
     /**
+     * @brief Get the columns of the board.
+     * @return The columns of the board.
+     */
+    DoublyLinkedList<Column> *getColumns();
+
+    /**
      * @brief Remove a column from the board.
      * @param column The column to be removed.
      */
@@ -109,16 +115,23 @@ public:
     void removeTaskFromBacklog(Task *task);
 
     /**
-     * @brief 
-     * 
+     * @brief Get the tasks in the backlog and in the columns.
+     * @param id The id of the task to be searched.
+     * @return Task* The task with the specified id.
      */
-    void printBoard();
+    Task *searchTaskById(string id);
 
     /**
-     * @brief 
-     * @param id 
+     * @brief Get the Column By Id object
+     * @param id The id of the column to be searched.
+     * @return Column The column with the specified id.
      */
-    Column getColumnById(string id);
+    Column *getColumnById(string id);
+
+    /**
+     * @brief Print the board.
+     */
+    void print();
 };
 
 #endif

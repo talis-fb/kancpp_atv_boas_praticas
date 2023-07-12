@@ -4,6 +4,7 @@
 #include <ctime>
 #include <string>
 #include <vector>
+#include <iostream>
 
 #include "Task.h"
 
@@ -17,6 +18,7 @@ using namespace std;
 class Column
 {
 private:
+    static int nextId;    /**< ID of the next column to be created */
     string id;            /**< ID of the column */
     string name;          /**< Name of the column */
     tm *createdAt;        /**< Creation date and time of the column */
@@ -25,36 +27,32 @@ private:
     vector<Task *> tasks; /**< List of tasks in the column */
 
 public:
-
     /**
      * @brief Construct a new Column object
-     * 
+     *
      */
     Column();
-    
+
     /**
      * @brief Constructs a new Column object.
-     * @param id The ID of the column.
      * @param name The name of the column.
      * @param description The description of the column.
      * @param order The order of the column.
      */
-    Column(const string id, const string name, const string description, const int order);
+    Column(const string name, const string description, const int order);
 
     /**
      * @brief Constructs a new Column object.
-     * @param id The ID of the column.
      * @param name The name of the column.
      * @param description The description of the column.
      */
-    Column(const string &id, const string &name, const string &description);
+    Column(const string &name, const string &description);
 
     /**
      * @brief Constructs a new Column object.
-     * @param id The ID of the column.
      * @param name The name of the column.
      */
-    Column(const string &id, const string &name);
+    Column(const string &name);
 
     /**
      * @brief Destroys the Column object and all its tasks.
@@ -141,6 +139,16 @@ public:
      * @return True if the columns are equal, false otherwise.
      */
     bool operator==(const Column &column) const;
+
+    /**
+     * @brief Overload of the != operator for the Column class.
+     * @return The next ID available.
+     */
+    static string getNextId();
+    /**
+     * @brief Prints the column.
+     */
+    void print();
 };
 
 #endif

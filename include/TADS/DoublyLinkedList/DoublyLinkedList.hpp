@@ -9,10 +9,11 @@
  * It allows for efficient insertion and removal of elements at both the head and tail of the list.
  */
 template <typename T>
-class DoublyLinkedList{
+class DoublyLinkedList
+{
 private:
-    Node<T>* head; /**< The head (first node) of the list. */
-    Node<T>* tail; /**< The tail (last node) of the list. */
+    Node<T> *head; /**< The head (first node) of the list. */
+    Node<T> *tail; /**< The tail (last node) of the list. */
     int size;      /**< The number of elements in the list. */
 
 public:
@@ -45,7 +46,7 @@ public:
      * @param index The index of the element to get.
      * @return The element at the specified index.
      */
-    T get(int index);
+    T *get(int index);
 
     /**
      * @brief Search for the specified element in the list.
@@ -95,14 +96,14 @@ public:
      *
      * @return The removed element.
      */
-    T removeFromHead();
+    T *removeFromHead();
 
     /**
      * @brief Remove the element at the tail (last node) of the list.
      *
      * @return The removed element.
      */
-    T removeFromTail();
+    T *removeFromTail();
 
     /**
      * @brief Remove the element at the specified index in the list.
@@ -110,7 +111,7 @@ public:
      * @param index The index of the element to remove.
      * @return The removed element.
      */
-    T removeAt(int index);
+    T *removeAt(int index);
 
     /**
      * @brief Remove the specified element from the list.
@@ -165,19 +166,19 @@ DoublyLinkedList<T>::~DoublyLinkedList()
 }
 
 template <typename T>
-Node<T>* DoublyLinkedList<T>::getHead()
+Node<T> *DoublyLinkedList<T>::getHead()
 {
     return this->head;
 }
 
 template <typename T>
-Node<T>* DoublyLinkedList<T>::getTail()
+Node<T> *DoublyLinkedList<T>::getTail()
 {
     return this->tail;
 }
 
 template <typename T>
-T DoublyLinkedList<T>::get(int index)
+T *DoublyLinkedList<T>::get(int index)
 {
     if (index < 0 || index >= this->size)
     {
@@ -191,7 +192,9 @@ T DoublyLinkedList<T>::get(int index)
     {
         if (i == index)
         {
-            return current->getValue();
+            T *value = new T(current->getValue());
+
+            return value;
         }
 
         current = current->getNext();
@@ -234,7 +237,7 @@ bool DoublyLinkedList<T>::insertSorted(T element)
         return false;
     }
 
-    Node<T>* current = this->head->getNext();
+    Node<T> *current = this->head->getNext();
 
     if (current == nullptr)
     {
@@ -353,7 +356,7 @@ bool DoublyLinkedList<T>::insertAt(int index, T element)
 }
 
 template <typename T>
-T DoublyLinkedList<T>::removeFromHead()
+T *DoublyLinkedList<T>::removeFromHead()
 {
     Node<T> *current = this->head->getNext();
 
@@ -375,7 +378,7 @@ T DoublyLinkedList<T>::removeFromHead()
 }
 
 template <typename T>
-T DoublyLinkedList<T>::removeFromTail()
+T *DoublyLinkedList<T>::removeFromTail()
 {
     Node<T> *current = this->tail->getPrevious();
 
@@ -397,7 +400,7 @@ T DoublyLinkedList<T>::removeFromTail()
 }
 
 template <typename T>
-T DoublyLinkedList<T>::removeAt(int index)
+T *DoublyLinkedList<T>::removeAt(int index)
 {
     if (index < 0 || index >= this->size)
     {

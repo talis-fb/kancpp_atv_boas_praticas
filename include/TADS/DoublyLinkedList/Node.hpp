@@ -15,8 +15,8 @@ class Node
 {
 private:
     T value;        /**< The value stored in the node. */
-    Node* next;     /**< Pointer to the next node. */
-    Node* previous; /**< Pointer to the previous node. */
+    Node *next;     /**< Pointer to the next node. */
+    Node *previous; /**< Pointer to the previous node. */
 
 public:
     /**
@@ -63,7 +63,7 @@ public:
      *
      * @return Pointer to the next node.
      */
-    Node* getNext();
+    Node *getNext();
 
     /**
      * @brief Set the next node.
@@ -77,7 +77,7 @@ public:
      *
      * @return Pointer to the previous node.
      */
-    Node* getPrevious();
+    Node *getPrevious();
 
     /**
      * @brief Set the previous node.
@@ -88,16 +88,13 @@ public:
 };
 
 template <typename T>
-Node<T>::Node(void):
-next(NULL) {}
+Node<T>::Node(void) : next(NULL) {}
 
 template <typename T>
-Node<T>::Node(T val) : 
-value(val), next(NULL), previous(NULL) {}
+Node<T>::Node(T val) : value(val), next(NULL), previous(NULL) {}
 
 template <typename T>
-Node<T>::Node(T val, Node *n, Node *p) : 
-value(val), next(n), previous(p) {}
+Node<T>::Node(T val, Node *n, Node *p) : value(val), next(n), previous(p) {}
 
 template <typename T>
 Node<T>::~Node()
@@ -118,7 +115,7 @@ void Node<T>::setValue(T val)
 }
 
 template <typename T>
-Node<T>* Node<T>::getNext()
+Node<T> *Node<T>::getNext()
 {
     return this->next;
 }
@@ -130,7 +127,7 @@ void Node<T>::setNext(Node<T> *n)
 }
 
 template <typename T>
-Node<T>* Node<T>::getPrevious()
+Node<T> *Node<T>::getPrevious()
 {
     return this->previous;
 }

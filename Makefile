@@ -4,7 +4,7 @@ SRCDIR = src
 INCDIR = includes
 OBJDIR = bin
 BINDIR = build
-SRCS := $(wildcard $(SRCDIR)/*.cpp) 
+SRCS := $(wildcard $(SRCDIR)/*.cpp) $(wildcard $(SRCDIR)/*/*.cpp)
 OBJS := $(patsubst $(SRCDIR)/%.cpp,$(OBJDIR)/%.o,$(SRCS))
 EXECUTABLE = $(BINDIR)/run
 
@@ -17,6 +17,9 @@ $(EXECUTABLE): $(OBJS)
 $(OBJDIR)/%.o: $(SRCDIR)/%.cpp
 	@if not exist "$(dir $@)" (mkdir "$(dir $@)")
 	$(CC) $(CFLAGS) -I$(INCDIR) $< -o $@
+
+run: $(EXECUTABLE)
+	$(EXECUTABLE)
 
 clean:
 	del /Q /F "$(OBJDIR)\*" 2>NUL
