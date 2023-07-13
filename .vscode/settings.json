@@ -45,7 +45,10 @@
     "typeinfo": "cpp",
     "chrono": "cpp",
     "ratio": "cpp",
-    "iomanip": "cpp"
+    "iomanip": "cpp",
+    "fort.hpp": "c",
+    "optional": "cpp",
+    "string_view": "cpp"
   },
   "makefile.launchConfigurations": [
     {

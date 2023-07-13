@@ -10,70 +10,44 @@
 
 int main()
 {
+  system("clear||cls");
 
-  /*Column *column = new Column("1", "name");
-
-  FeatureTask featureTask1(*column, "project1");
-  FeatureTask featureTask2(*column, "project2");
-
-  FileManager file(Filename::TASK);
-
-  if (file.isReady())
-  {
-    file.write(featureTask1, featureTask2);
-    cout << "Objetos da classe FeatureTask foram persistidos com sucesso no arquivo tasks.bin." << endl;
-  }
-  else
-  {
-    cout << "Erro ao abrir o arquivo." << endl;
-  }
-
-  file.~FileManager();
-
-  FileManager readFile(Filename::TASK);
-
-  vector<FeatureTask> tasks = readFile.read<FeatureTask>();
-  cout << "Objetos lidos do arquivo:" << endl;
-  for (const FeatureTask &task : tasks)
-  {
-    task.print();
-  }
-
-  readFile.~FileManager();*/
+  string name, description;
 
   cout << "Insira as informacoes do seu Kanban\n";
 
-  // cout << "Nome: ";
-  string nameKanban = "teste";
-  // cin >> nameKanban;
+  cout << "Nome do quadro: ";
+  getline(cin, name);
 
-  // cout << "Descricao: ";
-  string descriptionKanban = "teste descricao";
-  // cin >> descriptionKanban;
+  cout << "Descricao do quadro: ";
+  getline(cin, description);
 
-  Board boardKanban(nameKanban, descriptionKanban);
+  Board board(name, description);
 
-  cout << "Vamos adicionar as primeiras colunas do seu quadro kanban\n";
+  cout << "Quadro criado com sucesso!\n\n";
 
-  Menu::addNewColumns(&boardKanban);
+  cout << "Vamos adicionar as primeiras colunas do quadro " << board.getName() << endl
+       << endl;
+
+  Menu::addNewColumns(&board);
 
   int exitOption = 7;
-  int chosenOption;
+  int selectedOption;
 
   do
   {
-    chosenOption = Menu::show();
+    selectedOption = Menu::show();
 
-    switch (chosenOption)
+    switch (selectedOption)
     {
     case 1:
-      boardKanban.print();
+      board.print();
       break;
     case 2:
-      Menu::addNewColumns(&boardKanban);
+      Menu::addNewColumns(&board);
       break;
     case 3:
-      Menu::addNewTask(&boardKanban);
+      Menu::addNewTask(&board);
       break;
     case 4:
       /* code */
@@ -86,11 +60,11 @@ int main()
       break;
 
     default:
-      boardKanban.print();
+      board.print();
       break;
     }
 
-  } while (chosenOption != exitOption);
+  } while (selectedOption != exitOption);
 
   return 0;
 }

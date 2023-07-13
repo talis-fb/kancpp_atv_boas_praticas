@@ -32,33 +32,33 @@ public:
         cin.ignore();
 
         string title, description, id;
+        Column *selectedColumn;
 
-        cout << "Digite as informacoes da coluna" << endl;
-        cout << "ID da coluna: ";
+        cout << "Digite o ID da coluna dessa tarefa: ";
         getline(cin, id);
-        cout << "-------------------------------" << endl;
+        cout << endl;
 
-        cout << "Nome: ";
-        getline(cin, title);
-        cout << "-------------------------------" << endl;
-
-        cout << "Descricao: ";
-        getline(cin, description);
-        cout << "-------------------------------" << endl;
-
-        tm deadline;
-
-        Column *selectedColumn = board->getColumnById(id);
+        selectedColumn = board->getColumnById(id);
 
         while (selectedColumn == nullptr)
         {
             cout << "Coluna nao encontrada. Tente novamente: ";
             cin >> id;
             cin.ignore();
-            cout << "-------------------------------" << endl;
+            cout << endl;
 
             selectedColumn = board->getColumnById(id);
         }
+
+        cout << "Nome da tarefa: ";
+        getline(cin, title);
+        cout << endl;
+
+        cout << "Descricao da tarefa: ";
+        getline(cin, description);
+        cout << endl;
+
+        tm deadline;
 
         switch (optionTask)
         {
@@ -100,11 +100,10 @@ public:
         case 2:
         {
             string project;
-            cout << "Projeto: ";
+            cout << "Qual o projeto dessa feature?: ";
 
             cin >> project;
             cin.ignore();
-            cout << "-------------------------------" << endl;
 
             Task *featureTask = new FeatureTask(selectedColumn, title, description, deadline, project);
 
@@ -126,8 +125,6 @@ public:
                 cin.ignore();
             }
 
-            cout << "-------------------------------" << endl;
-
             Task *testTask;
             string feature;
 
@@ -138,7 +135,6 @@ public:
                     cout << "Id da feature: ";
                     cin >> feature;
                     cin.ignore();
-                    cout << "-------------------------------" << endl;
 
                     Task *featureTask = board->searchTaskById(feature);
 
@@ -192,6 +188,12 @@ public:
         }
 
         cout << "Tarefa adicionada com sucesso!" << endl;
+
+        cout << "Pressione qualquer tecla para continuar...";
+
+        cin.get();
+
+        system("clear||cls");
     }
 
     static void addNewColumns(Board *board)
@@ -201,30 +203,61 @@ public:
         do
         {
             string name, description;
+            char ordered;
             int order;
+            Column *newColumn;
 
-            cout << "Digite as informacoes da coluna" << endl;
-
-            cout << "Nome: ";
+            cout << "Nome da coluna: ";
             getline(cin, name);
-            cout << "-------------------------------" << endl;
 
-            cout << "Descricao: ";
+            cout << "Descricao da coluna: ";
             getline(cin, description);
-            cout << "-------------------------------" << endl;
 
-            cout << "Ordem: ";
-            cin >> order;
-            cout << "-------------------------------" << endl;
+            cout << "Deseja escolher uma ordem para a coluna? (S/N) ";
 
-            Column *newColumn = new Column(name, description, order);
+            cin >> ordered;
+
+            while (toupper(ordered) != 'S' && toupper(ordered) != 'N')
+            {
+                cout << "Opcao invalida. Tente novamente: ";
+                cin >> ordered;
+            }
+
+            if (toupper(ordered) == 'S')
+            {
+                cout << "Ordem da coluna (1 a " << board->getColumnCount() + 1 << "): ";
+
+                cin >> order;
+
+                while (order < 1 || order > board->getColumnCount() + 1)
+                {
+                    cout << "Ordem invalida. Tente novamente: ";
+                    cin >> order;
+                }
+
+                cin.ignore();
+
+                newColumn = new Column(name, description, order);
+            }
+            else
+            {
+                newColumn = new Column(name, description);
+            }
 
             board->addColumn(newColumn);
 
-            cout << "Deseja adicionar outra coluna?(S/N) ";
-            cin.ignore();
+            cout << "Deseja adicionar outra coluna? (S/N) ";
             cin >> addNewColumn;
+
+            while (toupper(addNewColumn) != 'S' && toupper(addNewColumn) != 'N')
+            {
+                cout << "Opcao invalida. Tente novamente: ";
+                cin >> addNewColumn;
+            }
+
             cin.ignore();
+
+            system("clear||cls");
 
         } while (toupper(addNewColumn) == 'S');
     }
@@ -245,8 +278,10 @@ public:
         cout << "|  5 - Opcoes de ordenacao        |\n";
         cout << "|  6 - Salvar o quadro            |\n";
         cout << "|  7 - Sair                       |\n";
-        cout << "+---------------------------------+\n";
+        cout << "+---------------------------------+\n\n";
+
         cout << "Digite o numero da operacao desejada: ";
+
         cin >> option;
         cin.ignore();
 
