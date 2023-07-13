@@ -16,12 +16,8 @@ using namespace std;
 class Menu
 {
 public:
-    static void addNewTask(Board *board)
+    static void printTaskTypeMenu()
     {
-        int optionTask;
-
-        board->print();
-
         cout << "+----------------------------------------+\n";
         cout << "|        Escolha o tipo da tarefa        |\n";
         cout << "+----------------------------------------+\n";
@@ -29,28 +25,89 @@ public:
         cout << "|  2 - Feature                           |\n";
         cout << "|  3 - Teste                             |\n";
         cout << "+----------------------------------------+\n";
+    }
 
+    static void printBugTaskPiorityMenu()
+    {
+        cout << "+--------------------------------------------+\n";
+        cout << "|        Qual a prioridade da tarefa?        |\n";
+        cout << "+--------------------------------------------+\n";
+        cout << "|  1 - Muito baixa                           |\n";
+        cout << "|  2 - Baixa                                 |\n";
+        cout << "|  3 - Media                                 |\n";
+        cout << "|  4 - Alta                                  |\n";
+        cout << "|  5 - Muito alta                            |\n";
+        cout << "+--------------------------------------------+\n";
+    }
+
+    static void printTaskMenu()
+    {
+        cout << "+-------------------------------------+\n";
+        cout << "|           MENU DE TAREFAS           |\n";
+        cout << "+-------------------------------------+\n";
+        cout << "|  1 - Exibir detalhes de uma tarefa  |\n";
+        cout << "|  2 - Editar tarefa                  |\n";
+        cout << "|  3 - Mover tarefa                   |\n";
+        cout << "|  4 - Remover tarefa                 |\n";
+        cout << "+-------------------------------------+\n\n";
+    }
+
+    static void printTaskActions()
+    {
+        cout << "+-------------------------------------+\n";
+        cout << "|            EDITAR TAREFA            |\n";
+        cout << "+-------------------------------------+\n";
+        cout << "|  1 - Editar titulo                  |\n";
+        cout << "|  2 - Editar descricao               |\n";
+        cout << "|  3 - Editar ordem                   |\n";
+        cout << "|  4 - Editar prazo                   |\n";
+        cout << "|  5 - Remover tarefa                 |\n";
+        cout << "+-------------------------------------+\n\n";
+    }
+
+    static void printMenuActions()
+    {
+        cout << "+---------------------------------+\n";
+        cout << "|        MENU DE OPERACOES        |\n";
+        cout << "+---------------------------------+\n";
+        cout << "|  1 - Exibir o quadro            |\n";
+        cout << "|  2 - Adicionar nova coluna      |\n";
+        cout << "|  3 - Remover coluna             |\n";
+        cout << "|  4 - Adicionar nova tarefa      |\n";
+        cout << "|  5 - Detalhar tarefa            |\n";
+        cout << "|  6 - Opcoes de ordenacao        |\n";
+        cout << "|  7 - Salvar o quadro            |\n";
+        cout << "|  8 - Sair                       |\n";
+        cout << "+---------------------------------+\n\n";
+    }
+
+    static void addNewTask(Board *board)
+    {
+        int optionTask;
+        board->print();
+
+        printTaskTypeMenu();
         cout << "Digite a opcao escolhida: ";
         cin >> optionTask;
         cin.ignore();
 
-        string title, description, id;
+        string id;
+        Column *selectedColumn = nullptr;
 
-        cout << "Digite o ID da coluna dessa tarefa: ";
-        getline(cin, id);
-        cout << endl;
-
-        Column *selectedColumn = board->getColumnById(id);
-
-        while (selectedColumn == nullptr)
+        do
         {
-            cout << "Coluna nao encontrada. Tente novamente: ";
-            cin >> id;
-            cin.ignore();
+            cout << "Digite o ID da coluna dessa tarefa: ";
+            getline(cin, id);
             cout << endl;
 
             selectedColumn = board->getColumnById(id);
-        }
+
+            if (selectedColumn == nullptr)
+                cout << "Coluna nao encontrada. Tente novamente." << endl;
+
+        } while (selectedColumn == nullptr);
+
+        string title, description;
 
         cout << "Nome da tarefa: ";
         getline(cin, title);
@@ -64,20 +121,11 @@ public:
         {
         case 1:
         {
-            cout << endl
-                 << "+--------------------------------------------+\n";
-            cout << "|        Qual a prioridade da tarefa?        |\n";
-            cout << "+--------------------------------------------+\n";
-            cout << "|  1 - Muito baixa                           |\n";
-            cout << "|  2 - Baixa                                 |\n";
-            cout << "|  3 - Media                                 |\n";
-            cout << "|  4 - Alta                                  |\n";
-            cout << "|  5 - Muito alta                            |\n";
-            cout << "+--------------------------------------------+\n";
-            cout << "Digite a opcao escolhida: ";
-
             int priority;
-
+            cout << endl;
+            printBugTaskPiorityMenu();
+            cout
+                << "Digite a opcao escolhida: ";
             cin >> priority;
             cin.ignore();
             cout << "-------------------------------" << endl;
@@ -98,7 +146,6 @@ public:
         {
             string project;
             cout << "Qual o projeto dessa feature?: ";
-
             cin >> project;
             cin.ignore();
 
@@ -122,11 +169,13 @@ public:
             }
 
             Task *testTask;
-            string feature;
 
             if (toupper(hasFeature) == 'S')
             {
-                while (true)
+                string feature;
+                bool isValidFeature = false;
+
+                do
                 {
                     cout << "Id da feature: ";
                     cin >> feature;
@@ -137,21 +186,11 @@ public:
                     if (featureTask != nullptr && featureTask->getType() == "FEATURE")
                     {
                         testTask = new TestTask(title, description, static_cast<FeatureTask *>(featureTask));
-                        break;
+                        isValidFeature = true;
                     }
                     else
                     {
-                        if (featureTask == nullptr)
-                        {
-                            cout << "Tarefa nao encontrada.";
-                        }
-
-                        if (featureTask->getType() != "FEATURE")
-                        {
-                            cout << "Tarefa encontrada nao e uma feature.";
-                        }
-
-                        cout << " Gostaria de criar sem feature? (S/N) ";
+                        cout << "Tarefa inválida. Gostaria de criar sem feature? (S/N) ";
                         cin >> hasFeature;
                         cin.ignore();
 
@@ -164,11 +203,11 @@ public:
 
                         if (toupper(hasFeature) == 'N')
                         {
+                            isValidFeature = true;
                             testTask = new TestTask(title, description);
-                            break;
                         }
                     }
-                }
+                } while (!isValidFeature);
             }
             else
             {
@@ -186,7 +225,6 @@ public:
         cout << "Tarefa adicionada com sucesso!" << endl;
 
         cout << "Pressione qualquer tecla para continuar...";
-
         cin.get();
 
         system("clear||cls");
@@ -200,14 +238,7 @@ public:
 
         board->print();
 
-        cout << "+-------------------------------------+\n";
-        cout << "|           MENU DE TAREFAS           |\n";
-        cout << "+-------------------------------------+\n";
-        cout << "|  1 - Exibir detalhes de uma tarefa  |\n";
-        cout << "|  2 - Editar tarefa                  |\n";
-        cout << "|  3 - Mover tarefa                   |\n";
-        cout << "|  4 - Remover tarefa                 |\n";
-        cout << "+-------------------------------------+\n\n";
+        printTaskMenu();
 
         cout << "Digite o numero da operacao desejada: ";
 
@@ -223,7 +254,7 @@ public:
         }
 
         string id;
-        Task *selectedTask;
+        Task *selectedTask = nullptr;
 
         cout << "Digite o ID da tarefa: ";
         getline(cin, id);
@@ -241,14 +272,14 @@ public:
         }
 
         string columnId;
-        Column *selectedColumn;
+        Column *selectedColumn = nullptr;
 
         string title, description;
         int order;
         tm deadline;
 
-        std::string dataStr;
-        bool dataValida = false;
+        std::string dateStr;
+        bool isValidDate = false;
 
         switch (option)
         {
@@ -256,16 +287,7 @@ public:
             selectedTask->print();
             break;
         case 2:
-            cout << "+-------------------------------------+\n";
-            cout << "|            EDITAR TAREFA            |\n";
-            cout << "+-------------------------------------+\n";
-            cout << "|  1 - Editar titulo                  |\n";
-            cout << "|  2 - Editar descricao               |\n";
-            cout << "|  3 - Editar ordem                   |\n";
-            cout << "|  4 - Editar prazo                   |\n";
-            cout << "|  5 - Remover tarefa                 |\n";
-            cout << "+-------------------------------------+\n\n";
-
+            printTaskActions();
             cout << "Digite o numero da operacao desejada: ";
 
             cin >> option;
@@ -309,28 +331,24 @@ public:
                 do
                 {
                     std::cout << "Digite a nova data de entrega (formato dd/mm/yyyy): ";
-                    std::cin >> dataStr;
+                    std::cin >> dateStr;
 
-                    // Extrai os componentes da data
-                    std::istringstream iss(dataStr);
+                    std::istringstream iss(dateStr);
                     char delimiter;
                     iss >> deadline.tm_mday >> delimiter >> deadline.tm_mon >> delimiter >> deadline.tm_year;
 
-                    // Verifica se a extração foi bem-sucedida e se a data é válida
                     if (!iss.fail() && delimiter == '/' && deadline.tm_mday >= 1 && deadline.tm_mday <= 31 &&
                         deadline.tm_mon >= 1 && deadline.tm_mon <= 12 && deadline.tm_year >= 1900)
                     {
-                        // A data é válida
-                        deadline.tm_mon -= 1;     // Ajusta o mês para o formato da estrutura tm (0-11)
-                        deadline.tm_year -= 1900; // Ajusta o ano para o formato da estrutura tm
-
-                        dataValida = true;
+                        deadline.tm_mon -= 1;
+                        deadline.tm_year -= 1900;
+                        isValidDate = true;
                     }
                     else
                     {
                         std::cout << "Data inválida. Por favor, digite novamente." << std::endl;
                     }
-                } while (!dataValida);
+                } while (!isValidDate);
 
                 selectedTask->setDeadline(deadline);
 
@@ -372,6 +390,12 @@ public:
         default:
             break;
         }
+
+        cout << "Pressione qualquer tecla para continuar...";
+
+        cin.get();
+
+        system("clear||cls");
     }
 
     static void addNewColumns(Board *board)
@@ -383,7 +407,7 @@ public:
             string name, description;
             char ordered;
             int order;
-            Column *newColumn;
+            Column *newColumn = nullptr;
 
             cout << "Nome da coluna: ";
             getline(cin, name);
@@ -505,18 +529,7 @@ public:
         int minOption = 1;
         int maxOption = 7;
 
-        cout << "+---------------------------------+\n";
-        cout << "|        MENU DE OPERACOES        |\n";
-        cout << "+---------------------------------+\n";
-        cout << "|  1 - Exibir o quadro            |\n";
-        cout << "|  2 - Adicionar nova coluna      |\n";
-        cout << "|  3 - Remover coluna             |\n";
-        cout << "|  4 - Adicionar nova tarefa      |\n";
-        cout << "|  5 - Detalhar tarefa            |\n";
-        cout << "|  6 - Opcoes de ordenacao        |\n";
-        cout << "|  7 - Salvar o quadro            |\n";
-        cout << "|  8 - Sair                       |\n";
-        cout << "+---------------------------------+\n\n";
+        printMenuActions();
 
         cout << "Digite o numero da operacao desejada: ";
 
