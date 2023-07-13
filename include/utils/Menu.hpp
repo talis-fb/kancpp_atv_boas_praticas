@@ -37,9 +37,9 @@ public:
         getline(cin, id);
         cout << endl;
 
-        Column selectedColumn = board->getColumnById(id);
+        Column *selectedColumn = board->getColumnById(id);
 
-        while (selectedColumn.getId() == "")
+        while (selectedColumn == nullptr)
         {
             cout << "Coluna nao encontrada. Tente novamente: ";
             cin >> id;
@@ -87,7 +87,7 @@ public:
             }
 
             Task *bugTask = new BugTask(title, description, priority);
-            selectedColumn.addTask(bugTask);
+            selectedColumn->addTask(bugTask);
 
             break;
         }
@@ -100,7 +100,7 @@ public:
             cin.ignore();
 
             Task *featureTask = new FeatureTask(title, description, project);
-            selectedColumn.addTask(featureTask);
+            selectedColumn->addTask(featureTask);
 
             break;
         }
@@ -171,7 +171,7 @@ public:
             {
                 testTask = new TestTask(title, description);
             }
-            selectedColumn.addTask(testTask);
+            selectedColumn->addTask(testTask);
 
             break;
         }
@@ -269,7 +269,7 @@ public:
         //     break;
         // case 4:
         //     Column *selectedColumn = selectedTask->getColumn();
-        //     selectedColumn.removeTask(selectedTask);
+        //     selectedColumn->removeTask(selectedTask);
         //     cout << "Tarefa removida com sucesso!" << endl;
         //     cout << "Pressione qualquer tecla para continuar...";
         //     cin.get();
@@ -364,14 +364,13 @@ public:
         board->print();
 
         string id;
-        Column selectedColumn;
 
         cout << "Digite o ID da coluna que deseja remover: ";
         getline(cin, id);
 
-        selectedColumn = board->getColumnById(id);
+        Column *selectedColumn = board->getColumnById(id);
 
-        while (selectedColumn.getId() == "")
+        while (selectedColumn == nullptr)
         {
             cout << "Coluna nao encontrada. Tente novamente: ";
             cin >> id;
@@ -381,7 +380,7 @@ public:
             selectedColumn = board->getColumnById(id);
         }
 
-        if (selectedColumn.getTaskCount() > 0)
+        if (selectedColumn->getTaskCount() > 0)
         {
             char confirm;
 
@@ -400,7 +399,7 @@ public:
             }
         }
 
-        board->removeColumn(&selectedColumn);
+        board->removeColumn(selectedColumn);
 
         cout << "Coluna removida com sucesso!" << endl;
 

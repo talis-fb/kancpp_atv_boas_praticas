@@ -125,19 +125,17 @@ void Board::print()
   cout << endl;
 }
 
-Column Board::getColumnById(string id)
+Column *Board::getColumnById(string id)
 {
-  int sizeColumns = this->columns->getSize();
-
-  for (int i = 0; i < sizeColumns; i++)
+  for (int i = 0; i < this->columns->getSize(); i++)
   {
     if (this->columns->get(i)->getId() == id)
     {
-      return *this->columns->get(i);
+      return this->columns->get(i);
     }
   }
 
-  return Column();
+  return nullptr;
 }
 
 Task *Board::searchTaskById(string id)

@@ -126,7 +126,7 @@ public:
      * @param id The id of the column to be searched.
      * @return Column The column with the specified id.
      */
-    Column getColumnById(string id);
+    Column *getColumnById(string id);
 
     /**
      * @brief Print the board.
