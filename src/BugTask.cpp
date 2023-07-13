@@ -17,7 +17,7 @@ BugTask::BugTask(string title, string description, int priority) : Task(title, d
     this->priority = priority;
 }
 
-BugTask::BugTask(string title, string description, tm *deadline, int priority) : Task(title, description, deadline, "BUG")
+BugTask::BugTask(string title, string description, tm deadline, int priority) : Task(title, description, deadline, "BUG")
 {
     this->priority = priority;
 }
@@ -33,17 +33,17 @@ int BugTask::getPriority()
 
 void BugTask::print()
 {
+    tm date = getDeadline();
+    string formattedDeadline = date.tm_year == 0 && date.tm_mon == 0 && date.tm_mday == 0 ? "Sem prazo" : formatDate(date);
+
     cout << "------------------------" << endl;
     cout << "ID: " << getId() << endl;
     cout << "Tipo: " << getType() << endl;
-    // cout << "Titulo: " << getTitle() << endl;
-    // // show description if it exists
-    // if (getDescription() != "")
-    //     cout << "Descricao: " << getDescription() << endl;
-    // if (getDeadline() != nullptr)
-    //     cout << "Deadline: " << formatDate(*getDeadline()) << endl;
-    // cout << "Prioridade: " << getPriority() << endl;
-    // cout << "Ordem: " << getOrder() << endl;
-    // cout << "Criado em: " << formatDate(*getCreatedAt()) << endl;
-    // cout << "------------------------" << endl;
+    cout << "Titulo: " << getTitle() << endl;
+    cout << "Descricao: " << getDescription() << endl;
+    cout << "Prazo: " << formattedDeadline << endl;
+    cout << "Prioridade: " << getPriority() << endl;
+    cout << "Ordem: " << getOrder() << endl;
+    cout << "Criado em: " << formatDate(getCreatedAt()) << endl;
+    cout << "------------------------" << endl;
 }

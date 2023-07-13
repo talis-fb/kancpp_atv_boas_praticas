@@ -48,7 +48,8 @@
     "iomanip": "cpp",
     "fort.hpp": "c",
     "optional": "cpp",
-    "string_view": "cpp"
+    "string_view": "cpp",
+    "cstring": "cpp"
   },
   "makefile.launchConfigurations": [
     {

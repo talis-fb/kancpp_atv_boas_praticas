@@ -2,6 +2,9 @@
 #define MENU_CLASS
 
 #include <iostream>
+#include <string>
+#include <sstream>
+
 #include "../Board.h"
 #include "../Column.h"
 #include "../FeatureTask.h"
@@ -240,13 +243,107 @@ public:
         string columnId;
         Column *selectedColumn;
 
+        string title, description;
+        int order;
+        tm deadline;
+
+        std::string dataStr;
+        bool dataValida = false;
+
         switch (option)
         {
         case 1:
             selectedTask->print();
             break;
         case 2:
-            // selectedTask->edit();
+            cout << "+-------------------------------------+\n";
+            cout << "|            EDITAR TAREFA            |\n";
+            cout << "+-------------------------------------+\n";
+            cout << "|  1 - Editar titulo                  |\n";
+            cout << "|  2 - Editar descricao               |\n";
+            cout << "|  3 - Editar ordem                   |\n";
+            cout << "|  4 - Editar prazo                   |\n";
+            cout << "|  5 - Remover tarefa                 |\n";
+            cout << "+-------------------------------------+\n\n";
+
+            cout << "Digite o numero da operacao desejada: ";
+
+            cin >> option;
+            cin.ignore();
+
+            while (option < 1 || option > 5)
+            {
+                system("clear||cls");
+                cout << "O numero digitado nao corresponde a nenhuma operacao. Tente novamente: ";
+                cin >> option;
+                cin.ignore();
+            }
+
+            switch (option)
+            {
+            case 1:
+                cout << "Digite o novo titulo: ";
+                getline(cin, title);
+
+                selectedTask->setTitle(title);
+
+                break;
+            case 2:
+                cout << "Digite a nova descricao: ";
+                getline(cin, description);
+
+                selectedTask->setDescription(description);
+
+                break;
+            case 3:
+                cout << "Digite a nova ordem: ";
+                cin >> order;
+                cin.ignore();
+
+                selectedTask->setOrder(order);
+
+                break;
+
+            case 4:
+
+                do
+                {
+                    std::cout << "Digite a nova data de entrega (formato dd/mm/yyyy): ";
+                    std::cin >> dataStr;
+
+                    // Extrai os componentes da data
+                    std::istringstream iss(dataStr);
+                    char delimiter;
+                    iss >> deadline.tm_mday >> delimiter >> deadline.tm_mon >> delimiter >> deadline.tm_year;
+
+                    // Verifica se a extração foi bem-sucedida e se a data é válida
+                    if (!iss.fail() && delimiter == '/' && deadline.tm_mday >= 1 && deadline.tm_mday <= 31 &&
+                        deadline.tm_mon >= 1 && deadline.tm_mon <= 12 && deadline.tm_year >= 1900)
+                    {
+                        // A data é válida
+                        deadline.tm_mon -= 1;     // Ajusta o mês para o formato da estrutura tm (0-11)
+                        deadline.tm_year -= 1900; // Ajusta o ano para o formato da estrutura tm
+
+                        dataValida = true;
+                    }
+                    else
+                    {
+                        std::cout << "Data inválida. Por favor, digite novamente." << std::endl;
+                    }
+                } while (!dataValida);
+
+                selectedTask->setDeadline(deadline);
+
+                break;
+            case 5:
+                selectedColumn = board->getColumnByTask(selectedTask);
+                selectedColumn->removeTask(selectedTask);
+
+                break;
+            default:
+                break;
+            }
+
             break;
         case 3:
             cout << "Digite o ID da coluna que deseja mover a tarefa: ";

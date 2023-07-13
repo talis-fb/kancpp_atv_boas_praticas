@@ -40,7 +40,7 @@ public:
      * @param deadline The deadline of the bug task.
      * @param priority The priority of the bug task.
      */
-    BugTask(std::string title, std::string description, tm *deadline, int priority);
+    BugTask(std::string title, std::string description, tm deadline, int priority);
 
     /**
      * @brief Destroys the BugTask object.

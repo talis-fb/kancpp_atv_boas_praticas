@@ -20,8 +20,8 @@ protected:
     string title;       /**< The title of the task. */
     string description; /**< The description of the task. */
     int order;          /**< The order of the task. */
-    tm *deadline;       /**< The deadline of the task. */
-    tm *createdAt;      /**< The creation date of the task. */
+    tm deadline;        /**< The deadline of the task. */
+    tm createdAt;       /**< The creation date of the task. */
     string type;        /**< The type of the task. */
 
 public:
@@ -54,7 +54,7 @@ public:
      * @param description The description of the task.
      * @param deadline The deadline of the task.
      */
-    Task(string title, string description, tm *deadline, string type);
+    Task(string title, string description, tm deadline, string type);
 
     /**
      * @brief Destroys the Task object and frees the memory.
@@ -101,7 +101,7 @@ public:
      * @brief Get the deadline of the task.
      * @return The deadline of the task.
      */
-    tm *getDeadline();
+    tm getDeadline();
 
     /**
      * @brief Set the deadline of the task.
@@ -125,7 +125,7 @@ public:
      * @brief Get the creation date of the task.
      * @return The creation date of the task.
      */
-    tm *getCreatedAt();
+    tm getCreatedAt();
 
     /**
      * @brief Set the creation date of the task.

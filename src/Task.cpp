@@ -11,8 +11,9 @@ Task::Task(string type)
   this->title = "";
   this->description = "";
   this->order = 0;
-  this->deadline = nullptr;
-  this->createdAt = nullptr;
+
+  time_t now = time(0);
+  this->createdAt = *localtime(&now);
 }
 
 Task::Task(string title, string type)
@@ -22,8 +23,17 @@ Task::Task(string title, string type)
   this->type = type;
   this->description = "";
   this->order = 0;
-  this->deadline = nullptr;
-  this->createdAt = nullptr;
+
+  std::time_t currentTime = std::time(nullptr);
+  std::tm *timeInfo = std::localtime(&currentTime);
+
+  deadline = *timeInfo;
+  deadline.tm_year = 0;
+  deadline.tm_mon = 0;
+  deadline.tm_mday = 0;
+
+  time_t now = time(0);
+  this->createdAt = *localtime(&now);
 }
 
 Task::Task(string title, string description, string type)
@@ -33,11 +43,20 @@ Task::Task(string title, string description, string type)
   this->type = type;
   this->description = description;
   this->order = 0;
-  this->deadline = nullptr;
-  this->createdAt = nullptr;
+
+  std::time_t currentTime = std::time(nullptr);
+  std::tm *timeInfo = std::localtime(&currentTime);
+
+  deadline = *timeInfo;
+  deadline.tm_year = 0;
+  deadline.tm_mon = 0;
+  deadline.tm_mday = 0;
+
+  time_t now = time(0);
+  this->createdAt = *localtime(&now);
 }
 
-Task::Task(string title, string description, tm *deadline, string type)
+Task::Task(string title, string description, tm deadline, string type)
 {
   this->id = Task::getNextId();
   this->title = title;
@@ -45,14 +64,12 @@ Task::Task(string title, string description, tm *deadline, string type)
   this->description = description;
   this->order = 0;
   this->deadline = deadline;
-  this->createdAt = nullptr;
+
+  time_t now = time(0);
+  this->createdAt = *localtime(&now);
 }
 
-Task::~Task()
-{
-  delete this->deadline;
-  delete this->createdAt;
-}
+Task::~Task() {}
 
 string Task::getId()
 {
@@ -84,14 +101,14 @@ int Task::getOrder()
   return this->order;
 }
 
-tm *Task::getDeadline()
+tm Task::getDeadline()
 {
   return this->deadline;
 }
 
 void Task::setDeadline(tm date)
 {
-  this->deadline = &date;
+  this->deadline = date;
 }
 
 string Task::getDescription()
@@ -104,7 +121,7 @@ void Task::setDescription(string description)
   this->description = description;
 }
 
-tm *Task::getCreatedAt()
+tm Task::getCreatedAt()
 {
   return this->createdAt;
 }

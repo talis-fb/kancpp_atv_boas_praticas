@@ -42,7 +42,7 @@ public:
      * @param deadline The deadline of the feature task.
      * @param project The project associated with the feature task.
      */
-    FeatureTask(std::string title, std::string description, tm *deadline, std::string project);
+    FeatureTask(std::string title, std::string description, tm deadline, std::string project);
 
     /**
      * @brief Destroys the FeatureTask object.

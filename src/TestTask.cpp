@@ -1,10 +1,11 @@
 #include <iostream>
 
 #include "../include/TestTask.h"
+#include "../include/formatters/Date.h"
 
 TestTask::TestTask() : Task("TEST") {}
 
-TestTask::TestTask(std::string title, std::string description, tm *deadline) : Task(title, description, deadline, "TEST") {}
+TestTask::TestTask(std::string title, std::string description, tm deadline) : Task(title, description, deadline, "TEST") {}
 
 TestTask::TestTask(std::string title, std::string description) : Task(title, description, "TEST") {}
 
@@ -15,7 +16,7 @@ TestTask::TestTask(FeatureTask *feature) : Task("TEST")
     this->feature = feature;
 }
 
-TestTask::TestTask(std::string title, std::string description, tm *deadline, FeatureTask *feature) : Task(title, description, deadline, "TEST")
+TestTask::TestTask(std::string title, std::string description, tm deadline, FeatureTask *feature) : Task(title, description, deadline, "TEST")
 {
     this->feature = feature;
 }
@@ -42,17 +43,18 @@ FeatureTask *TestTask::getFeature()
 
 void TestTask::print()
 {
-    std::cout << "------------------------" << std::endl;
-    std::cout << "ID: " << getId() << std::endl;
-    std::cout << "Tipo: " << getType() << std::endl;
-    // std::cout << "Titulo: " << getTitle() << std::endl;
-    // // show description if it exists
-    // if (getDescription() != "")
-    //     std::cout << "Descricao: " << getDescription() << std::endl;
-    // if (getDeadline() != nullptr)
-    //     std::cout << "Deadline: " << formatDate(*getDeadline()) << std::endl;
-    // std::cout << "Prioridade: " << getPriority() << std::endl;
-    // std::cout << "Ordem: " << getOrder() << std::endl;
-    // std::cout << "Criado em: " << formatDate(*getCreatedAt()) << std::endl;
-    // std::cout << "------------------------" << std::endl;
+    tm date = getDeadline();
+    string formattedDeadline = date.tm_year == 0 && date.tm_mon == 0 && date.tm_mday == 0 ? "Sem prazo" : formatDate(date);
+
+    cout << "------------------------" << endl;
+    cout << "ID: " << getId() << endl;
+    cout << "Tipo: " << getType() << endl;
+    cout << "Titulo: " << getTitle() << endl;
+    cout << "Descricao: " << getDescription() << endl;
+    cout << "Prazo: " << formattedDeadline << endl;
+    cout << "Feature ID: " << getFeature()->getId() << endl;
+    cout << "Feature Titulo: " << getFeature()->getTitle() << endl;
+    cout << "Ordem: " << getOrder() << endl;
+    cout << "Criado em: " << formatDate(getCreatedAt()) << endl;
+    cout << "------------------------" << endl;
 }
