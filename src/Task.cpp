@@ -6,7 +6,7 @@ Task::Task() {}
 
 Task::Task(Column *column, string type)
 {
-  this->id = "teste 123";
+  this->id = Task::getNextId();
   this->column = column;
   this->type = type;
   this->title = "";
@@ -18,7 +18,7 @@ Task::Task(Column *column, string type)
 
 Task::Task(Column *column, string title, string type)
 {
-  this->id = "teste 123";
+  this->id = Task::getNextId();
   this->column = column;
   this->title = title;
   this->type = type;
@@ -30,7 +30,7 @@ Task::Task(Column *column, string title, string type)
 
 Task::Task(Column *column, string title, string description, string type)
 {
-  this->id = "teste 123";
+  this->id = Task::getNextId();
   this->column = column;
   this->title = title;
   this->type = type;
@@ -42,7 +42,7 @@ Task::Task(Column *column, string title, string description, string type)
 
 Task::Task(Column *column, string title, string description, tm deadline, string type)
 {
-  this->id = "teste 123";
+  this->id = Task::getNextId();
   this->column = column;
   this->title = title;
   this->type = type;

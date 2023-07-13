@@ -32,13 +32,12 @@ public:
         cin.ignore();
 
         string title, description, id;
-        Column *selectedColumn;
 
         cout << "Digite o ID da coluna dessa tarefa: ";
         getline(cin, id);
         cout << endl;
 
-        selectedColumn = board->getColumnById(id);
+        Column *selectedColumn = board->getColumnById(id);
 
         while (selectedColumn == nullptr)
         {
@@ -90,10 +89,7 @@ public:
             }
 
             Task *bugTask = new BugTask(selectedColumn, title, description, deadline, priority);
-
             selectedColumn->addTask(bugTask);
-
-            selectedColumn->print();
 
             break;
         }
@@ -106,7 +102,6 @@ public:
             cin.ignore();
 
             Task *featureTask = new FeatureTask(selectedColumn, title, description, deadline, project);
-
             selectedColumn->addTask(featureTask);
 
             break;
@@ -178,8 +173,8 @@ public:
             {
                 testTask = new TestTask(selectedColumn, title, description, deadline);
             }
-
             selectedColumn->addTask(testTask);
+
             break;
         }
         default:
@@ -262,6 +257,66 @@ public:
         } while (toupper(addNewColumn) == 'S');
     }
 
+    static void removeColumn(Board *board)
+    {
+        system("clear||cls");
+
+        if (board->getColumnCount() == 0)
+        {
+            cout << "Nao ha colunas para remover." << endl
+                 << endl;
+            return;
+        }
+
+        board->print();
+
+        string id;
+        Column *selectedColumn;
+
+        cout << "Digite o ID da coluna que deseja remover: ";
+        getline(cin, id);
+
+        selectedColumn = board->getColumnById(id);
+
+        while (selectedColumn == nullptr)
+        {
+            cout << "Coluna nao encontrada. Tente novamente: ";
+            cin >> id;
+            cin.ignore();
+            cout << endl;
+
+            selectedColumn = board->getColumnById(id);
+        }
+
+        if (selectedColumn->getTaskCount() > 0)
+        {
+            char confirm;
+
+            cout << "A coluna possui tarefas. Deseja realmente remove-la? (S/N) ";
+            cin >> confirm;
+
+            while (toupper(confirm) != 'S' && toupper(confirm) != 'N')
+            {
+                cout << "Opcao invalida. Tente novamente: ";
+                cin >> confirm;
+            }
+
+            if (toupper(confirm) == 'N')
+            {
+                return;
+            }
+        }
+
+        board->removeColumn(selectedColumn);
+
+        cout << "Coluna removida com sucesso!" << endl;
+
+        cout << "Pressione qualquer tecla para continuar...";
+        cin.get();
+
+        system("clear||cls");
+    }
+
     static int show()
     {
         int option;
@@ -273,11 +328,12 @@ public:
         cout << "+---------------------------------+\n";
         cout << "|  1 - Exibir o quadro            |\n";
         cout << "|  2 - Adicionar nova coluna      |\n";
-        cout << "|  3 - Adicionar nova tarefa      |\n";
-        cout << "|  4 - Detalhar tarefa            |\n";
-        cout << "|  5 - Opcoes de ordenacao        |\n";
-        cout << "|  6 - Salvar o quadro            |\n";
-        cout << "|  7 - Sair                       |\n";
+        cout << "|  3 - Remover coluna             |\n";
+        cout << "|  4 - Adicionar nova tarefa      |\n";
+        cout << "|  5 - Detalhar tarefa            |\n";
+        cout << "|  6 - Opcoes de ordenacao        |\n";
+        cout << "|  7 - Salvar o quadro            |\n";
+        cout << "|  8 - Sair                       |\n";
         cout << "+---------------------------------+\n\n";
 
         cout << "Digite o numero da operacao desejada: ";

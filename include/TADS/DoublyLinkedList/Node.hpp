@@ -14,9 +14,9 @@ template <typename T>
 class Node
 {
 private:
-    T value;        /**< The value stored in the node. */
-    Node *next;     /**< Pointer to the next node. */
-    Node *previous; /**< Pointer to the previous node. */
+    T value;           /**< The value stored in the node. */
+    Node<T> *next;     /**< Pointer to the next node. */
+    Node<T> *previous; /**< Pointer to the previous node. */
 
 public:
     /**
@@ -29,7 +29,8 @@ public:
      *
      * @param val The value to be stored in the node.
      */
-    Node(T val);
+    Node(T &value);
+
     /**
      * @brief Constructor with value, next, and previous parameters.
      *
@@ -37,7 +38,7 @@ public:
      * @param n Pointer to the next node.
      * @param p Pointer to the previous node.
      */
-    Node(T val, Node *n, Node *p);
+    Node(T &value, Node *n, Node *p);
 
     /**
      * @brief Destructor for the Node class that frees the memory.
@@ -88,19 +89,16 @@ public:
 };
 
 template <typename T>
-Node<T>::Node(void) : next(NULL) {}
+Node<T>::Node() : next(nullptr), previous(nullptr) {}
 
 template <typename T>
-Node<T>::Node(T val) : value(val), next(NULL), previous(NULL) {}
+Node<T>::Node(T &val) : value(val), next(nullptr), previous(nullptr) {}
 
 template <typename T>
-Node<T>::Node(T val, Node *n, Node *p) : value(val), next(n), previous(p) {}
+Node<T>::Node(T &val, Node *n, Node *p) : value(val), next(n), previous(p) {}
 
 template <typename T>
-Node<T>::~Node()
-{
-    //
-}
+Node<T>::~Node() {}
 
 template <typename T>
 T Node<T>::getValue()
