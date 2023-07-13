@@ -37,9 +37,9 @@ public:
         getline(cin, id);
         cout << endl;
 
-        Column *selectedColumn = board->getColumnById(id);
+        Column selectedColumn = board->getColumnById(id);
 
-        while (selectedColumn == nullptr)
+        while (selectedColumn.getId() == "")
         {
             cout << "Coluna nao encontrada. Tente novamente: ";
             cin >> id;
@@ -56,8 +56,6 @@ public:
         cout << "Descricao da tarefa: ";
         getline(cin, description);
         cout << endl;
-
-        tm deadline;
 
         switch (optionTask)
         {
@@ -88,8 +86,8 @@ public:
                 cin.ignore();
             }
 
-            Task *bugTask = new BugTask(selectedColumn, title, description, deadline, priority);
-            selectedColumn->addTask(bugTask);
+            Task *bugTask = new BugTask(title, description, priority);
+            selectedColumn.addTask(bugTask);
 
             break;
         }
@@ -101,8 +99,8 @@ public:
             cin >> project;
             cin.ignore();
 
-            Task *featureTask = new FeatureTask(selectedColumn, title, description, deadline, project);
-            selectedColumn->addTask(featureTask);
+            Task *featureTask = new FeatureTask(title, description, project);
+            selectedColumn.addTask(featureTask);
 
             break;
         }
@@ -135,7 +133,7 @@ public:
 
                     if (featureTask != nullptr && featureTask->getType() == "FEATURE")
                     {
-                        testTask = new TestTask(selectedColumn, title, description, deadline, static_cast<FeatureTask *>(featureTask));
+                        testTask = new TestTask(title, description, static_cast<FeatureTask *>(featureTask));
                         break;
                     }
                     else
@@ -163,7 +161,7 @@ public:
 
                         if (toupper(hasFeature) == 'N')
                         {
-                            testTask = new TestTask(selectedColumn, title, description, deadline);
+                            testTask = new TestTask(title, description);
                             break;
                         }
                     }
@@ -171,9 +169,9 @@ public:
             }
             else
             {
-                testTask = new TestTask(selectedColumn, title, description, deadline);
+                testTask = new TestTask(title, description);
             }
-            selectedColumn->addTask(testTask);
+            selectedColumn.addTask(testTask);
 
             break;
         }
@@ -189,6 +187,101 @@ public:
         cin.get();
 
         system("clear||cls");
+    }
+
+    static void taskDetails(Board *board)
+    {
+        // int option;
+        // int minOption = 1;
+        // int maxOption = 4;
+
+        // board->print();
+
+        // cout << "+-------------------------------------+\n";
+        // cout << "|           MENU DE TAREFAS           |\n";
+        // cout << "+-------------------------------------+\n";
+        // cout << "|  1 - Exibir detalhes de uma tarefa  |\n";
+        // cout << "|  2 - Editar tarefa                  |\n";
+        // cout << "|  3 - Mover tarefa                   |\n";
+        // cout << "|  4 - Remover tarefa                 |\n";
+        // cout << "+-------------------------------------+\n\n";
+
+        // cout << "Digite o numero da operacao desejada: ";
+
+        // cin >> option;
+        // cin.ignore();
+
+        // while (option < minOption || option > maxOption)
+        // {
+        //     system("clear||cls");
+        //     cout << "O numero digitado nao corresponde a nenhuma operacao. Tente novamente: ";
+        //     cin >> option;
+        //     cin.ignore();
+        // }
+
+        // string id;
+        // Task *selectedTask;
+
+        // cout << "Digite o ID da tarefa: ";
+        // getline(cin, id);
+
+        // selectedTask = board->searchTaskById(id);
+
+        // while (selectedTask == nullptr)
+        // {
+        //     cout << "Tarefa nao encontrada. Tente novamente: ";
+        //     cin >> id;
+        //     cin.ignore();
+        //     cout << endl;
+
+        //     selectedTask = board->searchTaskById(id);
+        // }
+
+        // string columnId;
+
+        // switch (option)
+        // {
+        // case 1:
+        //     selectedTask->print();
+        //     break;
+        // case 2:
+        //     // selectedTask->edit();
+        //     break;
+        // case 3:
+
+        //     cout << "Digite o ID da coluna que deseja mover a tarefa: ";
+        //     getline(cin, id);
+
+        //     Column *selectedColumn = board->getColumnById(id);
+
+        //     while (selectedColumn == nullptr)
+        //     {
+        //         cout << "Coluna nao encontrada. Tente novamente: ";
+        //         cin >> id;
+        //         cin.ignore();
+        //         cout << endl;
+
+        //         selectedColumn = board->getColumnById(id);
+        //     }
+
+        //     board->moveTask(selectedTask, *selectedColumn);
+
+        //     break;
+        // case 4:
+        //     Column *selectedColumn = selectedTask->getColumn();
+        //     selectedColumn.removeTask(selectedTask);
+        //     cout << "Tarefa removida com sucesso!" << endl;
+        //     cout << "Pressione qualquer tecla para continuar...";
+        //     cin.get();
+
+        //     delete selectedTask;
+
+        //     system("clear||cls");
+
+        //     break;
+        // default:
+        //     break;
+        // }
     }
 
     static void addNewColumns(Board *board)
@@ -271,14 +364,14 @@ public:
         board->print();
 
         string id;
-        Column *selectedColumn;
+        Column selectedColumn;
 
         cout << "Digite o ID da coluna que deseja remover: ";
         getline(cin, id);
 
         selectedColumn = board->getColumnById(id);
 
-        while (selectedColumn == nullptr)
+        while (selectedColumn.getId() == "")
         {
             cout << "Coluna nao encontrada. Tente novamente: ";
             cin >> id;
@@ -288,7 +381,7 @@ public:
             selectedColumn = board->getColumnById(id);
         }
 
-        if (selectedColumn->getTaskCount() > 0)
+        if (selectedColumn.getTaskCount() > 0)
         {
             char confirm;
 
@@ -307,7 +400,7 @@ public:
             }
         }
 
-        board->removeColumn(selectedColumn);
+        board->removeColumn(&selectedColumn);
 
         cout << "Coluna removida com sucesso!" << endl;
 

@@ -16,71 +16,68 @@ private:
 public:
     /**
      * @brief Constructs a TestTask object with a specified column and project.
-     * @param column The column associated with the test task.
      * @param project The project associated with the test task.
      */
-    TestTask(Column *column);
+    TestTask();
 
     /**
      * @brief Constructs a TestTask object with a specified column, title, description, deadline, and project.
-     * @param column The column associated with the test task.
      * @param title The title of the test task.
      * @param description The description of the test task.
      * @param deadline The deadline of the test task.
      * @param project The project associated with the test task.
      */
-    TestTask(Column *column, std::string title, std::string description, tm deadline);
+    TestTask(std::string title, std::string description, tm *deadline);
 
     /**
      * @brief Constructs a TestTask object with a specified column, title, description, and project.
-     * @param column The column associated with the test task.
      * @param title The title of the test task.
      * @param description The description of the test task.
      * @param project The project associated with the test task.
      */
-    TestTask(Column *column, std::string title, std::string description);
+    TestTask(std::string title, std::string description);
 
     /**
      * @brief Constructs a TestTask object with a specified column, title, and project.
-     * @param column The column associated with the test task.
      * @param title The title of the test task.
      * @param project The project associated with the test task.
      */
-    TestTask(Column *column, std::string title);
+    TestTask(std::string title);
 
     /**
      * @brief Constructs a TestTask object with a specified column and project.
-     * @param column The column associated with the test task.
      * @param feature The feature associated with the test task.
      */
-    TestTask(Column *column, FeatureTask *feature);
+    TestTask(FeatureTask *feature);
 
     /**
      * @brief Constructs a TestTask object with a specified column, title, description, deadline, and project.
-     * @param column The column associated with the test task.
      * @param title The title of the test task.
      * @param description The description of the test task.
      * @param deadline The deadline of the test task.
      * @param feature The feature associated with the test task.
      */
-    TestTask(Column *column, std::string title, std::string description, tm deadline, FeatureTask *feature);
+    TestTask(std::string title, std::string description, tm *deadline, FeatureTask *feature);
 
     /**
      * @brief Constructs a TestTask object with a specified column, title, description, and project.
-     * @param column The column associated with the test task.
      * @param title The title of the test task.
      * @param description The description of the test task.
      * @param feature The feature associated with the test task.
      */
-    TestTask(Column *column, std::string title, std::string description, FeatureTask *feature);
+    TestTask(std::string title, std::string description, FeatureTask *feature);
 
     /**
      * @brief Constructs a TestTask object with a specified column, title, and project.
-     * @param column The column associated with the test task.
      * @param title The title of the test task.
      * @param feature The feature associated with the test task.
      */
-    TestTask(Column *column, std::string title, FeatureTask *feature);
+    TestTask(std::string title, FeatureTask *feature);
+
+    /**
+     * @brief Destroys the TestTask object.
+     */
+    ~TestTask();
 
     /**
      * @brief Get the feature associated with the test task.

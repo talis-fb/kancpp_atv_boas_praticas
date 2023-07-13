@@ -2,32 +2,37 @@
 
 #include "../include/TestTask.h"
 
-TestTask::TestTask(Column *column) : Task(column, "TEST") {}
+TestTask::TestTask() : Task("TEST") {}
 
-TestTask::TestTask(Column *column, std::string title, std::string description, tm deadline) : Task(column, title, description, deadline, "TEST") {}
+TestTask::TestTask(std::string title, std::string description, tm *deadline) : Task(title, description, deadline, "TEST") {}
 
-TestTask::TestTask(Column *column, std::string title, std::string description) : Task(column, title, description, "TEST") {}
+TestTask::TestTask(std::string title, std::string description) : Task(title, description, "TEST") {}
 
-TestTask::TestTask(Column *column, std::string title) : Task(column, title, "TEST") {}
+TestTask::TestTask(std::string title) : Task(title, "TEST") {}
 
-TestTask::TestTask(Column *column, FeatureTask *feature) : Task(column, "TEST")
+TestTask::TestTask(FeatureTask *feature) : Task("TEST")
 {
     this->feature = feature;
 }
 
-TestTask::TestTask(Column *column, std::string title, std::string description, tm deadline, FeatureTask *feature) : Task(column, title, description, deadline, "TEST")
+TestTask::TestTask(std::string title, std::string description, tm *deadline, FeatureTask *feature) : Task(title, description, deadline, "TEST")
 {
     this->feature = feature;
 }
 
-TestTask::TestTask(Column *column, std::string title, std::string description, FeatureTask *feature) : Task(column, title, description, "TEST")
+TestTask::TestTask(std::string title, std::string description, FeatureTask *feature) : Task(title, description, "TEST")
 {
     this->feature = feature;
 }
 
-TestTask::TestTask(Column *column, std::string title, FeatureTask *feature) : Task(column, title, "TEST")
+TestTask::TestTask(std::string title, FeatureTask *feature) : Task(title, "TEST")
 {
     this->feature = feature;
+}
+
+TestTask::~TestTask()
+{
+    delete this->feature;
 }
 
 FeatureTask *TestTask::getFeature()
@@ -40,7 +45,6 @@ void TestTask::print()
     std::cout << "------------------------" << std::endl;
     std::cout << "ID: " << getId() << std::endl;
     std::cout << "Tipo: " << getType() << std::endl;
-    std::cout << "Coluna: " << getColumn()->getName() << std::endl;
     // std::cout << "Titulo: " << getTitle() << std::endl;
     // // show description if it exists
     // if (getDescription() != "")

@@ -47,13 +47,13 @@ int main()
       Menu::addNewColumns(&board);
       break;
     case 3:
-      Menu::addNewTask(&board);
+      Menu::removeColumn(&board);
       break;
     case 4:
-      /* code */
+      Menu::addNewTask(&board);
       break;
     case 5:
-      /* code */
+      Menu::taskDetails(&board);
       break;
     case 6:
       /* code */

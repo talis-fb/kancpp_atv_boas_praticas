@@ -4,10 +4,9 @@ int Task::nextId = 1;
 
 Task::Task() {}
 
-Task::Task(Column *column, string type)
+Task::Task(string type)
 {
   this->id = Task::getNextId();
-  this->column = column;
   this->type = type;
   this->title = "";
   this->description = "";
@@ -16,10 +15,9 @@ Task::Task(Column *column, string type)
   this->createdAt = nullptr;
 }
 
-Task::Task(Column *column, string title, string type)
+Task::Task(string title, string type)
 {
   this->id = Task::getNextId();
-  this->column = column;
   this->title = title;
   this->type = type;
   this->description = "";
@@ -28,10 +26,9 @@ Task::Task(Column *column, string title, string type)
   this->createdAt = nullptr;
 }
 
-Task::Task(Column *column, string title, string description, string type)
+Task::Task(string title, string description, string type)
 {
   this->id = Task::getNextId();
-  this->column = column;
   this->title = title;
   this->type = type;
   this->description = description;
@@ -40,16 +37,21 @@ Task::Task(Column *column, string title, string description, string type)
   this->createdAt = nullptr;
 }
 
-Task::Task(Column *column, string title, string description, tm deadline, string type)
+Task::Task(string title, string description, tm *deadline, string type)
 {
   this->id = Task::getNextId();
-  this->column = column;
   this->title = title;
   this->type = type;
   this->description = description;
   this->order = 0;
-  this->deadline = &deadline;
+  this->deadline = deadline;
   this->createdAt = nullptr;
+}
+
+Task::~Task()
+{
+  delete this->deadline;
+  delete this->createdAt;
 }
 
 string Task::getId()
@@ -60,11 +62,6 @@ string Task::getId()
 string Task::getType()
 {
   return this->type;
-}
-
-Column *Task::getColumn()
-{
-  return this->column;
 }
 
 string Task::getTitle()

@@ -57,7 +57,7 @@ void Board::displayCreatedAt()
 
 void Board::addColumn(Column *column)
 {
-  this->columns->insertAtTail(*column);
+  this->columns->insertAtTail(column);
 }
 
 void Board::removeColumn(Column *column)
@@ -65,19 +65,18 @@ void Board::removeColumn(Column *column)
   this->columns->remove(*column);
 }
 
-void Board::moveTask(Task *task, Column *column)
+void Board::moveTask(Task *task, Column &column)
 {
-
   for (int i = 0; i < this->columns->getSize(); i++)
   {
-    if (this->columns->get(i) == column)
+    vector<Task *> tasks = this->columns->get(i)->getTasks();
+    for (std::size_t k = 0; k < tasks.size(); k++)
     {
-      Column *targetColumn = this->columns->get(i);
-      targetColumn->addTask(task);
-    }
-    else
-    {
-      this->columns->get(i)->removeTask(task);
+      if (tasks.at(k)->getId() == task->getId())
+      {
+        this->columns->get(i)->removeTask(task);
+        column.addTask(task);
+      }
     }
   }
 }
@@ -102,26 +101,31 @@ void Board::print()
 {
   int sizeColumns = this->columns->getSize();
 
-  system("clear||cls");
+  // system("clear||cls");
   cout << "Quadro Kanban (" << this->getName() << ")" << endl;
 
   for (int i = 0; i < sizeColumns; i++)
   {
-    cout << this->columns->get(i)->getName() << " (Id: " << this->columns->get(i)->getId() << ")" << endl;
-    vector<Task *> tasks = this->columns->get(i)->getTasks();
-    vector<Task *>::iterator it;
-    for (std::size_t k = 0; k < tasks.size(); k++)
-    {
-      cout << tasks.at(k)->getTitle() << endl;
-    }
 
-    cout << endl;
+    this->columns->get(i)->print();
+    // cout << this->columns->get(i).getName() << " (Id: " << this->columns->get(i).getId() << ")" << endl;
+
+    // std::cout << "Tarefas: " << std::endl;
+
+    // vector<Task *> tasks = this->columns->get(i).getTasks();
+    // vector<Task *>::iterator it;
+    // for (std::size_t k = 0; k < tasks.size(); k++)
+    // {
+    //   cout << tasks.at(k)->getTitle() << endl;
+    // }
+
+    // cout << endl;
   }
 
   cout << endl;
 }
 
-Column *Board::getColumnById(string id)
+Column Board::getColumnById(string id)
 {
   int sizeColumns = this->columns->getSize();
 
@@ -129,11 +133,11 @@ Column *Board::getColumnById(string id)
   {
     if (this->columns->get(i)->getId() == id)
     {
-      return this->columns->get(i);
+      return *this->columns->get(i);
     }
   }
 
-  return nullptr;
+  return Column();
 }
 
 Task *Board::searchTaskById(string id)

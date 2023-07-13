@@ -14,37 +14,38 @@ private:
 public:
     /**
      * @brief Constructs a BugTask object with a specified column and priority.
-     * @param column The column associated with the bug task.
      * @param priority The priority of the bug task.
      */
-    BugTask(Column* column, int priority);
+    BugTask(int priority);
 
     /**
      * @brief Constructs a BugTask object with a specified column, title, and priority.
-     * @param column The column associated with the bug task.
      * @param title The title of the bug task.
      * @param priority The priority of the bug task.
      */
-    BugTask(Column* column, std::string title, int priority);
+    BugTask(std::string title, int priority);
 
     /**
      * @brief Constructs a BugTask object with a specified column, title, description, and priority.
-     * @param column The column associated with the bug task.
      * @param title The title of the bug task.
      * @param description The description of the bug task.
      * @param priority The priority of the bug task.
      */
-    BugTask(Column* column, std::string title, std::string description, int priority);
+    BugTask(std::string title, std::string description, int priority);
 
     /**
      * @brief Constructs a BugTask object with a specified column, title, description, deadline, and priority.
-     * @param column The column associated with the bug task.
      * @param title The title of the bug task.
      * @param description The description of the bug task.
      * @param deadline The deadline of the bug task.
      * @param priority The priority of the bug task.
      */
-    BugTask(Column* column, std::string title, std::string description, tm deadline, int priority);
+    BugTask(std::string title, std::string description, tm *deadline, int priority);
+
+    /**
+     * @brief Destroys the BugTask object.
+     */
+    ~BugTask();
 
     /**
      * @brief Get the priority of the bug task.

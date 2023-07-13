@@ -100,7 +100,7 @@ public:
      * @param task The task to be moved.
      * @param column The target column.
      */
-    void moveTask(Task *task, Column *column);
+    void moveTask(Task *task, Column &column);
 
     /**
      * @brief Add a task to the backlog.
@@ -126,7 +126,7 @@ public:
      * @param id The id of the column to be searched.
      * @return Column The column with the specified id.
      */
-    Column *getColumnById(string id);
+    Column getColumnById(string id);
 
     /**
      * @brief Print the board.

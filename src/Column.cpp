@@ -13,6 +13,8 @@ Column::Column(const string name, const string description, const int order)
 
     time_t currentTime = time(nullptr);
     this->createdAt = localtime(&currentTime);
+
+    this->tasks = vector<Task *>();
 }
 
 Column::Column(const string &name, const string &description)
@@ -24,6 +26,8 @@ Column::Column(const string &name, const string &description)
 
     time_t currentTime = time(nullptr);
     this->createdAt = localtime(&currentTime);
+
+    this->tasks = vector<Task *>();
 }
 
 Column::Column(const string &name)
@@ -35,13 +39,15 @@ Column::Column(const string &name)
 
     time_t currentTime = time(nullptr);
     this->createdAt = localtime(&currentTime);
+
+    this->tasks = vector<Task *>();
 }
 
 Column::~Column()
 {
     for (auto task : this->tasks)
     {
-        delete &task;
+        delete task;
     }
 }
 
@@ -131,10 +137,6 @@ void Column::print()
 {
     cout << "Id: " << this->id << endl;
     cout << "Nome: " << this->name << endl;
-    // cout << "Descricao: " << this->description << endl;
-    // cout << "Ordem: " << this->order << endl;
-    // cout << "Data de criacao: " << this->createdAt->tm_mday << "/" << this->createdAt->tm_mon << "/" << this->createdAt->tm_year << endl;
-    // cout << "Tarefas: " << endl;
 
     for (auto task : this->tasks)
     {

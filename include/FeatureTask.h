@@ -16,37 +16,38 @@ public:
 
     /**
      * @brief Constructs a FeatureTask object with a specified column and project.
-     * @param column The column associated with the feature task.
      * @param project The project associated with the feature task.
      */
-    FeatureTask(Column* column, std::string project);
+    FeatureTask(std::string project);
 
     /**
      * @brief Constructs a FeatureTask object with a specified column, title, and project.
-     * @param column The column associated with the feature task.
      * @param title The title of the feature task.
      * @param project The project associated with the feature task.
      */
-    FeatureTask(Column* column, std::string title, std::string project);
+    FeatureTask(std::string title, std::string project);
 
     /**
      * @brief Constructs a FeatureTask object with a specified column, title, description, and project.
-     * @param column The column associated with the feature task.
      * @param title The title of the feature task.
      * @param description The description of the feature task.
      * @param project The project associated with the feature task.
      */
-    FeatureTask(Column* column, std::string title, std::string description, std::string project);
+    FeatureTask(std::string title, std::string description, std::string project);
 
     /**
      * @brief Constructs a FeatureTask object with a specified column, title, description, deadline, and project.
-     * @param column The column associated with the feature task.
      * @param title The title of the feature task.
      * @param description The description of the feature task.
      * @param deadline The deadline of the feature task.
      * @param project The project associated with the feature task.
      */
-    FeatureTask(Column* column, std::string title, std::string description, tm deadline, std::string project);
+    FeatureTask(std::string title, std::string description, tm *deadline, std::string project);
+
+    /**
+     * @brief Destroys the FeatureTask object.
+     */
+    ~FeatureTask();
 
     /**
      * @brief Get the project associated with the feature task.

@@ -2,6 +2,7 @@
 #define DOUBLY_LINKED_LIST_CLASS
 
 #include "Node.hpp"
+#include <stdexcept>
 
 /**
  * @brief The DoublyLinkedList class represents a doubly linked list.
@@ -20,25 +21,43 @@ public:
     /**
      * @brief Constructs an empty DoublyLinkedList object.
      */
-    DoublyLinkedList();
+    DoublyLinkedList()
+    {
+        head = new Node<T>();
+        tail = new Node<T>();
+        head->setNext(tail);
+        tail->setPrevious(head);
+        size = 0;
+    }
     /**
      * @brief Destroys the DoublyLinkedList object and frees the memory.
      */
-    ~DoublyLinkedList();
+    ~DoublyLinkedList()
+    {
+        clear();
+        delete head;
+        delete tail;
+    }
 
     /**
      * @brief Get the head (first node) of the list.
      *
      * @return A pointer to the head node.
      */
-    Node<T> *getHead();
+    Node<T> *getHead()
+    {
+        return head;
+    }
 
     /**
      * @brief Get the tail (last node) of the list.
      *
      * @return A pointer to the tail node.
      */
-    Node<T> *getTail();
+    Node<T> *getTail()
+    {
+        return tail;
+    }
 
     /**
      * @brief Get the element at the specified index.
@@ -46,7 +65,19 @@ public:
      * @param index The index of the element to get.
      * @return The element at the specified index.
      */
-    T *get(int index);
+    T *get(int index)
+    {
+        if (index < 0 || index >= size)
+            throw std::out_of_range("Index out of range");
+
+        Node<T> *current = head->getNext();
+        for (int i = 0; i < index; i++)
+        {
+            current = current->getNext();
+        }
+
+        return current->getValue();
+    }
 
     /**
      * @brief Search for the specified element in the list.
@@ -54,7 +85,19 @@ public:
      * @param element The element to search for.
      * @return The index of the first occurrence of the element, or -1 if not found.
      */
-    int search(T element);
+    int search(T element)
+    {
+        Node<T> *current = head->getNext();
+        int index = 0;
+        while (current != tail)
+        {
+            if (*(current->getValue()) == element)
+                return index;
+            current = current->getNext();
+            index++;
+        }
+        return -1;
+    }
 
     /**
      * @brief Insert an element into the list in an ordered manner.
@@ -64,7 +107,27 @@ public:
      * @param element The element to insert.
      * @return True if the element was successfully inserted, false otherwise.
      */
-    bool insertSorted(T element);
+    bool insertSorted(T element)
+    {
+        Node<T> *newNode = new Node<T>(element);
+        if (newNode == nullptr)
+            return false;
+
+        Node<T> *current = head->getNext();
+
+        while (current != tail && *(current->getValue()) < element)
+        {
+            current = current->getNext();
+        }
+
+        newNode->setPrevious(current->getPrevious());
+        newNode->setNext(current);
+        current->getPrevious()->setNext(newNode);
+        current->setPrevious(newNode);
+        size++;
+
+        return true;
+    }
 
     /**
      * @brief Insert an element at the head (start) of the list.
@@ -72,7 +135,20 @@ public:
      * @param element The element to insert.
      * @return True if the element was successfully inserted, false otherwise.
      */
-    bool insertAtHead(T element);
+    bool insertAtHead(T element)
+    {
+        Node<T> *newNode = new Node<T>(element);
+        if (newNode == nullptr)
+            return false;
+
+        newNode->setPrevious(head);
+        newNode->setNext(head->getNext());
+        head->getNext()->setPrevious(newNode);
+        head->setNext(newNode);
+        size++;
+
+        return true;
+    }
 
     /**
      * @brief Insert an element at the tail (end) of the list.
@@ -80,7 +156,20 @@ public:
      * @param element The element to insert.
      * @return True if the element was successfully inserted, false otherwise.
      */
-    bool insertAtTail(T element);
+    bool insertAtTail(T *element)
+    {
+        Node<T> *newNode = new Node<T>(element);
+        if (newNode == nullptr)
+            return false;
+
+        newNode->setPrevious(tail->getPrevious());
+        newNode->setNext(tail);
+        tail->getPrevious()->setNext(newNode);
+        tail->setPrevious(newNode);
+        size++;
+
+        return true;
+    }
 
     /**
      * @brief Insert an element at the specified index in the list.
@@ -89,21 +178,77 @@ public:
      * @param element The element to insert.
      * @return True if the element was successfully inserted, false otherwise.
      */
-    bool insertAt(int index, T element);
+    bool insertAt(int index, T element)
+    {
+        if (index < 0 || index > size)
+            return false;
+
+        if (index == 0)
+            return insertAtHead(element);
+        if (index == size)
+            return insertAtTail(element);
+
+        Node<T> *newNode = new Node<T>(element);
+        if (newNode == nullptr)
+            return false;
+
+        Node<T> *current = head->getNext();
+
+        for (int i = 0; i < index; i++)
+        {
+            current = current->getNext();
+        }
+
+        newNode->setPrevious(current->getPrevious());
+        newNode->setNext(current);
+        current->getPrevious()->setNext(newNode);
+        current->setPrevious(newNode);
+        size++;
+
+        return true;
+    }
 
     /**
      * @brief Remove the element at the head (first node) of the list.
      *
      * @return The removed element.
      */
-    T *removeFromHead();
+    T removeFromHead()
+    {
+        if (isEmpty())
+            throw std::runtime_error("List is empty");
+
+        Node<T> *nodeToRemove = head->getNext();
+        T *removedElement = nodeToRemove->getValue();
+
+        head->setNext(nodeToRemove->getNext());
+        nodeToRemove->getNext()->setPrevious(head);
+        delete nodeToRemove;
+        size--;
+
+        return *removedElement;
+    }
 
     /**
      * @brief Remove the element at the tail (last node) of the list.
      *
      * @return The removed element.
      */
-    T *removeFromTail();
+    T removeFromTail()
+    {
+        if (isEmpty())
+            throw std::runtime_error("List is empty");
+
+        Node<T> *nodeToRemove = tail->getPrevious();
+        T removedElement = *(nodeToRemove->getValue());
+
+        tail->setPrevious(nodeToRemove->getPrevious());
+        nodeToRemove->getPrevious()->setNext(tail);
+        delete nodeToRemove;
+        size--;
+
+        return removedElement;
+    }
 
     /**
      * @brief Remove the element at the specified index in the list.
@@ -111,7 +256,30 @@ public:
      * @param index The index of the element to remove.
      * @return The removed element.
      */
-    T *removeAt(int index);
+    T removeAt(int index)
+    {
+        if (index < 0 || index >= size)
+            throw std::out_of_range("Index out of range");
+
+        if (index == 0)
+            return removeFromHead();
+        if (index == size - 1)
+            return removeFromTail();
+
+        Node<T> *current = head->getNext();
+        for (int i = 0; i < index; i++)
+        {
+            current = current->getNext();
+        }
+
+        T removedElement = *(current->getValue());
+        current->getPrevious()->setNext(current->getNext());
+        current->getNext()->setPrevious(current->getPrevious());
+        delete current;
+        size--;
+
+        return removedElement;
+    }
 
     /**
      * @brief Remove the specified element from the list.
@@ -119,366 +287,54 @@ public:
      * @param element The element to remove.
      * @return True if the element was successfully removed, false otherwise.
      */
-    bool remove(T element);
+    bool remove(T element)
+    {
+        Node<T> *current = head->getNext();
+        while (current != tail)
+        {
+            if (*(current->getValue()) == element)
+            {
+                current->getPrevious()->setNext(current->getNext());
+                current->getNext()->setPrevious(current->getPrevious());
+                delete current;
+                size--;
+                return true;
+            }
+            current = current->getNext();
+        }
+        return false;
+    }
 
     /**
      * @brief Check if the list is empty.
      *
      * @return True if the list is empty, false otherwise.
      */
-    bool isEmpty();
+    bool isEmpty()
+    {
+        return size == 0;
+    }
 
     /**
      * @brief Get the number of elements in the list.
      *
      * @return The number of elements in the list.
      */
-    int getSize();
+    int getSize()
+    {
+        return size;
+    }
+
+    /**
+     * @brief Remove all elements from the list.
+     */
+    void clear()
+    {
+        while (!isEmpty())
+        {
+            removeFromHead();
+        }
+    }
 };
-
-template <typename T>
-DoublyLinkedList<T>::DoublyLinkedList()
-{
-    this->head = new Node<T>();
-    this->tail = new Node<T>();
-
-    this->head->setPrevious(nullptr);
-    this->tail->setNext(nullptr);
-
-    this->head->setNext(this->tail);
-    this->tail->setPrevious(this->head);
-
-    this->size = 0;
-}
-
-template <typename T>
-DoublyLinkedList<T>::~DoublyLinkedList()
-{
-    Node<T> *current = this->head;
-    Node<T> *next = nullptr;
-
-    while (current != nullptr)
-    {
-        next = current->getNext();
-        delete current;
-        current = next;
-    }
-}
-
-template <typename T>
-Node<T> *DoublyLinkedList<T>::getHead()
-{
-    return this->head;
-}
-
-template <typename T>
-Node<T> *DoublyLinkedList<T>::getTail()
-{
-    return this->tail;
-}
-
-template <typename T>
-T *DoublyLinkedList<T>::get(int index)
-{
-    if (index < 0 || index >= this->size)
-    {
-        throw std::out_of_range("Index out of range at retrieve.");
-    }
-
-    Node<T> *current = this->head->getNext();
-    int i = 0;
-
-    while (current != nullptr && current != this->tail)
-    {
-        if (i == index)
-        {
-            T *value = new T(current->getValue());
-
-            return value;
-        }
-
-        current = current->getNext();
-        i++;
-    }
-
-    throw std::out_of_range("Index out of range at retrieve.");
-}
-
-template <typename T>
-int DoublyLinkedList<T>::search(T element)
-{
-    Node<T> *current = this->head;
-    int i = 0;
-
-    while (current != nullptr)
-    {
-        if (current->getValue() == element)
-        {
-            return i;
-        }
-
-        current = current->getNext();
-
-        i++;
-    }
-
-    return -1;
-}
-
-template <typename T>
-bool DoublyLinkedList<T>::insertSorted(T element)
-{
-    //  Insert an element into the list in an ordered manner.
-
-    Node<T> *newNode = new Node<T>(element);
-
-    if (newNode == nullptr)
-    {
-        return false;
-    }
-
-    Node<T> *current = this->head->getNext();
-
-    if (current == nullptr)
-    {
-        return insertAtHead(element);
-    }
-
-    while (current != nullptr)
-    {
-        if (current->getValue().getOrder() > newNode->getValue().getOrder() || current->getNext() == nullptr)
-        {
-            newNode->setNext(current);
-            newNode->setPrevious(current->getPrevious());
-            current->getPrevious()->setNext(newNode);
-            current->setPrevious(newNode);
-
-            this->size++;
-
-            return true;
-        }
-
-        current = current->getNext();
-    }
-
-    return false;
-}
-
-template <typename T>
-bool DoublyLinkedList<T>::insertAtHead(T element)
-{
-    Node<T> *newNode = new Node<T>(element);
-
-    if (newNode == nullptr)
-    {
-        return false;
-    }
-
-    newNode->setNext(this->head->getNext());
-    newNode->setPrevious(this->head);
-    this->head->getNext()->setPrevious(newNode);
-    this->head->setNext(newNode);
-
-    this->size++;
-
-    return true;
-}
-
-template <typename T>
-bool DoublyLinkedList<T>::insertAtTail(T element)
-{
-    Node<T> *newNode = new Node<T>(element);
-
-    if (newNode == nullptr)
-    {
-        return false;
-    }
-
-    newNode->setNext(this->tail);
-    newNode->setPrevious(this->tail->getPrevious());
-    this->tail->getPrevious()->setNext(newNode);
-    this->tail->setPrevious(newNode);
-
-    this->size++;
-
-    return true;
-}
-
-template <typename T>
-bool DoublyLinkedList<T>::insertAt(int index, T element)
-{
-    if (index < 0 || index > this->size)
-    {
-        return false;
-    }
-
-    if (index == 0)
-    {
-        return this->insertAtHead(element);
-    }
-
-    if (index == this->size)
-    {
-        return this->insertAtTail(element);
-    }
-
-    Node<T> *newNode = new Node<T>(element);
-
-    if (newNode == nullptr)
-    {
-        return false;
-    }
-
-    Node<T> *current = this->head->getNext();
-
-    int i = 0;
-
-    while (current != nullptr)
-    {
-        if (i == index)
-        {
-            newNode->setNext(current);
-            newNode->setPrevious(current->getPrevious());
-            current->getPrevious()->setNext(newNode);
-            current->setPrevious(newNode);
-
-            this->size++;
-
-            return true;
-        }
-
-        current = current->getNext();
-
-        i++;
-    }
-
-    return false;
-}
-
-template <typename T>
-T *DoublyLinkedList<T>::removeFromHead()
-{
-    Node<T> *current = this->head->getNext();
-
-    if (current == nullptr)
-    {
-        throw std::out_of_range("List is empty.");
-    }
-
-    T value = current->getValue();
-
-    this->head->setNext(current->getNext());
-    current->getNext()->setPrevious(this->head);
-
-    delete current;
-
-    this->size--;
-
-    return value;
-}
-
-template <typename T>
-T *DoublyLinkedList<T>::removeFromTail()
-{
-    Node<T> *current = this->tail->getPrevious();
-
-    if (current == nullptr)
-    {
-        throw std::out_of_range("List is empty.");
-    }
-
-    T value = current->getValue();
-
-    this->tail->setPrevious(current->getPrevious());
-    current->getPrevious()->setNext(this->tail);
-
-    delete current;
-
-    this->size--;
-
-    return value;
-}
-
-template <typename T>
-T *DoublyLinkedList<T>::removeAt(int index)
-{
-    if (index < 0 || index >= this->size)
-    {
-        throw std::out_of_range("Index out of range at removeAt.");
-    }
-
-    if (index == 0)
-    {
-        return this->removeFromHead();
-    }
-
-    if (index == this->size - 1)
-    {
-        return this->removeFromTail();
-    }
-
-    Node<T> *current = this->head->getNext();
-
-    int i = 0;
-
-    while (current != nullptr)
-    {
-        if (i == index)
-        {
-            T value = current->getValue();
-
-            current->getPrevious()->setNext(current->getNext());
-            current->getNext()->setPrevious(current->getPrevious());
-
-            delete current;
-
-            this->size--;
-
-            return value;
-        }
-
-        current = current->getNext();
-        i++;
-    }
-
-    throw std::out_of_range("Index out of range at removeAt.");
-}
-
-template <typename T>
-bool DoublyLinkedList<T>::remove(T element)
-{
-    Node<T> *current = this->head->getNext();
-
-    while (current != nullptr)
-    {
-        if (current->getValue() == element)
-        {
-            current->getPrevious()->setNext(current->getNext());
-            current->getNext()->setPrevious(current->getPrevious());
-
-            delete current;
-
-            this->size--;
-
-            return true;
-        }
-
-        current = current->getNext();
-    }
-
-    return false;
-}
-
-template <typename T>
-bool DoublyLinkedList<T>::isEmpty()
-{
-    return this->size == 0;
-}
-
-template <typename T>
-int DoublyLinkedList<T>::getSize()
-{
-    return this->size;
-}
 
 #endif

@@ -3,9 +3,6 @@
 
 #include <string>
 #include <ctime>
-#include "Column.h"
-
-class Column;
 
 using namespace std;
 
@@ -20,7 +17,6 @@ private:
     string id;         /**< The ID of the task. */
 
 protected:
-    Column *column;     /**< The column associated with the task. */
     string title;       /**< The title of the task. */
     string description; /**< The description of the task. */
     int order;          /**< The order of the task. */
@@ -36,33 +32,34 @@ public:
 
     /**
      * @brief Constructs a Task object with a specified column.
-     * @param column The column associated with the task.
      */
-    Task(Column *column, string type);
+    Task(string type);
 
     /**
      * @brief Constructs a Task object with a specified column and title.
-     * @param column The column associated with the task.
      * @param title The title of the task.
      */
-    Task(Column *column, string title, string type);
+    Task(string title, string type);
 
     /**
      * @brief Constructs a Task object with a specified column, title, and description.
-     * @param column The column associated with the task.
      * @param title The title of the task.
      * @param description The description of the task.
      */
-    Task(Column *column, string title, string description, string type);
+    Task(string title, string description, string type);
 
     /**
      * @brief Constructs a Task object with a specified column, title, description, and deadline.
-     * @param column The column associated with the task.
      * @param title The title of the task.
      * @param description The description of the task.
      * @param deadline The deadline of the task.
      */
-    Task(Column *column, string title, string description, tm deadline, string type);
+    Task(string title, string description, tm *deadline, string type);
+
+    /**
+     * @brief Destroys the Task object and frees the memory.
+     */
+    virtual ~Task();
 
     /**
      * @brief Get the ID of the task.
@@ -75,12 +72,6 @@ public:
      * @return The type of the task.
      */
     string getType();
-
-    /**
-     * @brief Get the column associated with the task.
-     * @return The column associated with the task.
-     */
-    Column *getColumn();
 
     /**
      * @brief Get the title of the task.
