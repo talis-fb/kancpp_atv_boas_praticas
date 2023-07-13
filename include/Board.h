@@ -129,6 +129,14 @@ public:
     Column *getColumnById(string id);
 
     /**
+     * @brief Get the Column By Task object
+     * @param task The task to be searched.
+     * @return Column The column that contains the specified task.
+     * @return nullptr If the task is not found.
+     */
+    Column *getColumnByTask(Task *task);
+
+    /**
      * @brief Print the board.
      */
     void print();

@@ -191,97 +191,90 @@ public:
 
     static void taskDetails(Board *board)
     {
-        // int option;
-        // int minOption = 1;
-        // int maxOption = 4;
+        int option;
+        int minOption = 1;
+        int maxOption = 4;
 
-        // board->print();
+        board->print();
 
-        // cout << "+-------------------------------------+\n";
-        // cout << "|           MENU DE TAREFAS           |\n";
-        // cout << "+-------------------------------------+\n";
-        // cout << "|  1 - Exibir detalhes de uma tarefa  |\n";
-        // cout << "|  2 - Editar tarefa                  |\n";
-        // cout << "|  3 - Mover tarefa                   |\n";
-        // cout << "|  4 - Remover tarefa                 |\n";
-        // cout << "+-------------------------------------+\n\n";
+        cout << "+-------------------------------------+\n";
+        cout << "|           MENU DE TAREFAS           |\n";
+        cout << "+-------------------------------------+\n";
+        cout << "|  1 - Exibir detalhes de uma tarefa  |\n";
+        cout << "|  2 - Editar tarefa                  |\n";
+        cout << "|  3 - Mover tarefa                   |\n";
+        cout << "|  4 - Remover tarefa                 |\n";
+        cout << "+-------------------------------------+\n\n";
 
-        // cout << "Digite o numero da operacao desejada: ";
+        cout << "Digite o numero da operacao desejada: ";
 
-        // cin >> option;
-        // cin.ignore();
+        cin >> option;
+        cin.ignore();
 
-        // while (option < minOption || option > maxOption)
-        // {
-        //     system("clear||cls");
-        //     cout << "O numero digitado nao corresponde a nenhuma operacao. Tente novamente: ";
-        //     cin >> option;
-        //     cin.ignore();
-        // }
+        while (option < minOption || option > maxOption)
+        {
+            system("clear||cls");
+            cout << "O numero digitado nao corresponde a nenhuma operacao. Tente novamente: ";
+            cin >> option;
+            cin.ignore();
+        }
 
-        // string id;
-        // Task *selectedTask;
+        string id;
+        Task *selectedTask;
 
-        // cout << "Digite o ID da tarefa: ";
-        // getline(cin, id);
+        cout << "Digite o ID da tarefa: ";
+        getline(cin, id);
 
-        // selectedTask = board->searchTaskById(id);
+        selectedTask = board->searchTaskById(id);
 
-        // while (selectedTask == nullptr)
-        // {
-        //     cout << "Tarefa nao encontrada. Tente novamente: ";
-        //     cin >> id;
-        //     cin.ignore();
-        //     cout << endl;
+        while (selectedTask == nullptr)
+        {
+            cout << "Tarefa nao encontrada. Tente novamente: ";
+            cin >> id;
+            cin.ignore();
+            cout << endl;
 
-        //     selectedTask = board->searchTaskById(id);
-        // }
+            selectedTask = board->searchTaskById(id);
+        }
 
-        // string columnId;
+        string columnId;
+        Column *selectedColumn;
 
-        // switch (option)
-        // {
-        // case 1:
-        //     selectedTask->print();
-        //     break;
-        // case 2:
-        //     // selectedTask->edit();
-        //     break;
-        // case 3:
+        switch (option)
+        {
+        case 1:
+            selectedTask->print();
+            break;
+        case 2:
+            // selectedTask->edit();
+            break;
+        case 3:
+            cout << "Digite o ID da coluna que deseja mover a tarefa: ";
+            getline(cin, id);
 
-        //     cout << "Digite o ID da coluna que deseja mover a tarefa: ";
-        //     getline(cin, id);
+            selectedColumn = board->getColumnById(id);
 
-        //     Column *selectedColumn = board->getColumnById(id);
+            while (selectedColumn == nullptr)
+            {
+                cout << "Coluna nao encontrada. Tente novamente: ";
+                cin >> id;
+                cin.ignore();
+                cout << endl;
 
-        //     while (selectedColumn == nullptr)
-        //     {
-        //         cout << "Coluna nao encontrada. Tente novamente: ";
-        //         cin >> id;
-        //         cin.ignore();
-        //         cout << endl;
+                selectedColumn = board->getColumnById(id);
+            }
 
-        //         selectedColumn = board->getColumnById(id);
-        //     }
+            board->moveTask(selectedTask, *selectedColumn);
 
-        //     board->moveTask(selectedTask, *selectedColumn);
+            break;
+        case 4:
+            selectedColumn = board->getColumnByTask(selectedTask);
+            selectedColumn->removeTask(selectedTask);
 
-        //     break;
-        // case 4:
-        //     Column *selectedColumn = selectedTask->getColumn();
-        //     selectedColumn->removeTask(selectedTask);
-        //     cout << "Tarefa removida com sucesso!" << endl;
-        //     cout << "Pressione qualquer tecla para continuar...";
-        //     cin.get();
-
-        //     delete selectedTask;
-
-        //     system("clear||cls");
-
-        //     break;
-        // default:
-        //     break;
-        // }
+            break;
+        default:
+            break;
+        }
     }
 
     static void addNewColumns(Board *board)

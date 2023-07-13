@@ -138,6 +138,23 @@ Column *Board::getColumnById(string id)
   return nullptr;
 }
 
+Column *Board::getColumnByTask(Task *task)
+{
+  for (int i = 0; i < this->columns->getSize(); i++)
+  {
+    vector<Task *> tasks = this->columns->get(i)->getTasks();
+    for (std::size_t k = 0; k < tasks.size(); k++)
+    {
+      if (tasks.at(k)->getId() == task->getId())
+      {
+        return this->columns->get(i);
+      }
+    }
+  }
+
+  return nullptr;
+}
+
 Task *Board::searchTaskById(string id)
 {
   for (int i = 0; i < this->columns->getSize(); i++)
