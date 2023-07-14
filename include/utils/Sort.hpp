@@ -2,6 +2,7 @@
 #define SORT_FUNCTIONS
 
 #include <iostream>
+#include <functional>
 
 /**
  * @brief Find the median of the array
@@ -84,7 +85,7 @@ void quickSort(T array[], int start, int end)
  * @param compare the compare function
  */
 template <typename T>
-void bubbleSort(T array[], int length, bool (*compare)(T, T))
+void bubbleSort(T array[], int length, function<bool(T, T)> compare)
 {
     bool swapped = true;
     int end = length;
@@ -114,8 +115,9 @@ void bubbleSort(T array[], int length, bool (*compare)(T, T))
  * @param compare the compare function
  */
 template <typename T>
-void selectionSort(T array[], int length, bool (*compare)(T, T))
+void selectionSort(T array[], bool (*compare)(T, T))
 {
+    int length = sizeof(array) / sizeof(array[0]);
     for (int i = 0; i < length; i++)
     {
 
