@@ -107,7 +107,7 @@ void Board::print()
 {
   int sizeColumns = this->columns->getSize();
 
-  cout << "Quadro Kanban (" << this->getName() << ")" << endl;
+  cout << this->getName() << endl;
 
   for (int i = 0; i < sizeColumns; i++)
   {
