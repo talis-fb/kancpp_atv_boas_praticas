@@ -264,3 +264,23 @@ void Column::deserialize(std::istream &stream)
         }
     }
 }
+
+void Column::sortTasksByTitle(){
+    int n = tasks.size();
+    bool swapped = true;
+
+    while(swapped){
+        swapped = false; 
+        for (int j = 0; j < n - 1; j++)
+        {
+            if (tasks[j]->getTitle() > tasks[j + 1]->getTitle())
+            {
+                Task *temp = tasks[j];
+                tasks[j] = tasks[j + 1];
+                tasks[j + 1] = temp;
+                swapped = true;
+            }
+        }
+        n--;
+    }
+}
