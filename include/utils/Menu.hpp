@@ -82,6 +82,18 @@ public:
         cout << "+---------------------------------+\n\n";
     }
 
+    static void printSortActions(){
+        cout << "+----------------------------------+\n";
+        cout << "|       OPCOES DE ORDENACAO        |\n";
+        cout << "+----------------------------------+\n";
+        cout << "|  1 - Ordenar tarefa por tiulo    |\n";
+        cout << "|  2 - Ordenar tarefa por prazo    |\n";
+        cout << "|  3 - Ordenar tarefa por Id       |\n";
+        cout << "|  4 - Ordenar coluna por ordem    |\n";
+        cout << "|  5 - Ordenar coluna por Id       |\n";
+        cout << "+----------------------------------+\n\n";
+    }
+
     static void addBugTask(Board *board, Column *selectedColumn)
     {
         string title, description;
@@ -578,6 +590,10 @@ public:
         }
 
         return option;
+    }
+
+    static void sortBoard(){
+        
     }
 };
 

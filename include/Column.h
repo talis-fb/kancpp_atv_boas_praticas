@@ -164,6 +164,12 @@ public:
      * @param stream The stream to be deserialized.
      */
     void deserialize(std::istream &stream);
+
+    /**
+     * @brief sort the tasks by title
+     * 
+     */
+    void sortTasksByTitle();
 };
 
 #endif
