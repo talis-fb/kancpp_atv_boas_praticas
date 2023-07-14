@@ -59,6 +59,18 @@ public:
      * @brief Prints the feature task.
      */
     void print() override;
+
+    /**
+     * @brief Serialize the board.
+     * @param stream The stream to be serialized.
+     */
+    void serialize(std::ostream &stream);
+
+    /**
+     * @brief Deserialize the board.
+     * @param stream The stream to be deserialized.
+     */
+    void deserialize(std::istream &stream);
 };
 
 #endif // FEATURE_TASK_CLASS

@@ -13,6 +13,11 @@ private:
 
 public:
     /**
+     * @brief Constructs a BugTask object with a specified column and project.
+     */
+    BugTask();
+
+    /**
      * @brief Constructs a BugTask object with a specified column and priority.
      * @param priority The priority of the bug task.
      */
@@ -63,6 +68,18 @@ public:
      * @brief Prints the bug task.
      */
     void print();
+
+    /**
+     * @brief Serialize the board.
+     * @param stream The stream to be serialized.
+     */
+    void serialize(std::ostream &stream);
+
+    /**
+     * @brief Deserialize the board.
+     * @param stream The stream to be deserialized.
+     */
+    void deserialize(std::istream &stream);
 };
 
 #endif // BUGTASK_CLASS

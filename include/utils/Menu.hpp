@@ -523,6 +523,29 @@ public:
         system("clear||cls");
     }
 
+    static void saveBoard(Board *board)
+    {
+        try
+        {
+            std::fstream fileManager("./data/board.bin", std::ios::in | std::ios::out | std::ios::binary | std::ios::trunc);
+
+            board->serialize(fileManager);
+
+            fileManager.close();
+
+            cout << "Quadro salvo com sucesso!" << endl;
+        }
+        catch (const std::exception &e)
+        {
+            cout << "Erro ao salvar o quadro." << endl;
+        }
+
+        cout << "Pressione qualquer tecla para continuar...";
+        cin.get();
+
+        system("clear||cls");
+    }
+
     static int show()
     {
         int option;

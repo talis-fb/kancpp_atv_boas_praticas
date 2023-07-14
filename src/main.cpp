@@ -1,37 +1,51 @@
 #include <iostream>
+#include <fstream>
+
 #include "../include/TADS/DoublyLinkedList/DoublyLinkedList.hpp"
 #include "../include/Board.h"
 #include "../include/Column.h"
 #include "../include/FeatureTask.h"
 #include "../include/BugTask.h"
 #include "../include/TestTask.h"
-
 #include "../include/utils/Menu.hpp"
 
 int main()
 {
   system("clear||cls");
 
-  string name, description;
+  Board board;
 
-  cout << "Insira as informacoes do seu Kanban\n";
+  std::fstream fileManager2("data/board.bin", std::ios::in | std::ios::out | std::ios::binary | std::ios::app);
 
-  cout << "Nome do quadro: ";
-  getline(cin, name);
+  // check if fileManager2 is open and is not empty, if not, create a kanban object
+  if (fileManager2.is_open() && fileManager2.peek() != std::ifstream::traits_type::eof())
+  {
+    board.deserialize(fileManager2);
+    fileManager2.close();
+  }
+  else
+  {
+    string name, description;
 
-  cout << "Descricao do quadro: ";
-  getline(cin, description);
+    cout << "Insira as informacoes do seu Kanban\n";
 
-  Board board(name, description);
+    cout << "Nome do quadro: ";
+    getline(cin, name);
 
-  cout << "Quadro criado com sucesso!\n\n";
+    cout << "Descricao do quadro: ";
+    getline(cin, description);
 
-  cout << "Vamos adicionar as primeiras colunas do quadro " << board.getName() << endl
-       << endl;
+    Board board(name, description);
 
-  Menu::addNewColumns(&board);
+    cout << "Quadro criado com sucesso!\n\n";
 
-  int exitOption = 7;
+    cout << "Vamos adicionar as primeiras colunas do quadro " << board.getName() << endl
+         << endl;
+
+    Menu::addNewColumns(&board);
+  }
+
+  int exitOption = 8;
   int selectedOption;
 
   do
@@ -56,6 +70,12 @@ int main()
       Menu::taskDetails(&board);
       break;
     case 6:
+      /* code */
+      break;
+    case 7:
+      Menu::saveBoard(&board);
+      break;
+    case 8:
       /* code */
       break;
 

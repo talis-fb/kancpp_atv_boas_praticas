@@ -21,9 +21,14 @@ private:
     string description;                /**< Description of the board */
     DoublyLinkedList<Column> *columns; /**< List of columns in the board */
     vector<Task *> backlog;            /**< List of tasks in the backlog */
-    tm *createdAt;                     /**< Creation date and time of the board */
+    tm createdAt;                      /**< Creation date and time of the board */
 
 public:
+    /**
+     * @brief Constructs an empty Board object.
+     */
+    Board();
+
     /**
      * @brief Constructs a new Board object.
      * @param name The name of the board.
@@ -140,6 +145,18 @@ public:
      * @brief Print the board.
      */
     void print();
+
+    /**
+     * @brief Serialize the board.
+     * @param stream The stream to be serialized.
+     */
+    void serialize(std::ostream &stream);
+
+    /**
+     * @brief Deserialize the board.
+     * @param stream The stream to be deserialized.
+     */
+    void deserialize(std::istream &stream);
 };
 
 #endif

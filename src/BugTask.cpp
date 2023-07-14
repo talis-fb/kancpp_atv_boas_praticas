@@ -2,6 +2,11 @@
 #include "../include/BugTask.h"
 #include "../include/formatters/Date.h"
 
+BugTask::BugTask() : Task("BUG")
+{
+    this->priority = 0;
+}
+
 BugTask::BugTask(int priority) : Task("BUG")
 {
     this->priority = priority;
@@ -31,6 +36,11 @@ int BugTask::getPriority()
     return priority;
 }
 
+void BugTask::setPriority(int priority)
+{
+    this->priority = priority;
+}
+
 void BugTask::print()
 {
     tm date = getDeadline();
@@ -46,4 +56,18 @@ void BugTask::print()
     cout << "Ordem: " << getOrder() << endl;
     cout << "Criado em: " << formatDate(getCreatedAt()) << endl;
     cout << "------------------------" << endl;
+}
+
+void BugTask::serialize(std::ostream &stream)
+{
+    stream.write(reinterpret_cast<const char *>(&priority), sizeof(priority));
+
+    Task::serialize(stream);
+}
+
+void BugTask::deserialize(std::istream &stream)
+{
+    stream.read(reinterpret_cast<char *>(&priority), sizeof(priority));
+
+    Task::deserialize(stream);
 }

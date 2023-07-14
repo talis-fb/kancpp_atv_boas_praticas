@@ -1,6 +1,7 @@
 #ifndef TASK_CLASS
 #define TASK_CLASS
 
+#include <iostream>
 #include <string>
 #include <ctime>
 
@@ -144,6 +145,18 @@ public:
      * @return True if the tasks are equal, false otherwise.
      */
     bool operator==(const Task &task) const;
+
+    /**
+     * @brief Serialize the board.
+     * @param stream The stream to be serialized.
+     */
+    void serialize(std::ostream &stream);
+
+    /**
+     * @brief Deserialize the board.
+     * @param stream The stream to be deserialized.
+     */
+    void deserialize(std::istream &stream);
 };
 
 #endif // TASK_CLASS

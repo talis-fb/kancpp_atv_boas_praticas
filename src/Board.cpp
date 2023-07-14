@@ -1,5 +1,12 @@
 #include "../include/Board.h"
 
+Board::Board()
+{
+  this->columns = new DoublyLinkedList<Column>();
+  this->backlog = std::vector<Task *>();
+  setCreatedAt();
+}
+
 Board::Board(string name, string description)
 {
   this->name = name;
@@ -18,7 +25,6 @@ Board::Board(string name)
 Board::~Board()
 {
   delete this->columns;
-  delete this->createdAt;
 }
 
 string Board::getName()
@@ -33,7 +39,7 @@ string Board::getDescription()
 
 tm Board::getCreatedAt()
 {
-  return *this->createdAt;
+  return this->createdAt;
 }
 
 int Board::getColumnCount()
@@ -45,13 +51,13 @@ void Board::setCreatedAt()
 {
   time_t currentTime = time(nullptr);
   tm *localTime = localtime(&currentTime);
-  this->createdAt = localTime;
+  this->createdAt = *localTime;
 }
 
 void Board::displayCreatedAt()
 {
   char dateTime[100];
-  std::strftime(dateTime, sizeof(dateTime), "%d/%m/%Y as %Hh%Mmin", createdAt);
+  std::strftime(dateTime, sizeof(dateTime), "%d/%m/%Y as %Hh%Mmin", &createdAt);
   std::cout << "Criado em: " << dateTime << std::endl;
 }
 
@@ -101,25 +107,12 @@ void Board::print()
 {
   int sizeColumns = this->columns->getSize();
 
-  // system("clear||cls");
   cout << "Quadro Kanban (" << this->getName() << ")" << endl;
 
   for (int i = 0; i < sizeColumns; i++)
   {
 
     this->columns->get(i)->print();
-    // cout << this->columns->get(i).getName() << " (Id: " << this->columns->get(i).getId() << ")" << endl;
-
-    // std::cout << "Tarefas: " << std::endl;
-
-    // vector<Task *> tasks = this->columns->get(i).getTasks();
-    // vector<Task *>::iterator it;
-    // for (std::size_t k = 0; k < tasks.size(); k++)
-    // {
-    //   cout << tasks.at(k)->getTitle() << endl;
-    // }
-
-    // cout << endl;
   }
 
   cout << endl;
@@ -178,4 +171,55 @@ Task *Board::searchTaskById(string id)
   }
 
   return nullptr;
+}
+
+void Board::serialize(std::ostream &stream)
+{
+  size_t nameLength = name.length();
+  size_t descriptionLength = description.length();
+  int columnCount = columns->getSize();
+
+  stream.write(reinterpret_cast<const char *>(&nameLength), sizeof(nameLength));
+  stream.write(name.c_str(), nameLength);
+  stream.write(reinterpret_cast<const char *>(&descriptionLength), sizeof(descriptionLength));
+  stream.write(description.c_str(), descriptionLength);
+  stream.write(reinterpret_cast<const char *>(&columnCount), sizeof(columnCount));
+
+  for (int i = 0; i < columnCount; i++)
+  {
+    columns->get(i)->serialize(stream);
+  }
+
+  int backlogSize = backlog.size();
+
+  stream.write(reinterpret_cast<const char *>(&backlogSize), sizeof(backlogSize));
+
+  for (Task *task : backlog)
+  {
+    task->serialize(stream);
+  }
+}
+
+void Board::deserialize(std::istream &stream)
+{
+  size_t nameLength;
+  size_t descriptionLength;
+  int columnCount;
+
+  stream.read(reinterpret_cast<char *>(&nameLength), sizeof(nameLength));
+  name.resize(nameLength);
+  stream.read(&name[0], nameLength);
+
+  stream.read(reinterpret_cast<char *>(&descriptionLength), sizeof(descriptionLength));
+  description.resize(descriptionLength);
+  stream.read(&description[0], descriptionLength);
+
+  stream.read(reinterpret_cast<char *>(&columnCount), sizeof(columnCount));
+
+  for (int i = 0; i < columnCount; i++)
+  {
+    Column *column = new Column();
+    column->deserialize(stream);
+    columns->insertAtTail(column);
+  }
 }

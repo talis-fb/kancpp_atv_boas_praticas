@@ -58,3 +58,34 @@ void TestTask::print()
     cout << "Criado em: " << formatDate(getCreatedAt()) << endl;
     cout << "------------------------" << endl;
 }
+
+void TestTask::serialize(std::ostream &stream)
+{
+    bool hasFeature = (feature != nullptr);
+
+    stream.write(reinterpret_cast<const char *>(&hasFeature), sizeof(hasFeature));
+
+    if (hasFeature)
+    {
+        feature->serialize(stream);
+    }
+
+    Task::serialize(stream);
+}
+
+void TestTask::deserialize(std::istream &stream)
+{
+    bool hasFeature;
+    stream.read(reinterpret_cast<char *>(&hasFeature), sizeof(hasFeature));
+    if (hasFeature)
+    {
+        feature = new FeatureTask();
+        feature->deserialize(stream);
+    }
+    else
+    {
+        feature = nullptr;
+    }
+
+    Task::deserialize(stream);
+}

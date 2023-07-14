@@ -7,6 +7,9 @@
 #include <iostream>
 
 #include "Task.h"
+#include "BugTask.h"
+#include "FeatureTask.h"
+#include "TestTask.h"
 
 class Task;
 
@@ -149,6 +152,18 @@ public:
      * @brief Prints the column.
      */
     void print();
+
+    /**
+     * @brief Serialize the board.
+     * @param stream The stream to be serialized.
+     */
+    void serialize(std::ostream &stream);
+
+    /**
+     * @brief Deserialize the board.
+     * @param stream The stream to be deserialized.
+     */
+    void deserialize(std::istream &stream);
 };
 
 #endif
