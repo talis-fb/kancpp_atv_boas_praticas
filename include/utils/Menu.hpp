@@ -546,11 +546,10 @@ public:
         system("clear||cls");
     }
 
-    static int show()
+    static int show(int maxOption)
     {
         int option;
         int minOption = 1;
-        int maxOption = 7;
 
         printMenuActions();
 
@@ -563,7 +562,7 @@ public:
         {
             system("clear||cls");
             cout << "O numero digitado nao corresponde a nenhuma operacao. Tente novamente.\n";
-            option = show();
+            option = show(maxOption);
         }
 
         return option;

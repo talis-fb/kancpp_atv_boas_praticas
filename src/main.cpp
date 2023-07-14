@@ -17,7 +17,6 @@ int main()
 
   std::fstream fileManager2("data/board.bin", std::ios::in | std::ios::out | std::ios::binary | std::ios::app);
 
-  // check if fileManager2 is open and is not empty, if not, create a kanban object
   if (fileManager2.is_open() && fileManager2.peek() != std::ifstream::traits_type::eof())
   {
     board.deserialize(fileManager2);
@@ -50,7 +49,7 @@ int main()
 
   do
   {
-    selectedOption = Menu::show();
+    selectedOption = Menu::show(exitOption);
 
     switch (selectedOption)
     {
@@ -76,7 +75,6 @@ int main()
       Menu::saveBoard(&board);
       break;
     case 8:
-      /* code */
       break;
 
     default:
