@@ -176,3 +176,7 @@ void Task::deserialize(std::istream &stream)
   type.resize(typeLength);
   stream.read(&type[0], typeLength);
 }
+
+void Task::printResume(){
+  cout << this->getTitle() << "(Id: " << this->getId() << ")\n";
+}

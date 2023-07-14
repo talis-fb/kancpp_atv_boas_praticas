@@ -135,12 +135,14 @@ bool Column::operator==(const Column &column) const
 
 void Column::print()
 {
-    cout << "Id: " << this->id << endl;
-    cout << "Nome: " << this->name << endl;
 
+    cout << "+----------------------------\n";
+    cout << "| " << this->name << " (Id: " << this-> id << ")"<< endl;
+    cout << "+----------------------------\n";
     for (auto task : this->tasks)
     {
         task->print();
+        cout << "-----------------------------\n";
     }
 }
 

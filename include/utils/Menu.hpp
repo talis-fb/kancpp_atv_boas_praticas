@@ -592,7 +592,22 @@ public:
         return option;
     }
 
-    static void sortBoard(){
+    static void sortOptions(Board* board){
+        int option;
+
+        printSortActions();
+        
+        cout << "Escolha uma opcao de ordenacao: ";
+        cin >> option;
+        cin.ignore();
+
+        while(option < 1 && option >5){
+            cout << "O numero digitado nao corresponde a nenhuma opcao. Tente novamente.\n";
+             cout << "Escolha uma opcao de ordenacao: ";
+            cin >> option;
+            cin.ignore();
+        }
+
         
     }
 };

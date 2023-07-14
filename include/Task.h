@@ -157,6 +157,12 @@ public:
      * @param stream The stream to be deserialized.
      */
     void deserialize(std::istream &stream);
+
+    /**
+     * @brief print task 
+     * 
+     */
+    void printResume();
 };
 
 #endif // TASK_CLASS

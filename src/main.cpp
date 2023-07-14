@@ -71,7 +71,7 @@ int main()
       Menu::taskDetails(board);
       break;
     case 6:
-      /* code */
+      Menu::sortOptions(board);
       break;
     case 7:
       Menu::saveBoard(board);
