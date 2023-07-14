@@ -19,7 +19,7 @@ class Menu
 public:
     static void printTaskTypeMenu()
     {
-        cout << "+----------------------------------------+\n";
+        cout << "\n+----------------------------------------+\n";
         cout << "|        Escolha o tipo da tarefa        |\n";
         cout << "+----------------------------------------+\n";
         cout << "|  1 - Bug                               |\n";
@@ -43,7 +43,7 @@ public:
 
     static void printTaskMenu()
     {
-        cout << "+-------------------------------------+\n";
+        cout << "\n+-------------------------------------+\n";
         cout << "|           MENU DE TAREFAS           |\n";
         cout << "+-------------------------------------+\n";
         cout << "|  1 - Exibir detalhes de uma tarefa  |\n";
@@ -55,7 +55,7 @@ public:
 
     static void printTaskActions()
     {
-        cout << "+-------------------------------------+\n";
+        cout << "\n+-------------------------------------+\n";
         cout << "|            EDITAR TAREFA            |\n";
         cout << "+-------------------------------------+\n";
         cout << "|  1 - Editar titulo                  |\n";
@@ -68,7 +68,7 @@ public:
 
     static void printMenuActions()
     {
-        cout << "+---------------------------------+\n";
+        cout << "\n+---------------------------------+\n";
         cout << "|        MENU DE OPERACOES        |\n";
         cout << "+---------------------------------+\n";
         cout << "|  1 - Exibir o quadro            |\n";
