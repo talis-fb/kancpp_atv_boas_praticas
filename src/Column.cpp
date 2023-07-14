@@ -1,4 +1,7 @@
 #include "../include/Column.h"
+#include <map>
+#include <vector>
+#include <string>
 
 int Column::nextId = 1;
 
@@ -267,22 +270,64 @@ void Column::deserialize(std::istream &stream)
     }
 }
 
-void Column::sortTasksByTitle(){
-    int n = tasks.size();
-    bool swapped = true;
+void Column::sortTasksBy(string property)
+{
+    vector<string> properties = {"order", "title", "description"};
+    bool isPropertyValid = false;
 
-    while(swapped){
-        swapped = false; 
-        for (int j = 0; j < n - 1; j++)
+    for (auto prop : properties)
+    {
+        if (prop == property)
         {
-            if (tasks[j]->getTitle() > tasks[j + 1]->getTitle())
-            {
-                Task *temp = tasks[j];
-                tasks[j] = tasks[j + 1];
-                tasks[j + 1] = temp;
-                swapped = true;
-            }
+            isPropertyValid = true;
+            break;
         }
-        n--;
+    }
+
+    if (!isPropertyValid)
+    {
+        throw "Invalid property";
+    }
+
+    Task *tasksArray[this->tasks.size()];
+
+    int length = sizeof(tasksArray) / sizeof(tasksArray[0]);
+
+    for (int i = 0; i < this->tasks.size(); i++)
+    {
+        tasksArray[i] = this->tasks[i];
+    }
+
+    function<bool(Task *, Task *)> compare;
+
+    if (property == "order")
+    {
+        compare = [](Task *a, Task *b)
+        {
+            return a->getOrder() > b->getOrder();
+        };
+    }
+    else if (property == "title")
+    {
+        compare = [](Task *a, Task *b)
+        {
+            return a->getTitle() > b->getTitle();
+        };
+    }
+    else if (property == "description")
+    {
+        compare = [](Task *a, Task *b)
+        {
+            return a->getDescription() > b->getDescription();
+        };
+    }
+
+    bubbleSort<Task *>(tasksArray, length, compare);
+
+    this->tasks.clear();
+
+    for (int i = 0; i < length; i++)
+    {
+        this->tasks.push_back(tasksArray[i]);
     }
 }

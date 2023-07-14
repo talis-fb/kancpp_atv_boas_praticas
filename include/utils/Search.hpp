@@ -15,7 +15,6 @@ int binarySearch(T array[], T key, int start, int end)
 {
     if (start > end)
     {
-        // Element not found
         return -1;
     }
 
@@ -23,17 +22,14 @@ int binarySearch(T array[], T key, int start, int end)
 
     if (array[mid] == key)
     {
-        // Element found at mid index
         return mid;
     }
     else if (array[mid] > key)
     {
-        // Search in the left half of the array
         return binarySearch(array, key, start, mid - 1);
     }
     else
     {
-        // Search in the right half of the array
         return binarySearch(array, key, mid + 1, end);
     }
 }
@@ -53,12 +49,10 @@ int sequentialSearch(T array[], T key, int length)
     {
         if (array[i] == key)
         {
-            // Element found at index i
             return i;
         }
     }
 
-    // Element not found
     return -1;
 }
 

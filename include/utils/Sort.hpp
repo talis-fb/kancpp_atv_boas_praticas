@@ -1,6 +1,9 @@
 #ifndef SORT_FUNCTIONS
 #define SORT_FUNCTIONS
 
+#include <iostream>
+#include <functional>
+
 /**
  * @brief Find the median of the array
  * @tparam T the type of the array
@@ -9,6 +12,7 @@
  * @param end the end index of the array
  * @return the index of the median
  */
+template <typename T>
 int findMedian(T array[], int start, int end)
 {
     int mid = start + (end - start) / 2;
@@ -78,9 +82,10 @@ void quickSort(T array[], int start, int end)
  * @tparam T the type of the array
  * @param array the array to be sorted
  * @param length the length of the array
+ * @param compare the compare function
  */
 template <typename T>
-void bubbleSort(T array[], int length)
+void bubbleSort(T array[], int length, function<bool(T, T)> compare)
 {
     bool swapped = true;
     int end = length;
@@ -90,7 +95,7 @@ void bubbleSort(T array[], int length)
         swapped = false;
         for (int i = 0; i < end - 1; i++)
         {
-            if (array[i] > array[i + 1])
+            if (compare(array[i], array[i + 1]))
             {
                 T temp = array[i];
                 array[i] = array[i + 1];
@@ -107,10 +112,12 @@ void bubbleSort(T array[], int length)
  * @tparam T the type of the array
  * @param array the array to be sorted
  * @param length the length of the array
+ * @param compare the compare function
  */
 template <typename T>
-void selectionSort(T array[], int length)
+void selectionSort(T array[], bool (*compare)(T, T))
 {
+    int length = sizeof(array) / sizeof(array[0]);
     for (int i = 0; i < length; i++)
     {
 
@@ -118,7 +125,7 @@ void selectionSort(T array[], int length)
 
         for (int j = i + 1; j < length; j++)
         {
-            if (array[j] < array[minIndex])
+            if (compare(array[j], array[minIndex]))
                 minIndex = j;
         }
 

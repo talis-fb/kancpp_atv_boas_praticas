@@ -10,6 +10,7 @@
 #include "BugTask.h"
 #include "FeatureTask.h"
 #include "TestTask.h"
+#include "utils/Sort.hpp"
 
 class Task;
 
@@ -166,10 +167,10 @@ public:
     void deserialize(std::istream &stream);
 
     /**
-     * @brief sort the tasks by title
-     * 
+     * @brief Sort the tasks by a given property.
+     * @param property The property to be sorted by.
      */
-    void sortTasksByTitle();
+    void sortTasksBy(string property);
 };
 
 #endif

@@ -50,7 +50,11 @@
     "optional": "cpp",
     "string_view": "cpp",
     "cstring": "cpp",
+<<<<<<< HEAD
     "set": "cpp"
+=======
+    "map": "cpp"
+>>>>>>> 1648a6b525da588e4674159bd46223a1ab0ce0f6
   },
   "makefile.launchConfigurations": [
     {
