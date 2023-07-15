@@ -223,3 +223,11 @@ void Board::deserialize(std::istream &stream)
     columns->insertAtTail(column);
   }
 }
+
+void Board::sortTask(string property)
+{
+  for (int i = 0; i < this->columns->getSize(); i++)
+  {
+    this->columns->get(i)->sortTasksBy(property);
+  }
+}

@@ -82,16 +82,8 @@ public:
         cout << "+---------------------------------+\n\n";
     }
 
-    static void printSortType(){
-        cout << "+-----------------------------------+\n";
-        cout << "|        TIPO DE ORDENACAO          |\n";
-        cout << "+-----------------------------------+\n";
-        cout << "|  1 - Bubble Sort                  |\n";
-        cout << "|  2 - Selection Sort               |\n";
-        cout << "+-----------------------------------+\n\n";
-    }
-
-    static void printSortActions(){
+    static void printSortActions()
+    {
         cout << "+-----------------------------------+\n";
         cout << "|       OPCOES DE ORDENACAO         |\n";
         cout << "+-----------------------------------+\n";
@@ -105,6 +97,12 @@ public:
     {
         string title, description;
         int priority;
+
+        cout << "Nome da tarefa: ";
+        getline(cin, title);
+
+        cout << "Descricao da tarefa: ";
+        getline(cin, description);
 
         printBugTaskPiorityMenu();
 
@@ -127,13 +125,75 @@ public:
     static void addFeatureTask(Board *board, Column *selectedColumn)
     {
         string title, description, project;
+        cout << "Nome da tarefa: ";
+        getline(cin, title);
+
+        cout << "Descricao da tarefa: ";
+        getline(cin, description);
+
         cout << "Qual o projeto dessa feature?: ";
-        cin >> project;
-        cin.ignore();
+        getline(cin, project);
 
         Task *featureTask = new FeatureTask(title, description, project);
 
         selectedColumn->addTask(featureTask);
+    }
+
+    static void addTestTask(Board *board, Column *selectedColumn)
+    {
+        string title, description;
+
+        cout << "Nome da tarefa: ";
+        getline(cin, title);
+
+        cout << "Descricao da tarefa: ";
+        getline(cin, description);
+
+        char hasFeature;
+
+        cout << "Esse teste está associado a uma feature? (S/N) ";
+        cin >> hasFeature;
+        cin.ignore();
+
+        Task *testTask;
+
+        if (toupper(hasFeature) == 'S')
+        {
+            string feature;
+            bool isValidFeature = false;
+
+            do
+            {
+                cout << "Id da feature: ";
+                cin >> feature;
+                cin.ignore();
+
+                Task *featureTask = board->searchTaskById(feature);
+
+                if (featureTask != nullptr && featureTask->getType() == "FEATURE")
+                {
+                    testTask = new TestTask(title, description, static_cast<FeatureTask *>(featureTask));
+                    isValidFeature = true;
+                }
+                else
+                {
+                    cout << "Tarefa inválida. Gostaria de criar sem uma feature associada? (S/N) ";
+                    cin >> hasFeature;
+                    cin.ignore();
+
+                    if (toupper(hasFeature) == 'N')
+                    {
+                        isValidFeature = true;
+                        testTask = new TestTask(title, description);
+                    }
+                }
+            } while (!isValidFeature);
+        }
+        else
+        {
+            testTask = new TestTask(title, description);
+        }
+        selectedColumn->addTask(testTask);
     }
 
     static void editTask(Board *board, Column *selectedColumn, Task *selectedTask)
@@ -240,57 +300,6 @@ public:
         board->moveTask(selectedTask, *selectedColumn);
     }
 
-    static void addTestTask(Board *board, Column *selectedColumn)
-    {
-        string title, description;
-
-        char hasFeature;
-
-        cout << "Esse teste está associado a uma feature? (S/N) ";
-        cin >> hasFeature;
-        cin.ignore();
-
-        Task *testTask;
-
-        if (toupper(hasFeature) == 'S')
-        {
-            string feature;
-            bool isValidFeature = false;
-
-            do
-            {
-                cout << "Id da feature: ";
-                cin >> feature;
-                cin.ignore();
-
-                Task *featureTask = board->searchTaskById(feature);
-
-                if (featureTask != nullptr && featureTask->getType() == "FEATURE")
-                {
-                    testTask = new TestTask(title, description, static_cast<FeatureTask *>(featureTask));
-                    isValidFeature = true;
-                }
-                else
-                {
-                    cout << "Tarefa inválida. Gostaria de criar sem uma feature associada? (S/N) ";
-                    cin >> hasFeature;
-                    cin.ignore();
-
-                    if (toupper(hasFeature) == 'N')
-                    {
-                        isValidFeature = true;
-                        testTask = new TestTask(title, description);
-                    }
-                }
-            } while (!isValidFeature);
-        }
-        else
-        {
-            testTask = new TestTask(title, description);
-        }
-        selectedColumn->addTask(testTask);
-    }
-
     static void addNewTask(Board *board)
     {
         system("clear||cls");
@@ -321,14 +330,6 @@ public:
                     cout << "Coluna nao encontrada. Tente novamente." << endl;
 
             } while (selectedColumn == nullptr);
-
-            string title, description;
-
-            cout << "Nome da tarefa: ";
-            getline(cin, title);
-
-            cout << "Descricao da tarefa: ";
-            getline(cin, description);
 
             switch (optionTask)
             {
@@ -599,27 +600,18 @@ public:
         return option;
     }
 
-    static void sortOptions(Board* board){
+    static void sortOptions(Board *board)
+    {
         int option;
 
-        printSortType();
-        
-        cout << "Escolha um metodo de ordenacao: ";
-        cin >> option;
-        cin.ignore();
-
-        while(option < 1 && option > 2){
-            cout << "O numero digitado nao corresponde a nenhuma opcao. Tente novamente.\n";
-            cout << "Escolha um metodo de ordenacao: ";
-            cin >> option;
-            cin.ignore();
-        }
+        printSortActions();
 
         cout << "Escolha o criterio de ordenacao: ";
         cin >> option;
         cin.ignore();
 
-        while(option < 1 && option > 3){
+        while (option < 1 && option > 3)
+        {
             cout << "O numero digitado nao corresponde a nenhuma opcao. Tente novamente.\n";
             cout << "Escolha um criterio de ordenacao: ";
             cin >> option;
@@ -629,19 +621,17 @@ public:
         switch (option)
         {
         case 1:
-            
+            board->sortTask("title");
             break;
-        
         case 2:
-
+            board->sortTask("description");
             break;
         case 3:
+            board->sortTask("id");
             break;
         default:
             break;
         }
-
-        
     }
 };
 

@@ -140,7 +140,7 @@ void Column::print()
 {
 
     cout << "+----------------------------\n";
-    cout << "| " << this->name << " (Id: " << this-> id << ")"<< endl;
+    cout << "| " << this->name << " (Id: " << this->id << ")" << endl;
     cout << "+----------------------------\n";
     for (auto task : this->tasks)
     {
@@ -272,7 +272,7 @@ void Column::deserialize(std::istream &stream)
 
 void Column::sortTasksBy(string property)
 {
-    vector<string> properties = {"order", "title", "description"};
+    vector<string> properties = {"id", "title", "description"};
     bool isPropertyValid = false;
 
     for (auto prop : properties)
@@ -300,11 +300,11 @@ void Column::sortTasksBy(string property)
 
     function<bool(Task *, Task *)> compare;
 
-    if (property == "order")
+    if (property == "id")
     {
         compare = [](Task *a, Task *b)
         {
-            return a->getOrder() > b->getOrder();
+            return a->getId() > b->getId();
         };
     }
     else if (property == "title")

@@ -142,6 +142,11 @@ public:
     Column *getColumnByTask(Task *task);
 
     /**
+     * @brief Get the Task By Id object
+     */
+    void sortTask(string property);
+
+    /**
      * @brief Print the board.
      */
     void print();

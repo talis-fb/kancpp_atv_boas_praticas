@@ -52,8 +52,11 @@ void TestTask::print()
     cout << "Titulo: " << getTitle() << endl;
     cout << "Descricao: " << getDescription() << endl;
     cout << "Prazo: " << formattedDeadline << endl;
-    cout << "Feature ID: " << getFeature()->getId() << endl;
-    cout << "Feature Titulo: " << getFeature()->getTitle() << endl;
+    if (getFeature() != nullptr)
+    {
+        cout << "Feature ID: " << getFeature()->getId() << endl;
+        cout << "Feature Titulo: " << getFeature()->getTitle() << endl;
+    }
     cout << "Ordem: " << getOrder() << endl;
     cout << "Criado em: " << formatDate(getCreatedAt()) << endl;
     cout << "------------------------" << endl;

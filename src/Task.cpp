@@ -40,8 +40,8 @@ Task::Task(string title, string description, string type)
 {
   this->id = Task::getNextId();
   this->title = title;
-  this->type = type;
   this->description = description;
+  this->type = type;
   this->order = 0;
 
   std::time_t currentTime = std::time(nullptr);
@@ -146,6 +146,10 @@ void Task::serialize(std::ostream &stream)
   stream.write(reinterpret_cast<const char *>(&titleLength), sizeof(titleLength));
   stream.write(title.c_str(), titleLength);
 
+  size_t descriptionLength = description.length();
+  stream.write(reinterpret_cast<const char *>(&descriptionLength), sizeof(descriptionLength));
+  stream.write(description.c_str(), descriptionLength);
+
   stream.write(reinterpret_cast<const char *>(&order), sizeof(order));
   stream.write(reinterpret_cast<const char *>(&deadline), sizeof(deadline));
   stream.write(reinterpret_cast<const char *>(&createdAt), sizeof(createdAt));
@@ -177,6 +181,7 @@ void Task::deserialize(std::istream &stream)
   stream.read(&type[0], typeLength);
 }
 
-void Task::printResume(){
+void Task::printResume()
+{
   cout << this->getTitle() << "(Id: " << this->getId() << ")\n";
 }
