@@ -56,6 +56,7 @@ int main()
     switch (selectedOption)
     {
     case 1:
+      system("clear||cls");
       board->print();
       break;
     case 2:
