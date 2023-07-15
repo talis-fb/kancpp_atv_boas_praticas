@@ -82,16 +82,23 @@ public:
         cout << "+---------------------------------+\n\n";
     }
 
+    static void printSortType(){
+        cout << "+-----------------------------------+\n";
+        cout << "|        TIPO DE ORDENACAO          |\n";
+        cout << "+-----------------------------------+\n";
+        cout << "|  1 - Bubble Sort                  |\n";
+        cout << "|  2 - Selection Sort               |\n";
+        cout << "+-----------------------------------+\n\n";
+    }
+
     static void printSortActions(){
-        cout << "+----------------------------------+\n";
-        cout << "|       OPCOES DE ORDENACAO        |\n";
-        cout << "+----------------------------------+\n";
-        cout << "|  1 - Ordenar tarefa por tiulo    |\n";
-        cout << "|  2 - Ordenar tarefa por prazo    |\n";
-        cout << "|  3 - Ordenar tarefa por Id       |\n";
-        cout << "|  4 - Ordenar coluna por ordem    |\n";
-        cout << "|  5 - Ordenar coluna por Id       |\n";
-        cout << "+----------------------------------+\n\n";
+        cout << "+-----------------------------------+\n";
+        cout << "|       OPCOES DE ORDENACAO         |\n";
+        cout << "+-----------------------------------+\n";
+        cout << "|  1 - Ordenar tarefa por tiulo     |\n";
+        cout << "|  2 - Ordenar tarefa por descricao |\n";
+        cout << "|  3 - Ordenar tarefa por Id        |\n";
+        cout << "+-----------------------------------+\n\n";
     }
 
     static void addBugTask(Board *board, Column *selectedColumn)
@@ -595,17 +602,43 @@ public:
     static void sortOptions(Board* board){
         int option;
 
-        printSortActions();
+        printSortType();
         
-        cout << "Escolha uma opcao de ordenacao: ";
+        cout << "Escolha um metodo de ordenacao: ";
         cin >> option;
         cin.ignore();
 
-        while(option < 1 && option >5){
+        while(option < 1 && option > 2){
             cout << "O numero digitado nao corresponde a nenhuma opcao. Tente novamente.\n";
-             cout << "Escolha uma opcao de ordenacao: ";
+            cout << "Escolha um metodo de ordenacao: ";
             cin >> option;
             cin.ignore();
+        }
+
+        cout << "Escolha o criterio de ordenacao: ";
+        cin >> option;
+        cin.ignore();
+
+        while(option < 1 && option > 3){
+            cout << "O numero digitado nao corresponde a nenhuma opcao. Tente novamente.\n";
+            cout << "Escolha um criterio de ordenacao: ";
+            cin >> option;
+            cin.ignore();
+        }
+
+        switch (option)
+        {
+        case 1:
+            
+            break;
+        
+        case 2:
+
+            break;
+        case 3:
+            break;
+        default:
+            break;
         }
 
         
