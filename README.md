@@ -70,7 +70,6 @@ Um programa que simula um quadro kanban. O quadro kanban funciona de forma simpl
 * **Board**
   * Responsável pelo gerenciamento das colunas e o backlog
   * O atributo `columns` é do tipo `DoublyLinkedList<Column>`
-  * O atributo `backlog` é do tipo `xxxxxxxx`
   * Possui métodos construtores
   * Possui métodos getters
   * Possui métodos para gerenciar as colunas e exibir o quadro, além de outros métodos adicionais
