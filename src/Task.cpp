@@ -166,6 +166,11 @@ void Task::deserialize(std::istream &stream)
   id.resize(idLength);
   stream.read(&id[0], idLength);
 
+  string idString = id.substr(0, id.length());
+  int idInt = stoi(idString.substr(1, idString.length() - 1));
+
+  nextId = max(idInt, nextId) + 1;
+
   size_t titleLength;
   stream.read(reinterpret_cast<char *>(&titleLength), sizeof(titleLength));
   title.resize(titleLength);

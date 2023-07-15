@@ -213,6 +213,11 @@ void Column::deserialize(std::istream &stream)
     id.resize(idLength);
     stream.read(&id[0], idLength);
 
+    string idString = id.substr(0, id.length());
+    int idInt = stoi(idString.substr(1, idString.length() - 1));
+
+    nextId = max(idInt, nextId) + 1;
+
     stream.read(reinterpret_cast<char *>(&nameLength), sizeof(nameLength));
     name.resize(nameLength);
     stream.read(&name[0], nameLength);

@@ -430,6 +430,9 @@ public:
             break;
         }
 
+        cout << "Pressione qualquer tecla para continuar...";
+        cin.get();
+
         system("clear||cls");
     }
 
