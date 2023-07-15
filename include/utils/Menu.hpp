@@ -87,7 +87,7 @@ public:
         cout << "+-----------------------------------+\n";
         cout << "|       OPCOES DE ORDENACAO         |\n";
         cout << "+-----------------------------------+\n";
-        cout << "|  1 - Ordenar tarefa por tiulo     |\n";
+        cout << "|  1 - Ordenar tarefa por titulo    |\n";
         cout << "|  2 - Ordenar tarefa por descricao |\n";
         cout << "|  3 - Ordenar tarefa por Id        |\n";
         cout << "+-----------------------------------+\n\n";
@@ -151,7 +151,7 @@ public:
 
         char hasFeature;
 
-        cout << "Esse teste está associado a uma feature? (S/N) ";
+        cout << "Esse teste esta associado a uma feature? (S/N) ";
         cin >> hasFeature;
         cin.ignore();
 
@@ -177,7 +177,7 @@ public:
                 }
                 else
                 {
-                    cout << "Tarefa inválida. Gostaria de criar sem uma feature associada? (S/N) ";
+                    cout << "Tarefa invalida. Gostaria de criar sem uma feature associada? (S/N) ";
                     cin >> hasFeature;
                     cin.ignore();
 
@@ -602,6 +602,9 @@ public:
 
     static void sortOptions(Board *board)
     {
+        system("clear||cls");
+        board->print();
+
         int option;
 
         printSortActions();

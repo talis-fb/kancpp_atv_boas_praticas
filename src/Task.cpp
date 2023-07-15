@@ -188,5 +188,6 @@ void Task::deserialize(std::istream &stream)
 
 void Task::printResume()
 {
-  cout << this->getTitle() << "(Id: " << this->getId() << ")\n";
+  cout << this->getTitle() << " (Id: " << this->getId() << ")\n";
+  cout << this->getDescription() << "\n";
 }
