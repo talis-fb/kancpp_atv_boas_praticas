@@ -123,8 +123,6 @@ Tipos abstratos de dados (TADs) são estruturas de dados que definem um conjunto
 
 2. **Conjunto**, outro TAD que armazena uma coleção de elementos únicos, sem ordem específica. Diferente de uma lista, onde a ordem dos elementos importa, um conjunto prioriza a verificação de duplicatas e oferece operações eficientes para essa finalidade. A estrutura de dados de conjunto é particularmente útil quando é necessário verificar se um elemento pertence ao conjunto ou realizar operações de união, interseção ou diferença entre conjuntos. Com sua implementação adequada, um conjunto permite um acesso rápido e eficiente aos elementos, garantindo a integridade dos dados armazenados.
 
-3. **Preencher mais tarde**: lorem ipsum
-
 ### Algoritmos de ordenação
 
 Os algoritmos de ordenação usados no projeto foram os seguintes:
