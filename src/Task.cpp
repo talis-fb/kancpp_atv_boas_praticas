@@ -171,6 +171,11 @@ void Task::deserialize(std::istream &stream)
   title.resize(titleLength);
   stream.read(&title[0], titleLength);
 
+  size_t descriptionLength;
+  stream.read(reinterpret_cast<char *>(&descriptionLength), sizeof(descriptionLength));
+  description.resize(descriptionLength);
+  stream.read(&description[0], descriptionLength);
+
   stream.read(reinterpret_cast<char *>(&order), sizeof(order));
   stream.read(reinterpret_cast<char *>(&deadline), sizeof(deadline));
   stream.read(reinterpret_cast<char *>(&createdAt), sizeof(createdAt));

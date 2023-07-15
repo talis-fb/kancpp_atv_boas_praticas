@@ -144,7 +144,7 @@ void Column::print()
     cout << "+----------------------------\n";
     for (auto task : this->tasks)
     {
-        task->print();
+        task->printResume();
         cout << "-----------------------------\n";
     }
 }
