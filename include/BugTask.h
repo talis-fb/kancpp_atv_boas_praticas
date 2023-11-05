@@ -67,7 +67,7 @@ public:
     /**
      * @brief Prints the bug task.
      */
-    void print();
+    void print() override;
 
     /**
      * @brief Serialize the board.

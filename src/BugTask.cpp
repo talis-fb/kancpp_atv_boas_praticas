@@ -12,17 +12,17 @@ BugTask::BugTask(int priority) : Task("BUG")
     this->priority = priority;
 }
 
-BugTask::BugTask(string title, int priority) : Task(title, "BUG")
+BugTask::BugTask(const& string title, int priority) : Task(title, "BUG")
 {
     this->priority = priority;
 }
 
-BugTask::BugTask(string title, string description, int priority) : Task(title, description, "BUG")
+BugTask::BugTask(const& string title, string description, int priority) : Task(title, description, "BUG")
 {
     this->priority = priority;
 }
 
-BugTask::BugTask(string title, string description, tm deadline, int priority) : Task(title, description, deadline, "BUG")
+BugTask::BugTask(const& string title, string description, tm deadline, int priority) : Task(title, description, deadline, "BUG")
 {
     this->priority = priority;
 }
@@ -41,7 +41,7 @@ void BugTask::setPriority(int priority)
     this->priority = priority;
 }
 
-void BugTask::print()
+void BugTask::print() 
 {
     tm date = getDeadline();
     string formattedDeadline = date.tm_year == 0 && date.tm_mon == 0 && date.tm_mday == 0 ? "Sem prazo" : formatDate(date);
