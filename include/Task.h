@@ -34,20 +34,20 @@ public:
     /**
      * @brief Constructs a Task object with a specified column.
      */
-    Task(string type);
+    Task(const& string type);
 
     /**
      * @brief Constructs a Task object with a specified column and title.
      * @param title The title of the task.
      */
-    Task(string title, string type);
+    Task(const& string title, const& string type);
 
     /**
      * @brief Constructs a Task object with a specified column, title, and description.
      * @param title The title of the task.
      * @param description The description of the task.
      */
-    Task(string title, string description, string type);
+    Task(const& string title, const& string description, const& string type);
 
     /**
      * @brief Constructs a Task object with a specified column, title, description, and deadline.
@@ -55,7 +55,7 @@ public:
      * @param description The description of the task.
      * @param deadline The deadline of the task.
      */
-    Task(string title, string description, tm deadline, string type);
+    Task(const& string title, const& string description, tm deadline, const& string type);
 
     /**
      * @brief Destroys the Task object and frees the memory.

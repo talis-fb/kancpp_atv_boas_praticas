@@ -12,11 +12,20 @@ Task::Task(string type)
   this->description = "";
   this->order = 0;
 
+
+  std::time_t currentTime = std::time(nullptr);
+  std::tm *timeInfo = std::localtime(&currentTime);
+
+  deadline = *timeInfo;
+  deadline.tm_year = 0;
+  deadline.tm_mon = 0;
+  deadline.tm_mday = 0;
+
   time_t now = time(0);
   this->createdAt = *localtime(&now);
 }
 
-Task::Task(string title, string type)
+Task::Task(const& string title, const&  string type)
 {
   this->id = Task::getNextId();
   this->title = title;
@@ -25,7 +34,7 @@ Task::Task(string title, string type)
   this->order = 0;
 
   std::time_t currentTime = std::time(nullptr);
-  std::tm *timeInfo = std::localtime(&currentTime);
+  const std::tm *timeInfo = std::localtime(&currentTime);
 
   deadline = *timeInfo;
   deadline.tm_year = 0;
@@ -36,7 +45,7 @@ Task::Task(string title, string type)
   this->createdAt = *localtime(&now);
 }
 
-Task::Task(string title, string description, string type)
+Task::Task(const& string title, const& string description, const& string type)
 {
   this->id = Task::getNextId();
   this->title = title;
@@ -45,7 +54,7 @@ Task::Task(string title, string description, string type)
   this->order = 0;
 
   std::time_t currentTime = std::time(nullptr);
-  std::tm *timeInfo = std::localtime(&currentTime);
+  const std::tm *timeInfo = std::localtime(&currentTime);
 
   deadline = *timeInfo;
   deadline.tm_year = 0;
@@ -56,7 +65,7 @@ Task::Task(string title, string description, string type)
   this->createdAt = *localtime(&now);
 }
 
-Task::Task(string title, string description, tm deadline, string type)
+Task::Task(const& string title, const& string description, tm deadline, const& string type)
 {
   this->id = Task::getNextId();
   this->title = title;
@@ -86,7 +95,7 @@ string Task::getTitle()
   return this->title;
 }
 
-void Task::setTitle(string title)
+void Task::setTitle(const& string title)
 {
   this->title = title;
 }
@@ -116,7 +125,7 @@ string Task::getDescription()
   return this->description;
 }
 
-void Task::setDescription(string description)
+void Task::setDescription(const& string description)
 {
   this->description = description;
 }
