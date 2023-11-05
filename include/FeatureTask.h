@@ -9,7 +9,7 @@
 class FeatureTask : public Task
 {
 private:
-    std::string project; /**< The project associated with the feature task. */
+    std::string project = ""; /**< The project associated with the feature task. */
 
 public:
     FeatureTask();
@@ -18,14 +18,14 @@ public:
      * @brief Constructs a FeatureTask object with a specified column and project.
      * @param project The project associated with the feature task.
      */
-    FeatureTask(std::string project);
+    FeatureTask(const& std::string project);
 
     /**
      * @brief Constructs a FeatureTask object with a specified column, title, and project.
      * @param title The title of the feature task.
      * @param project The project associated with the feature task.
      */
-    FeatureTask(std::string title, std::string project);
+    FeatureTask(const& std::string title, const& std::string project);
 
     /**
      * @brief Constructs a FeatureTask object with a specified column, title, description, and project.
@@ -33,7 +33,7 @@ public:
      * @param description The description of the feature task.
      * @param project The project associated with the feature task.
      */
-    FeatureTask(std::string title, std::string description, std::string project);
+    FeatureTask(const& std::string title, const& std::string description, const& std::string project);
 
     /**
      * @brief Constructs a FeatureTask object with a specified column, title, description, deadline, and project.
@@ -42,7 +42,7 @@ public:
      * @param deadline The deadline of the feature task.
      * @param project The project associated with the feature task.
      */
-    FeatureTask(std::string title, std::string description, tm deadline, std::string project);
+    FeatureTask(const& std::string title, const& std::string description, tm deadline, const& std::string project);
 
     /**
      * @brief Destroys the FeatureTask object.
