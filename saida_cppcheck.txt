@@ -1,0 +1,394 @@
+Checking src/Board.cpp ...
+include/Board.h:4:0: information: Include file: <ctime> not found. Please note: Cppcheck does not need standard library headers to get proper results. [missingIncludeSystem]
+#include <ctime>
+^
+include/Board.h:5:0: information: Include file: <string> not found. Please note: Cppcheck does not need standard library headers to get proper results. [missingIncludeSystem]
+#include <string>
+^
+include/Board.h:6:0: information: Include file: <vector> not found. Please note: Cppcheck does not need standard library headers to get proper results. [missingIncludeSystem]
+#include <vector>
+^
+include/Column.h:4:0: information: Include file: <ctime> not found. Please note: Cppcheck does not need standard library headers to get proper results. [missingIncludeSystem]
+#include <ctime>
+^
+include/Column.h:5:0: information: Include file: <string> not found. Please note: Cppcheck does not need standard library headers to get proper results. [missingIncludeSystem]
+#include <string>
+^
+include/Column.h:6:0: information: Include file: <vector> not found. Please note: Cppcheck does not need standard library headers to get proper results. [missingIncludeSystem]
+#include <vector>
+^
+include/Column.h:7:0: information: Include file: <iostream> not found. Please note: Cppcheck does not need standard library headers to get proper results. [missingIncludeSystem]
+#include <iostream>
+^
+include/Task.h:4:0: information: Include file: <iostream> not found. Please note: Cppcheck does not need standard library headers to get proper results. [missingIncludeSystem]
+#include <iostream>
+^
+include/Task.h:5:0: information: Include file: <string> not found. Please note: Cppcheck does not need standard library headers to get proper results. [missingIncludeSystem]
+#include <string>
+^
+include/Task.h:6:0: information: Include file: <ctime> not found. Please note: Cppcheck does not need standard library headers to get proper results. [missingIncludeSystem]
+#include <ctime>
+^
+include/utils/Sort.hpp:4:0: information: Include file: <iostream> not found. Please note: Cppcheck does not need standard library headers to get proper results. [missingIncludeSystem]
+#include <iostream>
+^
+include/utils/Sort.hpp:5:0: information: Include file: <functional> not found. Please note: Cppcheck does not need standard library headers to get proper results. [missingIncludeSystem]
+#include <functional>
+^
+include/utils/DoublyLinkedList/Node.hpp:4:0: information: Include file: <iostream> not found. Please note: Cppcheck does not need standard library headers to get proper results. [missingIncludeSystem]
+#include <iostream>
+^
+include/utils/DoublyLinkedList/DoublyLinkedList.hpp:5:0: information: Include file: <stdexcept> not found. Please note: Cppcheck does not need standard library headers to get proper results. [missingIncludeSystem]
+#include <stdexcept>
+^
+include/utils/Sort.hpp:47:21: style: Array index 'i' is used before limits check. [arrayIndexThenCheck]
+        while (array[i] < pivot && j >= i)
+                    ^
+src/Board.cpp:19:8: warning: Member variable 'Board::columns' is not initialized in the constructor. [uninitMemberVar]
+Board::Board(string name)
+       ^
+src/Board.cpp:14:9: warning: Class 'Board' does not have a copy constructor which is recommended since it has dynamic memory/resource allocation(s). [noCopyConstructor]
+  this->columns = new DoublyLinkedList<Column>();
+        ^
+src/Board.cpp:14:9: warning: Class 'Board' does not have a operator= which is recommended since it has dynamic memory/resource allocation(s). [noOperatorEq]
+  this->columns = new DoublyLinkedList<Column>();
+        ^
+include/BugTask.h:24:5: style: Class 'BugTask' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
+    BugTask(int priority);
+    ^
+include/FeatureTask.h:21:5: style: Class 'FeatureTask' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
+    FeatureTask(std::string project);
+    ^
+include/TestTask.h:45:5: style: Class 'TestTask' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
+    TestTask(std::string title);
+    ^
+include/TestTask.h:51:5: style: Class 'TestTask' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
+    TestTask(FeatureTask *feature);
+    ^
+include/Column.h:59:5: style: Class 'Column' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
+    Column(const string &name);
+    ^
+include/utils/DoublyLinkedList/Node.hpp:32:5: style: Class 'Node' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
+    Node(T *value);
+    ^
+include/Board.h:43:5: style: Class 'Board' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
+    Board(string name);
+    ^
+include/BugTask.h:70:10: style: The function 'print' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
+    void print();
+         ^
+include/Task.h:134:18: note: Virtual function in base class
+    virtual void print() = 0;
+                 ^
+include/BugTask.h:70:10: note: Function in derived class
+    void print();
+         ^
+include/TestTask.h:91:10: style: The function 'print' overrides a function in a base class but is not marked with a 'override' specifier. [missingOverride]
+    void print();
+         ^
+include/Task.h:134:18: note: Virtual function in base class
+    virtual void print() = 0;
+                 ^
+include/TestTask.h:91:10: note: Function in derived class
+    void print();
+         ^
+include/Column.h:46:25: performance: Function parameter 'name' should be passed by const reference. [passedByValue]
+    Column(const string name, const string description, const int order);
+                        ^
+include/Column.h:46:44: performance: Function parameter 'description' should be passed by const reference. [passedByValue]
+    Column(const string name, const string description, const int order);
+                                           ^
+src/Board.cpp:10:21: performance: Function parameter 'name' should be passed by const reference. [passedByValue]
+Board::Board(string name, string description)
+                    ^
+src/Board.cpp:10:34: performance: Function parameter 'description' should be passed by const reference. [passedByValue]
+Board::Board(string name, string description)
+                                 ^
+src/Board.cpp:19:21: performance: Function parameter 'name' should be passed by const reference. [passedByValue]
+Board::Board(string name)
+                    ^
+src/Board.cpp:121:37: performance: Function parameter 'id' should be passed by const reference. [passedByValue]
+Column *Board::getColumnById(string id)
+                                    ^
+src/Board.cpp:151:36: performance: Function parameter 'id' should be passed by const reference. [passedByValue]
+Task *Board::searchTaskById(string id)
+                                   ^
+src/Board.cpp:53:7: style: Variable 'localTime' can be declared as pointer to const [constVariablePointer]
+  tm *localTime = localtime(&currentTime);
+      ^
+include/utils/Sort.hpp:120:18: warning: Using 'sizeof' on array given as function argument returns size of a pointer. [sizeofwithsilentarraypointer]
+    int length = sizeof(array) / sizeof(array[0]);
+                 ^
+1/8 files checked 19% done
+Checking src/BugTask.cpp ...
+src/BugTask.cpp:1:0: information: Include file: <iostream> not found. Please note: Cppcheck does not need standard library headers to get proper results. [missingIncludeSystem]
+#include <iostream>
+^
+include/formatters/Date.h:4:0: information: Include file: <ctime> not found. Please note: Cppcheck does not need standard library headers to get proper results. [missingIncludeSystem]
+#include <ctime>
+^
+include/formatters/Date.h:5:0: information: Include file: <sstream> not found. Please note: Cppcheck does not need standard library headers to get proper results. [missingIncludeSystem]
+#include <sstream>
+^
+include/formatters/Date.h:6:0: information: Include file: <string> not found. Please note: Cppcheck does not need standard library headers to get proper results. [missingIncludeSystem]
+#include <string>
+^
+src/BugTask.cpp:15:25: performance: Function parameter 'title' should be passed by const reference. [passedByValue]
+BugTask::BugTask(string title, int priority) : Task(title, "BUG")
+                        ^
+src/BugTask.cpp:20:25: performance: Function parameter 'title' should be passed by const reference. [passedByValue]
+BugTask::BugTask(string title, string description, int priority) : Task(title, description, "BUG")
+                        ^
+src/BugTask.cpp:20:39: performance: Function parameter 'description' should be passed by const reference. [passedByValue]
+BugTask::BugTask(string title, string description, int priority) : Task(title, description, "BUG")
+                                      ^
+src/BugTask.cpp:25:25: performance: Function parameter 'title' should be passed by const reference. [passedByValue]
+BugTask::BugTask(string title, string description, tm deadline, int priority) : Task(title, description, deadline, "BUG")
+                        ^
+src/BugTask.cpp:25:39: performance: Function parameter 'description' should be passed by const reference. [passedByValue]
+BugTask::BugTask(string title, string description, tm deadline, int priority) : Task(title, description, deadline, "BUG")
+                                      ^
+2/8 files checked 26% done
+Checking src/Column.cpp ...
+src/Column.cpp:2:0: information: Include file: <map> not found. Please note: Cppcheck does not need standard library headers to get proper results. [missingIncludeSystem]
+#include <map>
+^
+src/Column.cpp:3:0: information: Include file: <vector> not found. Please note: Cppcheck does not need standard library headers to get proper results. [missingIncludeSystem]
+#include <vector>
+^
+src/Column.cpp:4:0: information: Include file: <string> not found. Please note: Cppcheck does not need standard library headers to get proper results. [missingIncludeSystem]
+#include <string>
+^
+src/Column.cpp:162:9: style: Local variable 'order' shadows outer variable [shadowVariable]
+    int order = this->order;
+        ^
+include/Column.h:30:9: note: Shadowed declaration
+    int order;            /**< Order of the column */
+        ^
+src/Column.cpp:162:9: note: Shadow variable
+    int order = this->order;
+        ^
+src/Column.cpp:209:9: style: Local variable 'order' shadows outer variable [shadowVariable]
+    int order;
+        ^
+include/Column.h:30:9: note: Shadowed declaration
+    int order;            /**< Order of the column */
+        ^
+src/Column.cpp:209:9: note: Shadow variable
+    int order;
+        ^
+src/Column.cpp:10:29: performance: Function parameter 'name' should be passed by const reference. [passedByValue]
+Column::Column(const string name, const string description, const int order)
+                            ^
+src/Column.cpp:10:48: performance: Function parameter 'description' should be passed by const reference. [passedByValue]
+Column::Column(const string name, const string description, const int order)
+                                               ^
+src/Column.cpp:67:29: performance: Function parameter 'name' should be passed by const reference. [passedByValue]
+void Column::setName(string name)
+                            ^
+src/Column.cpp:87:36: performance: Function parameter 'description' should be passed by const reference. [passedByValue]
+void Column::setDescription(string description)
+                                   ^
+src/Column.cpp:278:33: performance: Function parameter 'property' should be passed by const reference. [passedByValue]
+void Column::sortTasksBy(string property)
+                                ^
+src/Column.cpp:119:31: style: Parameter 'task' can be declared as pointer to const [constParameterPointer]
+bool Column::removeTask(Task *task)
+                              ^
+src/Column.cpp:125:9: style: Consider using std::find_if algorithm instead of a raw loop. [useStlAlgorithm]
+        {
+        ^
+src/Column.cpp:286:9: style: Consider using std::any_of algorithm instead of a raw loop. [useStlAlgorithm]
+        {
+        ^
+3/8 files checked 55% done
+Checking src/FeatureTask.cpp ...
+src/FeatureTask.cpp:1:0: information: Include file: <iostream> not found. Please note: Cppcheck does not need standard library headers to get proper results. [missingIncludeSystem]
+#include <iostream>
+^
+src/FeatureTask.cpp:7:5: performance: Variable 'project' is assigned in constructor body. Consider performing initialization in initialization list. [useInitializationList]
+    project = "";
+    ^
+src/FeatureTask.cpp:14:38: performance: Function parameter 'project' should be passed by const reference. [passedByValue]
+FeatureTask::FeatureTask(std::string project) : Task("FEATURE")
+                                     ^
+src/FeatureTask.cpp:19:38: performance: Function parameter 'title' should be passed by const reference. [passedByValue]
+FeatureTask::FeatureTask(std::string title, std::string project) : Task(title, "FEATURE")
+                                     ^
+src/FeatureTask.cpp:19:57: performance: Function parameter 'project' should be passed by const reference. [passedByValue]
+FeatureTask::FeatureTask(std::string title, std::string project) : Task(title, "FEATURE")
+                                                        ^
+src/FeatureTask.cpp:24:38: performance: Function parameter 'title' should be passed by const reference. [passedByValue]
+FeatureTask::FeatureTask(std::string title, std::string description, std::string project) : Task(title, description, "FEATURE")
+                                     ^
+src/FeatureTask.cpp:24:57: performance: Function parameter 'description' should be passed by const reference. [passedByValue]
+FeatureTask::FeatureTask(std::string title, std::string description, std::string project) : Task(title, description, "FEATURE")
+                                                        ^
+src/FeatureTask.cpp:24:82: performance: Function parameter 'project' should be passed by const reference. [passedByValue]
+FeatureTask::FeatureTask(std::string title, std::string description, std::string project) : Task(title, description, "FEATURE")
+                                                                                 ^
+src/FeatureTask.cpp:29:38: performance: Function parameter 'title' should be passed by const reference. [passedByValue]
+FeatureTask::FeatureTask(std::string title, std::string description, tm deadline, std::string project) : Task(title, description, deadline, "FEATURE")
+                                     ^
+src/FeatureTask.cpp:29:57: performance: Function parameter 'description' should be passed by const reference. [passedByValue]
+FeatureTask::FeatureTask(std::string title, std::string description, tm deadline, std::string project) : Task(title, description, deadline, "FEATURE")
+                                                        ^
+src/FeatureTask.cpp:29:95: performance: Function parameter 'project' should be passed by const reference. [passedByValue]
+FeatureTask::FeatureTask(std::string title, std::string description, tm deadline, std::string project) : Task(title, description, deadline, "FEATURE")
+                                                                                              ^
+4/8 files checked 64% done
+Checking src/Task.cpp ...
+src/Task.cpp:7:7: warning: Member variable 'Task::deadline' is not initialized in the constructor. [uninitMemberVar]
+Task::Task(string type)
+      ^
+src/Task.cpp:7:19: performance: Function parameter 'type' should be passed by const reference. [passedByValue]
+Task::Task(string type)
+                  ^
+src/Task.cpp:19:19: performance: Function parameter 'title' should be passed by const reference. [passedByValue]
+Task::Task(string title, string type)
+                  ^
+src/Task.cpp:19:33: performance: Function parameter 'type' should be passed by const reference. [passedByValue]
+Task::Task(string title, string type)
+                                ^
+src/Task.cpp:39:19: performance: Function parameter 'title' should be passed by const reference. [passedByValue]
+Task::Task(string title, string description, string type)
+                  ^
+src/Task.cpp:39:33: performance: Function parameter 'description' should be passed by const reference. [passedByValue]
+Task::Task(string title, string description, string type)
+                                ^
+src/Task.cpp:39:53: performance: Function parameter 'type' should be passed by const reference. [passedByValue]
+Task::Task(string title, string description, string type)
+                                                    ^
+src/Task.cpp:59:19: performance: Function parameter 'title' should be passed by const reference. [passedByValue]
+Task::Task(string title, string description, tm deadline, string type)
+                  ^
+src/Task.cpp:59:33: performance: Function parameter 'description' should be passed by const reference. [passedByValue]
+Task::Task(string title, string description, tm deadline, string type)
+                                ^
+src/Task.cpp:59:66: performance: Function parameter 'type' should be passed by const reference. [passedByValue]
+Task::Task(string title, string description, tm deadline, string type)
+                                                                 ^
+src/Task.cpp:89:28: performance: Function parameter 'title' should be passed by const reference. [passedByValue]
+void Task::setTitle(string title)
+                           ^
+src/Task.cpp:119:34: performance: Function parameter 'description' should be passed by const reference. [passedByValue]
+void Task::setDescription(string description)
+                                 ^
+src/Task.cpp:28:12: style: Variable 'timeInfo' can be declared as pointer to const [constVariablePointer]
+  std::tm *timeInfo = std::localtime(&currentTime);
+           ^
+src/Task.cpp:48:12: style: Variable 'timeInfo' can be declared as pointer to const [constVariablePointer]
+  std::tm *timeInfo = std::localtime(&currentTime);
+           ^
+5/8 files checked 81% done
+Checking src/TestTask.cpp ...
+src/TestTask.cpp:1:0: information: Include file: <iostream> not found. Please note: Cppcheck does not need standard library headers to get proper results. [missingIncludeSystem]
+#include <iostream>
+^
+src/TestTask.cpp:6:11: warning: Member variable 'TestTask::feature' is not initialized in the constructor. [uninitMemberVar]
+TestTask::TestTask() : Task("TEST") {}
+          ^
+src/TestTask.cpp:8:11: warning: Member variable 'TestTask::feature' is not initialized in the constructor. [uninitMemberVar]
+TestTask::TestTask(std::string title, std::string description, tm deadline) : Task(title, description, deadline, "TEST") {}
+          ^
+src/TestTask.cpp:10:11: warning: Member variable 'TestTask::feature' is not initialized in the constructor. [uninitMemberVar]
+TestTask::TestTask(std::string title, std::string description) : Task(title, description, "TEST") {}
+          ^
+src/TestTask.cpp:12:11: warning: Member variable 'TestTask::feature' is not initialized in the constructor. [uninitMemberVar]
+TestTask::TestTask(std::string title) : Task(title, "TEST") {}
+          ^
+src/TestTask.cpp:8:32: performance: Function parameter 'title' should be passed by const reference. [passedByValue]
+TestTask::TestTask(std::string title, std::string description, tm deadline) : Task(title, description, deadline, "TEST") {}
+                               ^
+src/TestTask.cpp:8:51: performance: Function parameter 'description' should be passed by const reference. [passedByValue]
+TestTask::TestTask(std::string title, std::string description, tm deadline) : Task(title, description, deadline, "TEST") {}
+                                                  ^
+src/TestTask.cpp:10:32: performance: Function parameter 'title' should be passed by const reference. [passedByValue]
+TestTask::TestTask(std::string title, std::string description) : Task(title, description, "TEST") {}
+                               ^
+src/TestTask.cpp:10:51: performance: Function parameter 'description' should be passed by const reference. [passedByValue]
+TestTask::TestTask(std::string title, std::string description) : Task(title, description, "TEST") {}
+                                                  ^
+src/TestTask.cpp:12:32: performance: Function parameter 'title' should be passed by const reference. [passedByValue]
+TestTask::TestTask(std::string title) : Task(title, "TEST") {}
+                               ^
+src/TestTask.cpp:19:32: performance: Function parameter 'title' should be passed by const reference. [passedByValue]
+TestTask::TestTask(std::string title, std::string description, tm deadline, FeatureTask *feature) : Task(title, description, deadline, "TEST")
+                               ^
+src/TestTask.cpp:19:51: performance: Function parameter 'description' should be passed by const reference. [passedByValue]
+TestTask::TestTask(std::string title, std::string description, tm deadline, FeatureTask *feature) : Task(title, description, deadline, "TEST")
+                                                  ^
+src/TestTask.cpp:24:32: performance: Function parameter 'title' should be passed by const reference. [passedByValue]
+TestTask::TestTask(std::string title, std::string description, FeatureTask *feature) : Task(title, description, "TEST")
+                               ^
+src/TestTask.cpp:24:51: performance: Function parameter 'description' should be passed by const reference. [passedByValue]
+TestTask::TestTask(std::string title, std::string description, FeatureTask *feature) : Task(title, description, "TEST")
+                                                  ^
+src/TestTask.cpp:29:32: performance: Function parameter 'title' should be passed by const reference. [passedByValue]
+TestTask::TestTask(std::string title, FeatureTask *feature) : Task(title, "TEST")
+                               ^
+6/8 files checked 91% done
+Checking src/formatters/Date.cpp ...
+7/8 files checked 92% done
+Checking src/main.cpp ...
+src/main.cpp:1:0: information: Include file: <iostream> not found. Please note: Cppcheck does not need standard library headers to get proper results. [missingIncludeSystem]
+#include <iostream>
+^
+src/main.cpp:2:0: information: Include file: <fstream> not found. Please note: Cppcheck does not need standard library headers to get proper results. [missingIncludeSystem]
+#include <fstream>
+^
+include/utils/Menu.hpp:4:0: information: Include file: <iostream> not found. Please note: Cppcheck does not need standard library headers to get proper results. [missingIncludeSystem]
+#include <iostream>
+^
+include/utils/Menu.hpp:5:0: information: Include file: <string> not found. Please note: Cppcheck does not need standard library headers to get proper results. [missingIncludeSystem]
+#include <string>
+^
+include/utils/Menu.hpp:6:0: information: Include file: <sstream> not found. Please note: Cppcheck does not need standard library headers to get proper results. [missingIncludeSystem]
+#include <sstream>
+^
+include/utils/Menu.hpp:7:0: information: Include file: <fstream> not found. Please note: Cppcheck does not need standard library headers to get proper results. [missingIncludeSystem]
+#include <fstream>
+^
+include/utils/DoublyLinkedList/DoublyLinkedList.hpp:147:5: warning: Class 'DoublyLinkedList < Column >' does not have a copy constructor which is recommended since it has dynamic memory/resource allocation(s). [noCopyConstructor]
+    head = new Node<T>();
+    ^
+include/utils/DoublyLinkedList/DoublyLinkedList.hpp:147:5: warning: Class 'DoublyLinkedList < Column >' does not have a operator= which is recommended since it has dynamic memory/resource allocation(s). [noOperatorEq]
+    head = new Node<T>();
+    ^
+include/utils/Menu.hpp:619:27: warning: Logical conjunction always evaluates to false: option < 1 && option > 3. [incorrectLogicOperator]
+        while (option < 1 && option > 3)
+                          ^
+include/utils/Menu.hpp:450:17: style: The scope of the variable 'order' can be reduced. [variableScope]
+            int order;
+                ^
+include/utils/DoublyLinkedList/DoublyLinkedList.hpp:190:35: performance: Function parameter 'element' should be passed by const reference. [passedByValue]
+int DoublyLinkedList<T>::search(T element)
+                                  ^
+include/utils/DoublyLinkedList/DoublyLinkedList.hpp:205:42: performance: Function parameter 'element' should be passed by const reference. [passedByValue]
+bool DoublyLinkedList<T>::insertSorted(T element)
+                                         ^
+include/utils/DoublyLinkedList/DoublyLinkedList.hpp:228:42: performance: Function parameter 'element' should be passed by const reference. [passedByValue]
+bool DoublyLinkedList<T>::insertAtHead(T element)
+                                         ^
+include/utils/DoublyLinkedList/DoublyLinkedList.hpp:260:49: performance: Function parameter 'element' should be passed by const reference. [passedByValue]
+bool DoublyLinkedList<T>::insertAt(int index, T element)
+                                                ^
+include/utils/DoublyLinkedList/DoublyLinkedList.hpp:351:36: performance: Function parameter 'element' should be passed by const reference. [passedByValue]
+bool DoublyLinkedList<T>::remove(T element)
+                                   ^
+8/8 files checked 100% done
+src/Board.cpp:57:0: style: The function 'displayCreatedAt' is never used. [unusedFunction]
+void Board::displayCreatedAt()
+^
+src/Board.cpp:90:0: style: The function 'addTaskToBacklog' is never used. [unusedFunction]
+void Board::addTaskToBacklog(Task *task)
+^
+src/Board.cpp:95:0: style: The function 'removeTaskFromBacklog' is never used. [unusedFunction]
+void Board::removeTaskFromBacklog(Task *task)
+^
+src/BugTask.cpp:39:0: style: The function 'setPriority' is never used. [unusedFunction]
+void BugTask::setPriority(int priority)
+^
+src/Column.cpp:67:0: style: The function 'setName' is never used. [unusedFunction]
+void Column::setName(string name)
+^
