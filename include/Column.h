@@ -43,20 +43,20 @@ public:
      * @param description The description of the column.
      * @param order The order of the column.
      */
-    Column(const string name, const string description, const int order);
+    Column(const& string name, const& string description, int order);
 
     /**
      * @brief Constructs a new Column object.
      * @param name The name of the column.
      * @param description The description of the column.
      */
-    Column(const string &name, const string &description);
+    Column(const& string name, const& string description);
 
     /**
      * @brief Constructs a new Column object.
      * @param name The name of the column.
      */
-    Column(const string &name);
+    Column(const& string name);
 
     /**
      * @brief Destroys the Column object and all its tasks.
@@ -79,7 +79,7 @@ public:
      * @brief Set the name of the column.
      * @param name The new name of the column.
      */
-    void setName(string name);
+    void setName(const& string name);
 
     /**
      * @brief Get the number of tasks in the column.
@@ -103,7 +103,7 @@ public:
      * @brief Set the description of the column.
      * @param description The new description of the column.
      */
-    void setDescription(string description);
+    void setDescription(const& string description);
 
     /**
      * @brief Get the order of the column.
@@ -135,7 +135,7 @@ public:
      * @param task The task to be removed.
      * @return True if the task was removed successfully, false otherwise.
      */
-    bool removeTask(Task *task);
+    bool removeTask(const Task *task);
 
     /**
      * @brief Overload of the == operator for the Column class.
@@ -170,7 +170,7 @@ public:
      * @brief Sort the tasks by a given property.
      * @param property The property to be sorted by.
      */
-    void sortTasksBy(string property);
+    void sortTasksBy(const& string property);
 };
 
 #endif

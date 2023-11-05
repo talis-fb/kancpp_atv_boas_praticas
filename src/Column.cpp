@@ -7,7 +7,7 @@ int Column::nextId = 1;
 
 Column::Column() {}
 
-Column::Column(const string name, const string description, const int order)
+Column::Column(const& string name, const& string description, int order)
 {
     this->id = Column::getNextId();
     this->name = name;
@@ -20,7 +20,7 @@ Column::Column(const string name, const string description, const int order)
     this->tasks = vector<Task *>();
 }
 
-Column::Column(const string &name, const string &description)
+Column::Column(const& string name, const& string description)
 {
     this->id = Column::getNextId();
     this->name = name;
@@ -33,7 +33,7 @@ Column::Column(const string &name, const string &description)
     this->tasks = vector<Task *>();
 }
 
-Column::Column(const string &name)
+Column::Column(const& string name)
 {
     this->id = Column::getNextId();
     this->name = name;
@@ -64,7 +64,7 @@ string Column::getName()
     return this->name;
 }
 
-void Column::setName(string name)
+void Column::setName(const& string name)
 {
     this->name = name;
 }
@@ -84,7 +84,7 @@ string Column::getDescription()
     return this->description;
 }
 
-void Column::setDescription(string description)
+void Column::setDescription(const& string description)
 {
     this->description = description;
 }
@@ -116,19 +116,9 @@ bool Column::addTask(Task *task)
     return true;
 }
 
-bool Column::removeTask(Task *task)
+bool Column::removeTask(const Task *task)
 {
-
-    for (auto i = this->tasks.begin(); i != this->tasks.end(); i++)
-    {
-        if (*i == task)
-        {
-            this->tasks.erase(i);
-            return true;
-        }
-    }
-
-    return false;
+    return std::any_of(this->tasks.begin(), this->tasks.end(), task);
 }
 
 bool Column::operator==(const Column &column) const
@@ -159,7 +149,6 @@ void Column::serialize(std::ostream &stream)
     size_t idLength = id.length();
     size_t nameLength = name.length();
     size_t descriptionLength = description.length();
-    int order = this->order;
     int taskCount = tasks.size();
 
     stream.write(reinterpret_cast<const char *>(&idLength), sizeof(idLength));
@@ -206,7 +195,7 @@ void Column::deserialize(std::istream &stream)
     size_t idLength;
     size_t nameLength;
     size_t descriptionLength;
-    int order;
+    // int order;
     int taskCount;
 
     stream.read(reinterpret_cast<char *>(&idLength), sizeof(idLength));
@@ -227,7 +216,7 @@ void Column::deserialize(std::istream &stream)
     stream.read(&description[0], descriptionLength);
 
     stream.read(reinterpret_cast<char *>(&order), sizeof(order));
-    this->order = order;
+    // this->order = order;
 
     stream.read(reinterpret_cast<char *>(&taskCount), sizeof(taskCount));
 
@@ -275,19 +264,10 @@ void Column::deserialize(std::istream &stream)
     }
 }
 
-void Column::sortTasksBy(string property)
+void Column::sortTasksBy(const& string property)
 {
     vector<string> properties = {"id", "title", "description"};
-    bool isPropertyValid = false;
-
-    for (auto prop : properties)
-    {
-        if (prop == property)
-        {
-            isPropertyValid = true;
-            break;
-        }
-    }
+    bool isPropertyValid = std::any_of(properties.begin(), properties.end(), property);
 
     if (!isPropertyValid)
     {
