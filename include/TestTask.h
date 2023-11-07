@@ -11,7 +11,7 @@ class TestTask : public Task
 {
 
 private:
-    FeatureTask *feature; /**< The feature associated with the test task. */
+    FeatureTask *feature = nullptr; /**< The feature associated with the test task. */
 
 public:
     /**
@@ -27,7 +27,7 @@ public:
      * @param deadline The deadline of the test task.
      * @param project The project associated with the test task.
      */
-    TestTask(std::string title, std::string description, tm deadline);
+    TestTask(const std::string &title, const std::string &description, tm deadline);
 
     /**
      * @brief Constructs a TestTask object with a specified column, title, description, and project.
@@ -35,14 +35,14 @@ public:
      * @param description The description of the test task.
      * @param project The project associated with the test task.
      */
-    TestTask(std::string title, std::string description);
+    TestTask(const std::string& title, const std::string& description);
 
     /**
      * @brief Constructs a TestTask object with a specified column, title, and project.
      * @param title The title of the test task.
      * @param project The project associated with the test task.
      */
-    TestTask(std::string title);
+    TestTask(const std::string& title);
 
     /**
      * @brief Constructs a TestTask object with a specified column and project.
@@ -57,7 +57,7 @@ public:
      * @param deadline The deadline of the test task.
      * @param feature The feature associated with the test task.
      */
-    TestTask(std::string title, std::string description, tm deadline, FeatureTask *feature);
+    TestTask(const std::string& title, const std::string& description, tm deadline, FeatureTask *feature);
 
     /**
      * @brief Constructs a TestTask object with a specified column, title, description, and project.
@@ -65,14 +65,14 @@ public:
      * @param description The description of the test task.
      * @param feature The feature associated with the test task.
      */
-    TestTask(std::string title, std::string description, FeatureTask *feature);
+    TestTask(const std::string& title, const std::string& description, FeatureTask *feature);
 
     /**
      * @brief Constructs a TestTask object with a specified column, title, and project.
      * @param title The title of the test task.
      * @param feature The feature associated with the test task.
      */
-    TestTask(std::string title, FeatureTask *feature);
+    TestTask(const std::string& title, FeatureTask *feature);
 
     /**
      * @brief Destroys the TestTask object.

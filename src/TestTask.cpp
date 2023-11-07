@@ -5,28 +5,28 @@
 
 TestTask::TestTask() : Task("TEST") {}
 
-TestTask::TestTask(std::string title, std::string description, tm deadline) : Task(title, description, deadline, "TEST") {}
+TestTask::TestTask(const std::string &title, const std::string &description, tm deadline) : Task(title, description, deadline, "TEST") {}
 
-TestTask::TestTask(std::string title, std::string description) : Task(title, description, "TEST") {}
+TestTask::TestTask(const std::string &title, const std::string &description) : Task(title, description, "TEST") {}
 
-TestTask::TestTask(std::string title) : Task(title, "TEST") {}
+TestTask::TestTask(const std::string &title) : Task(title, "TEST") {}
 
 TestTask::TestTask(FeatureTask *feature) : Task("TEST")
 {
     this->feature = feature;
 }
 
-TestTask::TestTask(std::string title, std::string description, tm deadline, FeatureTask *feature) : Task(title, description, deadline, "TEST")
+TestTask::TestTask(const std::string& title, const std::string& description, tm deadline, FeatureTask *feature) : Task(title, description, deadline, "TEST")
 {
     this->feature = feature;
 }
 
-TestTask::TestTask(std::string title, std::string description, FeatureTask *feature) : Task(title, description, "TEST")
+TestTask::TestTask(const std::string& title, const std::string& description, FeatureTask *feature) : Task(title, description, "TEST")
 {
     this->feature = feature;
 }
 
-TestTask::TestTask(std::string title, FeatureTask *feature) : Task(title, "TEST")
+TestTask::TestTask(const std::string& title, FeatureTask *feature) : Task(title, "TEST")
 {
     this->feature = feature;
 }
