@@ -44,9 +44,9 @@ int partition(T array[], int start, int end)
 
     while (j >= i)
     {
-        while (array[i] < pivot && j >= i)
+        while (j >= i && array[i] < pivot)
             i++;
-        while (array[j] > pivot && j >= i)
+        while (j >= i && array[j] > pivot)
             j--;
         if (j >= i)
         {
@@ -115,9 +115,8 @@ void bubbleSort(T array[], int length, function<bool(T, T)> compare)
  * @param compare the compare function
  */
 template <typename T>
-void selectionSort(T array[], bool (*compare)(T, T))
+void selectionSort(T array[],  int length, bool (*compare)(T, T))
 {
-    int length = sizeof(array) / sizeof(array[0]);
     for (int i = 0; i < length; i++)
     {
 

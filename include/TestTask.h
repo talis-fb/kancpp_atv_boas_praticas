@@ -88,7 +88,7 @@ public:
     /**
      * @brief Prints the test task.
      */
-    void print();
+    void print() override;
 
     /**
      * @brief Serialize the board.

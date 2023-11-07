@@ -52,7 +52,7 @@ public:
      * @param element The element to search for.
      * @return The index of the first occurrence of the element, or -1 if not found.
      */
-    int search(T element);
+    int search(const T& element);
 
     /**
      * @brief Insert an element into the list in an ordered manner.
@@ -62,7 +62,7 @@ public:
      * @param element The element to insert.
      * @return True if the element was successfully inserted, false otherwise.
      */
-    bool insertSorted(T element);
+    bool insertSorted(const T& element);
 
     /**
      * @brief Insert an element at the head (start) of the list.
@@ -70,7 +70,7 @@ public:
      * @param element The element to insert.
      * @return True if the element was successfully inserted, false otherwise.
      */
-    bool insertAtHead(T element);
+    bool insertAtHead(const T& element);
 
     /**
      * @brief Insert an element at the tail (end) of the list.
@@ -87,7 +87,7 @@ public:
      * @param element The element to insert.
      * @return True if the element was successfully inserted, false otherwise.
      */
-    bool insertAt(int index, T element)
+    bool insertAt(int index, const T& element)
 
         ;
 
@@ -119,7 +119,7 @@ public:
      * @param element The element to remove.
      * @return True if the element was successfully removed, false otherwise.
      */
-    bool remove(T element);
+    bool remove(const T& element);
 
     /**
      * @brief Check if the list is empty.
@@ -187,7 +187,7 @@ T *DoublyLinkedList<T>::get(int index)
 }
 
 template <typename T>
-int DoublyLinkedList<T>::search(T element)
+int DoublyLinkedList<T>::search(const T& element)
 {
     Node<T> *current = head->getNext();
     int index = 0;
@@ -202,7 +202,7 @@ int DoublyLinkedList<T>::search(T element)
 }
 
 template <typename T>
-bool DoublyLinkedList<T>::insertSorted(T element)
+bool DoublyLinkedList<T>::insertSorted(const T& element)
 {
     Node<T> *newNode = new Node<T>(element);
     if (newNode == nullptr)
@@ -225,7 +225,7 @@ bool DoublyLinkedList<T>::insertSorted(T element)
 }
 
 template <typename T>
-bool DoublyLinkedList<T>::insertAtHead(T element)
+bool DoublyLinkedList<T>::insertAtHead(const T& element)
 {
     Node<T> *newNode = new Node<T>(element);
     if (newNode == nullptr)
@@ -257,7 +257,7 @@ bool DoublyLinkedList<T>::insertAtTail(T *element)
 }
 
 template <typename T>
-bool DoublyLinkedList<T>::insertAt(int index, T element)
+bool DoublyLinkedList<T>::insertAt(int index, const T& element)
 {
     if (index < 0 || index > size)
         return false;
@@ -348,7 +348,7 @@ T DoublyLinkedList<T>::removeAt(int index)
 }
 
 template <typename T>
-bool DoublyLinkedList<T>::remove(T element)
+bool DoublyLinkedList<T>::remove(const T& element)
 {
     Node<T> *current = head->getNext();
     while (current != tail)
