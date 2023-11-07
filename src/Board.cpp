@@ -18,6 +18,7 @@ Board::Board(const string& name, const string& description)
 
 Board::Board(const string& name)
 {
+  this->columns = new DoublyLinkedList<Column>();
   this->name = name;
   setCreatedAt();
 }
@@ -50,7 +51,7 @@ int Board::getColumnCount()
 void Board::setCreatedAt()
 {
   time_t currentTime = time(nullptr);
-  tm *localTime = localtime(&currentTime);
+  const tm *localTime = localtime(&currentTime);
   this->createdAt = *localTime;
 }
 
