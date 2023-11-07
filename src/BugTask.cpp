@@ -12,17 +12,17 @@ BugTask::BugTask(int priority) : Task("BUG")
     this->priority = priority;
 }
 
-BugTask::BugTask(const& string title, int priority) : Task(title, "BUG")
+BugTask::BugTask(const std::string& title, int priority) : Task(title, "BUG")
 {
     this->priority = priority;
 }
 
-BugTask::BugTask(const& string title, string description, int priority) : Task(title, description, "BUG")
+BugTask::BugTask(const std::string& title, const std::string& description, int priority) : Task(title, description, "BUG")
 {
     this->priority = priority;
 }
 
-BugTask::BugTask(const& string title, string description, tm deadline, int priority) : Task(title, description, deadline, "BUG")
+BugTask::BugTask(const std::string& title, const std::string& description, tm deadline, int priority) : Task(title, description, deadline, "BUG")
 {
     this->priority = priority;
 }

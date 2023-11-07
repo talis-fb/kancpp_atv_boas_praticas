@@ -7,7 +7,7 @@ Board::Board()
   setCreatedAt();
 }
 
-Board::Board(string name, string description)
+Board::Board(const string& name, const string& description)
 {
   this->name = name;
   this->description = description;
@@ -16,7 +16,7 @@ Board::Board(string name, string description)
   setCreatedAt();
 }
 
-Board::Board(string name)
+Board::Board(const string& name)
 {
   this->name = name;
   setCreatedAt();
@@ -118,7 +118,7 @@ void Board::print()
   cout << endl;
 }
 
-Column *Board::getColumnById(string id)
+Column *Board::getColumnById(const string& id)
 {
   for (int i = 0; i < this->columns->getSize(); i++)
   {
@@ -148,7 +148,7 @@ Column *Board::getColumnByTask(Task *task)
   return nullptr;
 }
 
-Task *Board::searchTaskById(string id)
+Task *Board::searchTaskById(const string& id)
 {
   for (int i = 0; i < this->columns->getSize(); i++)
   {
@@ -224,7 +224,7 @@ void Board::deserialize(std::istream &stream)
   }
 }
 
-void Board::sortTask(string property)
+void Board::sortTask(const string& property)
 {
   for (int i = 0; i < this->columns->getSize(); i++)
   {

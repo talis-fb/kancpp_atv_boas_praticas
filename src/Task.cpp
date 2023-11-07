@@ -25,7 +25,7 @@ Task::Task(string type)
   this->createdAt = *localtime(&now);
 }
 
-Task::Task(const& string title, const&  string type)
+Task::Task(const string& title, const&  string type)
 {
   this->id = Task::getNextId();
   this->title = title;
@@ -45,7 +45,7 @@ Task::Task(const& string title, const&  string type)
   this->createdAt = *localtime(&now);
 }
 
-Task::Task(const& string title, const& string description, const& string type)
+Task::Task(const string& title, const string& description, const string& type)
 {
   this->id = Task::getNextId();
   this->title = title;
@@ -65,7 +65,7 @@ Task::Task(const& string title, const& string description, const& string type)
   this->createdAt = *localtime(&now);
 }
 
-Task::Task(const& string title, const& string description, tm deadline, const& string type)
+Task::Task(const string& title, const string& description, tm deadline, const string& type)
 {
   this->id = Task::getNextId();
   this->title = title;
@@ -95,7 +95,7 @@ string Task::getTitle()
   return this->title;
 }
 
-void Task::setTitle(const& string title)
+void Task::setTitle(const string& title)
 {
   this->title = title;
 }
@@ -125,7 +125,7 @@ string Task::getDescription()
   return this->description;
 }
 
-void Task::setDescription(const& string description)
+void Task::setDescription(const string& description)
 {
   this->description = description;
 }

@@ -7,7 +7,7 @@ int Column::nextId = 1;
 
 Column::Column() {}
 
-Column::Column(const& string name, const& string description, int order)
+Column::Column(const string& name, const string& description, int order)
 {
     this->id = Column::getNextId();
     this->name = name;
@@ -20,7 +20,7 @@ Column::Column(const& string name, const& string description, int order)
     this->tasks = vector<Task *>();
 }
 
-Column::Column(const& string name, const& string description)
+Column::Column(const string& name, const string& description)
 {
     this->id = Column::getNextId();
     this->name = name;
@@ -33,7 +33,7 @@ Column::Column(const& string name, const& string description)
     this->tasks = vector<Task *>();
 }
 
-Column::Column(const& string name)
+Column::Column(const string& name)
 {
     this->id = Column::getNextId();
     this->name = name;
@@ -64,7 +64,7 @@ string Column::getName()
     return this->name;
 }
 
-void Column::setName(const& string name)
+void Column::setName(const string& name)
 {
     this->name = name;
 }
@@ -84,7 +84,7 @@ string Column::getDescription()
     return this->description;
 }
 
-void Column::setDescription(const& string description)
+void Column::setDescription(const string& description)
 {
     this->description = description;
 }
@@ -264,7 +264,7 @@ void Column::deserialize(std::istream &stream)
     }
 }
 
-void Column::sortTasksBy(const& string property)
+void Column::sortTasksBy(const string& property)
 {
     vector<string> properties = {"id", "title", "description"};
     bool isPropertyValid = std::any_of(properties.begin(), properties.end(), property);

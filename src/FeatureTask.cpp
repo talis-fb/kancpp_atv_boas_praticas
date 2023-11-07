@@ -10,22 +10,22 @@ FeatureTask::~FeatureTask()
 {
 }
 
-FeatureTask::FeatureTask(const& std::string project) : Task("FEATURE")
+FeatureTask::FeatureTask(const std::string& project) : Task("FEATURE")
 {
     this->project = project;
 }
 
-FeatureTask::FeatureTask(const& std::string title, const& std::string project) : Task(title, "FEATURE")
+FeatureTask::FeatureTask(const std::string& title, const std::string& project) : Task(title, "FEATURE")
 {
     this->project = project;
 }
 
-FeatureTask::FeatureTask(const& std::string title, const& std::string description, const& std::string project) : Task(title, description, "FEATURE")
+FeatureTask::FeatureTask(const std::string& title, const std::string& description, const std::string& project) : Task(title, description, "FEATURE")
 {
     this->project = project;
 }
 
-FeatureTask::FeatureTask(const& std::string title, const& std::string description, tm deadline, const& std::string project) : Task(title, description, deadline, "FEATURE")
+FeatureTask::FeatureTask(const std::string& title, const std::string& description, tm deadline, const std::string& project) : Task(title, description, deadline, "FEATURE")
 {
     this->project = project;
 }

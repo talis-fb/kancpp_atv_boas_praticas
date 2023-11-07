@@ -34,13 +34,13 @@ public:
      * @param name The name of the board.
      * @param description The description of the board.
      */
-    Board(string name, string description);
+    Board(const string& name, const string& description);
 
     /**
      * @brief Constructs a new Board object.
      * @param name The name of the board.
      */
-    Board(string name);
+    Board(const string& name);
 
     /**
      * @brief Destroys the Board object and all its columns and tasks.
@@ -124,14 +124,14 @@ public:
      * @param id The id of the task to be searched.
      * @return Task* The task with the specified id.
      */
-    Task *searchTaskById(string id);
+    Task *searchTaskById(const string& id);
 
     /**
      * @brief Get the Column By Id object
      * @param id The id of the column to be searched.
      * @return Column The column with the specified id.
      */
-    Column *getColumnById(string id);
+    Column *getColumnById(const string& id);
 
     /**
      * @brief Get the Column By Task object
@@ -144,7 +144,7 @@ public:
     /**
      * @brief Get the Task By Id object
      */
-    void sortTask(string property);
+    void sortTask(const string& property);
 
     /**
      * @brief Print the board.
